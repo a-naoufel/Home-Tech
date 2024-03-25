@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path,include
+from HomeTech import views
+from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("product/",views.product_list),
+    path("",views.product_list),
+    path("product/<int:id>/",views.product_detail),
+    path("base/", include("base.urls")),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns) 

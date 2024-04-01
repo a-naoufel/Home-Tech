@@ -16,14 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from HomeTech import views
 from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("product/",views.product_list),
-    path("",views.product_list),
-    path("product/<int:id>/",views.product_detail),
     path("base/", include("base.urls")),
+    path("api/", include("api.urls")),
+    path("api-auth/", include("rest_framework.urls")),
+    path("",include("base.urls")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns) 

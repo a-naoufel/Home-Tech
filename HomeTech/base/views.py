@@ -5,16 +5,16 @@ from django.contrib.auth import authenticate, login , logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-
+from .forms import ExtendedUserCreationForm
 
 
 def home(request):
-    return render(request, 'base/home.html')
+    return render(request, 'home.html')
 
 
-def signup(request):
+def signin(request):
 
-    Page = 'sign up'
+    Page = 'sign in'
     if request.user.is_authenticated:  # that mean that if i loged in yet , so i couldn't accesss to the log in page because i already registre   (http://127.0.0.1:8000/login/)
         return redirect('home')
     
@@ -36,7 +36,7 @@ def signup(request):
     # If request method is not POST or authentication fails, render the login form
             
     context ={'Page':Page }
-    return render(request, 'base/signup.html' , context)
+    return render(request, 'signin.html' , context)
 
 
 def logoutPage(request):
@@ -45,10 +45,12 @@ def logoutPage(request):
 
 
 
+
+
 def registeruser(request):
-    form = UserCreationForm()
+    form = ExtendedUserCreationForm()  # Use ExtendedUserCreationForm
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = ExtendedUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -57,4 +59,4 @@ def registeruser(request):
             return redirect('home')
         else:
             messages.error(request, 'Error occurred while processing the form')
-    return render(request, 'base/signup.html', {'form': form})
+    return render(request, 'signin.html', {'form': form})

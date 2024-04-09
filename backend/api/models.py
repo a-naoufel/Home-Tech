@@ -8,9 +8,14 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
     instock = models.IntegerField(null=False,default =1)  
-    image = models.ImageField(upload_to='products/', null=True, blank=True) 
+    image = models.ImageField(upload_to='products/', null=True, blank=True)
+    category = models.CharField(max_length=255, default='General')
+    rating = models.FloatField(default=0)
+    brand = models.CharField(max_length=255, default='')
+    label = models.CharField(max_length=255, default='New')
+
 
     def __str__(self):
 
-        return self.name +' '+ self.description 
+        return self.name 
 # Create your models here.

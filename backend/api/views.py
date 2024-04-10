@@ -22,6 +22,12 @@ class MyProductList(generics.ListCreateAPIView):
     def get_queryset(self):
         return Product.objects.filter(author=self.request.user)
     
+class ProductList(generics.ListCreateAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [AllowAny]
+    def get_queryset(self):
+        return Product.objects.all()
+    
 
     def perform_create(self, serializer):
         if serializer.is_valid():
@@ -62,12 +68,6 @@ class MyProductDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             print(serializer.errors)
 
-@api_view(['GET'])
-def product_list(request,fomat=None):
-    if request.method == 'GET':
-        products = Product.objects.all()
-        serializer = ProductSerializer(products, many = True)
-        return JsonResponse(serializer.data ,safe = False)
 @api_view(['GET'])
 def product_detail(request , id, format=None):
     try:

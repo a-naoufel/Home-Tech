@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #99a4a570;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5b6c74;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #010911;
+  
+}
+
+/* input {
+  height: 2.4rem;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: transparent;
+  border-bottom: 1px solid #2edfd4;
+} */
+
+.animation-right-arrow-father:hover>.animation-right-arrow {
+  position: relative;
+  animation: animate-right-arrow 0.3s infinite alternate linear;
+  -webkit-animation: animate-right-arrow 0.3s infinite alternate linear;
+}
+
+@keyframes animate-right-arrow {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 5px;
+  }
+}
+
+.log-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  background-color: black;
+  height: 1px;
+  opacity: 0.5;
+}

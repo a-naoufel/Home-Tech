@@ -12,15 +12,8 @@ const Page = () => {
       <div className="">
       <div className=" flex items-center justify-center ">
         <div
-          className="hidden h-full  w-1/2 md:block"
-          style={{
-            minHeight: "calc(100vh )",
-            backgroundImage: `url(/${"jdk.jpg"})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-           
-           
-          }}
+          className=" my-container hidden h-full  w-1/2 md:block"
+         
           >
             
         </div>

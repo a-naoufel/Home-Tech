@@ -4,6 +4,7 @@ import "../styles/Home.css"
 import { Link } from "react-router-dom";
 import Header from "../components/header/Header";
 import Product from "../components/Product/Product";
+import ProductForm from "../components/ProductForm";
 
 function Home() {
     const [products , setProducts] = useState([]);
@@ -38,6 +39,7 @@ function Home() {
                     ))}
                 </div>
             </div>
+            
         </div>
     );
 }

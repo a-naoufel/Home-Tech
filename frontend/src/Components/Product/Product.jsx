@@ -2,14 +2,14 @@ import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
 import RatingStars from "../ratingstars/RatingStars";
 import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
-
+import PropTypes from 'prop-types';
 // eslint-disable-next-line react/prop-types
-export default function Product({ notification, setnotification }) {
+export default function Product({ notification, setnotification, product }) {
   const [wishList, setwishList] = useState(false);
-
   const handleClick = () => {
     setnotification(notification + 1);
   };
+  // console.log(product?.name)
 
   const addWishListHandler = () => {
     setwishList(!wishList);
@@ -66,17 +66,19 @@ export default function Product({ notification, setnotification }) {
   <div className="flex items-center justify-between rounded-b-xl bg-[#040e0d] text-white px-2 leading-loose">
     <div className="left px-2 py-3">
       {/* Product Name */}
-      <p className="text-sm font-bold">Product</p>
+            <p className="text-sm font-bold"> 
+            {product?.name}
+            </p>
       {/* Rating */}
       <div className="my-1">
-        <RatingStars />                 
+        <RatingStars rating={product?.rating} />                 
       </div>
       {/* Price */}
       <div className="relative text-base font-bold text-red-600 mx-0 w-fit">
-        $1000
+     {product?.price}
         {/* Original Price */}
         <del className="absolute text-xs text-[#787575] bottom-0 left-full">
-          $1000
+        {product?.price}
         </del>
       </div>
     </div>
@@ -101,3 +103,4 @@ export default function Product({ notification, setnotification }) {
     </>
   );
 }
+

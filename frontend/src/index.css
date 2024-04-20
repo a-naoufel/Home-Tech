@@ -47,3 +47,28 @@
   height: 1px;
   opacity: 0.5;
 }
+.rating-stars {
+  display: inline-block;
+}
+
+.star-container {
+  display: flex;
+  gap: 1; /* Adjust gap as needed */
+}
+
+.star {
+  color: yellow;
+}
+
+.filled {
+  color: yellow;
+}
+
+.half-filled {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.half-icon {
+  width: 50%;
+}

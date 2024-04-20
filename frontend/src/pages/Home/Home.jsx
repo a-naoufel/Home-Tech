@@ -21,8 +21,10 @@ export default function Home() {
           notification={notification}
           setnotification={setnotification}
         />
-        <Daily />
-        <Phones />
+        <Daily notification={notification}
+          setnotification={setnotification}/>
+        <Phones notification={notification}
+          setnotification={setnotification} />
        
       </div>
     </>

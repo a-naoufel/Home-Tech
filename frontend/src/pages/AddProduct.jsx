@@ -11,9 +11,8 @@ const AddProduct = () => {
   const createProduct = (e) => {
     e.preventDefault();
 
-    console.log(image);
     api
-      .post("/api/products/", { name, price, description, image})
+      .post("/api/products/", { name, price, description})
       .then((res) => {
         if (res.status === 201) {
           console.log(res);

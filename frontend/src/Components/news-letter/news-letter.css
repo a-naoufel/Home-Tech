@@ -1,0 +1,94 @@
+
+.news {
+    padding: 20px 0;
+}
+
+
+.news .news-letter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.news .news-letter .logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+
+.news .news-letter .logo .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #00acff; /* Replace var(--mainColor) with your actual color value */
+    padding: 5px;
+    border-radius: 10px; /* Adjust the value as needed */
+    font-size: 45px;
+    margin-right: 2px;
+    
+    
+}
+ 
+
+
+.news .news-letter .mail-bar {
+    width: 40%;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    display: flex;
+    overflow: hidden;
+}
+
+
+.news .news-letter .mail-bar input {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+}
+
+
+.news .news-letter .mail-bar input[type="search"] {
+    font-size: 18px;
+    width: 80%;
+}
+
+.news .news-letter .mail-bar input[type="button"] {
+    cursor: pointer;
+    background:#00acff ;
+    color: white;
+    padding-top: 12px;
+    font-size: 17px;
+    font-weight: 400;
+    transition: 0.3s;
+}
+
+
+.news .news-letter .mail-bar input[type="button"]:hover {
+    background: #00d9ff;
+}
+
+/* Media query for max-width: 991px */
+@media (max-width:991px) {
+    .news .news-letter {
+        flex-direction: column;
+    }
+
+    .news .news-letter .logo {
+        margin-bottom: 10px;
+    }
+
+    .news .news-letter .mail-bar {
+        margin-top: 10px;
+        width: 80%;
+    }
+}
+
+/* Media query for max-width: 767px */
+@media (max-width:767px) {
+    .news .news-letter .mail-bar {
+        width: 100%;
+    }
+}

@@ -1,0 +1,73 @@
+
+
+
+/* Styles for .products .container .product-list li */
+ li {
+    padding: 20px 10px;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+/* Styles for .products .container .product-list li:hover */
+ li:hover {
+    background:#00acff;
+    color: #000;
+    font-weight:500 ;
+}
+
+/* Styles for .products .container .product-list li.active */
+ li.active {
+    background:#00acff;
+}
+.icon.fav {
+    color:black;
+}
+.icon.fav:hover {
+    color: rgb(53, 7, 4);
+}
+.icon.fav.active {
+    color: crimson;
+}
+/* Styles for .pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+/* Styles for .pagination .page */
+.pagination .page {
+    padding: 10px;
+    margin: 2px;
+    cursor: pointer;
+    background: white;
+    color: black;
+    border: 1px solid rgba(21, 20, 20, 0.714);
+    transition: .3s;
+    border-radius: 30px;
+}
+
+/* Styles for .pagination .page:hover */
+.pagination .page:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Styles for .pagination .page.active */
+.pagination .page.active {
+    background-color: black;
+    color: white;
+}
+
+/* Styles for .pagination .arrow */
+.pagination .arrow {
+    cursor: pointer;
+}
+
+/* Styles for .pagination .arrow:disabled */
+.pagination .arrow:disabled {
+    cursor: not-allowed;
+}

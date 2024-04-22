@@ -1,0 +1,81 @@
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+
+  .my-container {
+    min-height: calc(100vh);
+    background-image: url("/jdk.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+  }
+
+
+  /* input {
+    height: 2.4rem;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-bottom: 1px solid #2edfd4;
+  } */
+
+  .animation-right-arrow-father:hover>.animation-right-arrow {
+    position: relative;
+    animation: animate-right-arrow 0.3s infinite alternate linear;
+    -webkit-animation: animate-right-arrow 0.3s infinite alternate linear;
+  }
+
+  @keyframes animate-right-arrow {
+    from {
+      left: 0;
+    }
+
+    to {
+      left: 5px;
+    }
+  }
+
+  .log-in::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: black;
+    height: 1px;
+    opacity: 0.5;
+  }
+  .rating-stars {
+    display: inline-block;
+  }
+
+  .star-container {
+    display: flex;
+    gap: 1; /* Adjust gap as needed */
+  }
+
+  .star {
+    color: yellow;
+  }
+
+  .filled {
+    color: yellow;
+  }
+
+  .half-filled {
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  .half-icon {
+    width: 50%;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+  

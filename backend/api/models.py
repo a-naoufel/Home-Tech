@@ -10,7 +10,7 @@ class Product(models.Model):
     description = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
-    instock = models.IntegerField(null=False,default =1)  
+    instock = models.IntegerField(null=False,default =1)
     image = models.ImageField(default='products/default.png',upload_to='products/')
     category = models.CharField(max_length=255, default='General')
     rating = models.FloatField(default=0)

@@ -11,15 +11,9 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer 
     permission_classes = [AllowAny]
 # 
-class MyProductList(generics.ListCreateAPIView):
+class AdminProductList(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return Product.objects.filter(author=self.request.user)
-    
-class ProductList(generics.ListCreateAPIView):
-    serializer_class = ProductSerializer
-    permission_classes = [AllowAny]
     def get_queryset(self):
         return Product.objects.all()
     
@@ -28,6 +22,12 @@ class ProductList(generics.ListCreateAPIView):
             serializer.save(author=self.request.user)
         else:
             print(serializer.errors)
+    
+class ProductList(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [AllowAny]
+    queryset = Product.objects.all()
+    
 class ProductDelete(generics.DestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]

@@ -19,12 +19,14 @@ const AddProduct = () => {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("Brand", Brand);
-    formData.append("Rating", Rating);
-    formData.append("Category", Category);
-    formData.append("CountInStock", CountInStock);
+    formData.append("brand", Brand);
+    formData.append("rating", Rating);
+    formData.append("category", Category);
+    formData.append("instock", CountInStock);
     formData.append("discount", discount);
+
     
+
 
 
     api
@@ -95,7 +97,7 @@ const AddProduct = () => {
             Brand
           </label>
           <input
-            id="Brand"
+            id="brand"
             type="text"
             name="Brand"
             value={Brand}

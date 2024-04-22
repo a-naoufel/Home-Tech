@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "price", "author", "created_at","image"]
+        fields = '__all__'
         extra_kwargs = {"author": {"read_only": True}}
 
 class CartSerializer(serializers.ModelSerializer):

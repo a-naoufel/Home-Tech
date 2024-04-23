@@ -13,4 +13,5 @@ urlpatterns = [
     path('rate/', views.RateProduct.as_view(), name='rate_product'),
     path('products/category/<str:category_name>/', views.ProductCategory.as_view(), name='product-category'),
     path('products/brand/<str:brand_name>/', views.ProductBrand.as_view(), name='product-brand'),
+    path("admin/products/", views.AdminProductList.as_view(),name = "admin Products"),
 ]

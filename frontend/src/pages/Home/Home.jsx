@@ -1,5 +1,4 @@
 import Hero from "../../Components/Hero/Hero";
-
 import { useState } from "react";
 import { Featured } from "../../Components/featuerd/Featured";
 import { NewsLetter } from "../../Components/news-letter/NewsLetter";

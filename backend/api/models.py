@@ -30,6 +30,7 @@ class Product(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     instock = models.IntegerField(null=False,default =1)  
+    instock = models.IntegerField(null=False,default =1)
     image = models.ImageField(default='products/default.png',upload_to='products/')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
 

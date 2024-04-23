@@ -30,7 +30,7 @@ const AddProduct = () => {
 
 
     api
-      .post("/api/products/", formData, {
+      .post("/api/admin/products/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

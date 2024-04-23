@@ -3,8 +3,38 @@ import axios from "axios";
 import { FaEyeSlash } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import api from "../../api";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
+import { useNavigate } from "react-router-dom";
+import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 
 const Page = () => {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const name = "Login"
+
+    const handleSubmit = async (e) => {
+        setLoading(true);
+        e.preventDefault();
+
+        try {
+            const res = await api.post("/api/token/", { username, password })
+            
+                localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                navigate("/")
+        } catch (error) {
+            alert(error)
+        } finally {
+            setLoading(false)
+        }
+    };
+
+
   return (
     <>
       <div className="">
@@ -17,25 +47,18 @@ const Page = () => {
             }}
             className="flex h-full w-full flex-col justify-center  px-6 md:w-1/2"
           >
-            <p className="text-xl font-bold">Sign In</p>
-            <button className="my-2 flex w-full justify-center gap-2 rounded-xl   border-2 py-2 text-mainColor">
-              <img src="/Google.svg" alt="google" />
-              <p>Continue With Google</p>
-            </button>
-            <button className="my-2 flex w-full justify-center gap-2 rounded-xl   border-2 py-2 text-mainColor">
-              <img src="/" alt="Twitter" />
-              <p>Continue With Twitter</p>
-            </button>
+
             <div className="log-in relative my-2 text-center  ">
-              <span className="relative z-20 mx-auto  bg-white px-2 font-bold">
-                OR
-              </span>
+
             </div>
-            <form className="flex flex-col">
-              <label htmlFor="email">Email : </label>
+            <form onSubmit={handleSubmit} className="flex flex-col"> 
+              <label htmlFor="name">Name : </label>
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
                 className="mb-2 mt-1 rounded-lg border-2 py-1 pl-2 focus:outline-none"
               />
               <div className="flex justify-between">
@@ -46,6 +69,9 @@ const Page = () => {
               </div>
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
                 id="password"
                 className="mb-2 mt-1 rounded-lg border-2 py-2 pl-2 focus:outline-none"
               />
@@ -53,12 +79,18 @@ const Page = () => {
                 Use 8 or more characters with a mix of letters, numbers &
                 symbols
               </span>
+              <div
+                className="mt-2 flex items-center justify-center gap-2"
+                >
+              {loading && <LoadingIndicator />}
+              </div>
               <button
                 type="submit"
                 className="mx-auto w-fit rounded-xl bg-mainColor px-6 py-2 text-xl font-bold text-white"
               >
                 Sign In
               </button>
+
               <div className="mt-2 flex items-center justify-center gap-2">
                 <p className="opacity-50">Don't Have An Account ? </p>
                 <Link to="/regester" className="text-mainColor underline">

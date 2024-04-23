@@ -9,6 +9,7 @@ import AddProduct from "./pages/AddProduct/AddProduct";
 import NotFound from "./pages/Not-Found/NotFound";
 import { Shop } from "./pages/shopPage/Shop";
 import ProtectedRoute from "./Components/protectedroot/ProtectedRoute";
+
 function Logout() {
   localStorage.clear()
   return <Navigate to="/login" />

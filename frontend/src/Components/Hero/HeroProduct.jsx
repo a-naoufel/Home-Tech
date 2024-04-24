@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
 // eslint-disable-next-line react/prop-types
-export default function HeroProduct({ notification, setnotification }) {
+export default function HeroProduct({rated}) {
   // Function to handle click event
-  const handleClick = () => {
-    setnotification(notification + 1);
-  };
+ 
 
   return (
     <div
@@ -17,25 +15,17 @@ export default function HeroProduct({ notification, setnotification }) {
     >
       {/* Text content */}
       <div className="w-full text-center leading-loose lg:w-1/2 lg:text-left">
-        <p className="mb-2 text-5xl font-bold">LG Air Conditioner</p>
+        <p className="mb-2 text-5xl font-bold">{ rated?.name}</p>
         {/* Description */}
         <p className="opacity-60">
-          The Air Conditioner brings unmatched cooling efficiency to your living
-          space. With advanced technology and sleek design, it's more than just
-          an appliance  it's a necessity for comfort. Experience rapid cooling
-          with precision control, ensuring a perfect climate in any room. Enjoy
-          energy savings and eco-friendly operation, all while maintaining
-          whisper-quiet performance. Whether it's scorching summer days or humid
-          nights, the Air Conditioner keeps you cool and comfortable throughout.
-          Make every moment indoors refreshing and enjoyable with the Air
-          Conditioner by your side.
+        { rated?.description}
         </p>
         {/* Price */}
         <div className="my-2">
           <div className="relative mx-auto w-fit text-3xl text-red-600 lg:mx-0">
-            $399
+           {rated?.price} $                                                          
             <del className="absolute bottom-0 left-full text-sm text-white">
-              $599
+            { rated?.newprice}$
             </del>
           </div>
           {/* Offer message */}
@@ -50,7 +40,7 @@ export default function HeroProduct({ notification, setnotification }) {
           {/* Add to Cart Button */}
           <button
             className="flex w-[150px] items-center gap-1 rounded-xl bg-red-600 px-3 py-1 text-white"
-            onClick={handleClick}
+           
           >
             <p>Add To Cart</p>
             <FaCartShopping />
@@ -65,7 +55,7 @@ export default function HeroProduct({ notification, setnotification }) {
         </div>
       </div>
       {/* Image */}
-      <img src="/air.png" alt="#" width="400" height="400" />
+      <img src={ rated?.image} alt="#" width="400" height="400" />
     </div>
   );
 }

@@ -1,11 +1,12 @@
-
 import { useState, useEffect } from "react";
-import { ShopOptions } from "./ShopOptions";
 import { ShopProducts } from "./ShopProducts";
+import Box from "./Box";
 import api from "../../api";
+
 
 export const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [priceSorted, setPriceSorted] = useState("");
   useEffect(() => {
     getProducts();
   }, []);
@@ -22,22 +23,22 @@ export const Shop = () => {
       })
       .catch((err) => alert(err));
   };
-  
+  const sortedPrices =
+    priceSorted === "Lth"
+      ? products.sort((a, b) => a.price - b.price)
+      : priceSorted === "Htl"
+      ? products.sort((a, b) => b.price - a.price)
+      : products;
   return (
     <>
       <div className="py-[40px] px-0 bg-bgColorWhite">
         <div className="container">
-          <h1 className="text-2xl  font-bold  sm:text-xl pb-1 ">Shop</h1>
+          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Shop</h1>
           <div className="shop-wrapper">
-          <ShopOptions
-              
-            />
+            <Box setPriceSorted={setPriceSorted} />
             <ShopProducts
-              product={products}
+              product={sortedPrices}
               // filterdProducts={sortedPrices}
-              
-              
-             
             />
           </div>
         </div>

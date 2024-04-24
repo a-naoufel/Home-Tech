@@ -22,16 +22,17 @@ export const Products = () => {
     console.log(products);
   }, [products]);
   const getProducts = () => {
-      fetch("http://127.0.0.1:8000/api/products/")
-      .then(response => response.json())
+    api
+      .get("/api/products/")
+      .then((res) => res.data)
       .then((data) => {
         setProducts(data);
         console.log(data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
-  const PRODUCT_PER_PAGE = 4;
+  const PRODUCT_PER_PAGE = 8;
   const PAGES = Math.ceil(products.length / PRODUCT_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCT_PER_PAGE;
   const finishIndex = currentPage * PRODUCT_PER_PAGE;
@@ -41,12 +42,12 @@ export const Products = () => {
     <>
       <div className="bg-[#f1f1f1f1] pt-5 pb-[100px]">
         <div className="container">
-          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Our Products</h1>
-          <ProductListUL
+          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Super Deals</h1>
+          {/* <ProductListUL
             toggled={toggled}
             setToggled={setToggled}
             setApiControl={setApiControl}
-          />
+          /> */}
           <div className="flex flex-wrap justify-center gap-6">
            
             <ProductBox products={orderdProduct} />

@@ -1,4 +1,5 @@
 import Hero from "../../Components/Hero/Hero";
+
 import { useState } from "react";
 import { Featured } from "../../Components/featuerd/Featured";
 import { NewsLetter } from "../../Components/news-letter/NewsLetter";
@@ -11,9 +12,10 @@ export default function Home() {
     <>
       {/* disabled */}
         
-        <Hero />
+      <Hero />
+     
       <div className="bg-bgColorWhite ">
-        <Featured />
+      <Featured />
         <Products/>
       </div>
       <NewsLetter />

@@ -2,7 +2,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 // Creating an empty array to store slide indexes
 const emptyArray = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 4; i++) {
   emptyArray.push(i);
 }
 

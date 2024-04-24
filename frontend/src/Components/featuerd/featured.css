@@ -1,53 +1,31 @@
-/* Styles for .featured */
-.featured .container ul.featured-list {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    box-shadow: 0px 0px 10px -5px #232222;
-    border-radius: 6px;
-    padding: 15px;
-    width: 100%;
-    margin: 0 auto;
-    top: 10px;
-    
-    
-}
-
-/* Styles for .featured li */
-.featured .container ul.featured-list li {
-    display: flex;
-    align-items: center;
-}
-
-/* Styles for .featured .container ul.featured-list .icon */
-.featured .container ul.featured-list .icon {
-    font-size: 25px;
-    color: var(--mainGreen);
-}
 
 /* Styles for .featured .container ul.featured-list .txt */
-.featured .container ul.featured-list .txt {
+.featured  ul .txt {
     margin-left: 10px;
 }
 
 /* Styles for .featured .container ul.featured-list .txt p */
-.featured .container ul.featured-list .txt p {
+.featured  ul .txt p {
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 3px;
 }
+.featured ul :hover {
+    background-color:white;
+    
+    
+}
+
 
 /* Styles for .featured .container ul.featured-list .txt span */
-.featured .container ul.featured-list .txt span {
+.featured  ul .txt span {
     color: #242020;
     font-size: 14px;
 }
 
 /* Media query for smaller screens */
 @media (max-width:991px) {
-    .featured .container ul.featured-list {
+    .featured  ul {
         display: none;
     }
 }

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useState } from "react";
 import RatingStars from "../../Components/ratingstars/RatingStars";
+
 export const ShopProducts = ({ product }) => {
   const [likedProducts, setLikedProducts] = useState([]);
   const handleHeartClick = (productId) => {
@@ -26,11 +27,7 @@ export const ShopProducts = ({ product }) => {
             >
               {/* Product Image */}
               <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
-                <img
-                  src={prod?.image}
-                  alt="aymen.png"
-                  className="w-[100px] h-[100px] object-contain block mx-auto my-0"
-                />
+          <img src={prod?.image} alt={prod?.name} className="object-cover h-full w-full" />
                 {/* Wishlist Icon */}
                 <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
                   <div
@@ -55,7 +52,7 @@ export const ShopProducts = ({ product }) => {
                 </div>
                 {/* Discount Badge */}
                 <div className="absolute h-[30px] w-[30px] left-2 top-2 text-xs text-white bg-[#D72A48] flex items-center justify-center rounded-full">
-                  50%
+                {prod?.discount}%
                 </div>
               </div>
               {/* Product Details */}
@@ -73,7 +70,7 @@ export const ShopProducts = ({ product }) => {
                   <div className="relative text-base font-bold text-red-600 mx-0 w-fit">
                     {prod?.price}${/* Original Price */}
                     <del className="absolute text-xs text-[#787575] bottom-0 left-full">
-                      {prod?.price}$
+                      {prod?.newprice}$
                     </del>
                   </div>
                 </div>

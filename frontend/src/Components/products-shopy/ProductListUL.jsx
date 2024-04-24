@@ -17,27 +17,27 @@ export const ProductListUL = ({ toggled, setToggled, setApiControl }) => {
           Electronics
         </li>
         <li
-          className={toggled === "Jewelry" ? "active" : ""}
+          className={toggled === "Tv" ? "active" : ""}
           onClick={() => (
-            setApiControl("/category/jewelery"), setToggled("Jewelry")
+            setApiControl("/category/TV"), setToggled("TV")
           )}
         >
           Air Conditioner
         </li>
         <li
-          className={toggled === "Men's clothing" ? "active" : ""}
+          className={toggled === "TV" ? "active" : ""}
           onClick={() => (
-            setApiControl("/category/men's clothing"),
-            setToggled("Men's clothing")
+            setApiControl("/category/TV"),
+            setToggled("TV")
           )}
         >
           TV
         </li>
         <li
-          className={toggled === "Women's clothing" ? "active" : ""}
+          className={toggled === "TV" ? "active" : ""}
           onClick={() => (
-            setApiControl("/category/women's clothing"),
-            setToggled("Women's clothing")
+            setApiControl("/category/TV"),
+            setToggled("TV")
           )}
         >
           Kitchen

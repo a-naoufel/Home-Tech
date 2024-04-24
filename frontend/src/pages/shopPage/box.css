@@ -1,0 +1,45 @@
+
+    
+    li {
+    list-style: none;
+    font-size: 17px;
+    text-transform: capitalize;
+    padding: 17px 20px;
+    cursor: pointer;
+    }
+    
+    li:hover {
+    background: #242424;
+    }
+    
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+    
+    /* Track */
+    
+    
+    
+    ::-webkit-scrollbar-track {
+    
+    background: #3b3b3b;
+    
+    }
+    
+    
+    
+    ::-webkit-scrollbar-thumb {    
+    background: #d9d9d9;
+    
+    border-radius: 20px;
+    
+    }
+    
+    /* Handle on hover */
+    
+    ::-webkit-scrollbar-thumb:hover {
+    
+    background: #8e8e8e;
+    }
+    

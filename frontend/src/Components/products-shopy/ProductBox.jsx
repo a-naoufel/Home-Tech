@@ -50,7 +50,7 @@ export const ProductBox = ({ products }) => {
             </div>
             {/* Discount Badge */}
             <div className="absolute h-[30px] w-[30px] left-2 top-2 text-xs text-white bg-[#D72A48] flex items-center justify-center rounded-full">
-              50%
+            {product?.discount}%
             </div>
           </div>
           {/* Product Details */}
@@ -69,7 +69,7 @@ export const ProductBox = ({ products }) => {
                 {product?.price}$
                 {/* Original Price */}
                 <del className="absolute text-xs text-[#787575] bottom-0 left-full">
-                  {product?.price}$
+                  {product?.newprice}$
                 </del>
               </div>
             </div>

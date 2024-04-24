@@ -22,9 +22,8 @@ export const Products = () => {
     console.log(products);
   }, [products]);
   const getProducts = () => {
-    api
-      .get("/api/products/")
-      .then((res) => res.data)
+      fetch("http://127.0.0.1:8000/api/products/")
+      .then(response => response.json())
       .then((data) => {
         setProducts(data);
         console.log(data);

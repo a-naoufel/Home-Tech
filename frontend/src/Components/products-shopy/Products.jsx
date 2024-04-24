@@ -7,13 +7,10 @@ import { Link } from "react-router-dom";
 import api from "../../api";
 
 export const Products = () => {
-  
   const [toggled, setToggled] = useState("All");
   const [apiControl, setApiControl] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  
 
-  
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
@@ -22,9 +19,8 @@ export const Products = () => {
     console.log(products);
   }, [products]);
   const getProducts = () => {
-    api
-      .get("/api/products/")
-      .then((res) => res.data)
+    fetch("http://localhost:8000/api/products/")
+      .then((response) => response.json())
       .then((data) => {
         setProducts(data);
         console.log(data);
@@ -42,17 +38,16 @@ export const Products = () => {
     <>
       <div className="bg-[#f1f1f1f1] pt-5 pb-[100px]">
         <div className="container">
-          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Super Deals</h1>
+          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">
+            Super Deals
+          </h1>
           {/* <ProductListUL
             toggled={toggled}
             setToggled={setToggled}
             setApiControl={setApiControl}
           /> */}
           <div className="flex flex-wrap justify-center gap-6">
-           
             <ProductBox products={orderdProduct} />
-         
-            
           </div>
           <Paginition
             PAGES={PAGES}

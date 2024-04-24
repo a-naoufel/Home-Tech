@@ -3,7 +3,6 @@ import { ShopProducts } from "./ShopProducts";
 import Box from "./Box";
 import api from "../../api";
 
-
 export const Shop = () => {
   const [products, setProducts] = useState([]);
   const [priceSorted, setPriceSorted] = useState("");
@@ -14,9 +13,9 @@ export const Shop = () => {
     console.log(products);
   }, [products]);
   const getProducts = () => {
-    api
-      .get("/api/products/")
-      .then((res) => res.data)
+    api;
+    fetch("http://localhost:8000/api/products/")
+      .then((response) => response.json())
       .then((data) => {
         setProducts(data);
         console.log(data);

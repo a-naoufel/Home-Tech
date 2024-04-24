@@ -19,7 +19,7 @@ const AddProduct = () => {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("brand", Brand);
+    
     formData.append("rating", Rating);
     formData.append("category", Category);
     formData.append("instock", CountInStock);
@@ -30,7 +30,7 @@ const AddProduct = () => {
 
 
     api
-      .post("/api/products/", formData, {
+      .post("/api/admin/products/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -92,21 +92,7 @@ const AddProduct = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <label htmlFor="Brand" className="block text-gray-700 font-bold mb-2">
-            Brand
-          </label>
-          <input
-            id="brand"
-            type="text"
-            name="Brand"
-            value={Brand}
-            onChange={(e) => setBrand(e.target.value)}
-            placeholder="Brand"
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+
         <div className="mb-4">
           <label htmlFor="Rating" className="block text-gray-700 font-bold mb-2">
             Rating

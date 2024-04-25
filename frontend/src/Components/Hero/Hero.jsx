@@ -19,8 +19,8 @@ export default function Hero() {
 
   const getProducts = () => {
     api
-      .get("/api/products/")
-      .then((res) => res.data)
+    fetch("http://localhost:8000/api/products/")
+    .then((response) => response.json())
       .then((data) => {
         setProducts(data);
         console.log(data);

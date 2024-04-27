@@ -48,6 +48,7 @@ def getTopProducts(request):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)

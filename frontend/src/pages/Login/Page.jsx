@@ -1,12 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
-import { FaEyeSlash } from "react-icons/fa6";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import api from "../../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import { useNavigate } from "react-router-dom";
-import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 import "./style.css";
 import { FaGooglePlusG, FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 

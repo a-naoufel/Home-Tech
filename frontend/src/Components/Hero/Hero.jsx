@@ -18,12 +18,11 @@ export default function Hero() {
   }, [products]);
 
   const getProducts = () => {
-    api
     fetch("http://localhost:8000/api/products/")
     .then((response) => response.json())
       .then((data) => {
-        setProducts(data);
-        console.log(data);
+        setProducts(data.products);
+        console.log(data.products);
       })
       .catch((err) => console.log(err));
   };

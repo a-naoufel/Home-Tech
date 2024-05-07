@@ -8,7 +8,7 @@ function Product({ product }) {
         <Card className="my-3 p-3 rounded">
             <Link to={`/product/${product._id}`}>
                 {console.log(product.image)}
-                <Card.Img src={"http://localhost:8000/".concat(product.image)} />
+                <Card.Img src={product.image} />
             </Link>
 
             <Card.Body>

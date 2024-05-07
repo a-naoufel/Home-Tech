@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../../api'
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -49,8 +49,8 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(
-            'http://localhost:8000/api/users/login/',
+        const { data } = await api.post(
+            'api/users/login/',
             { 'username': email, 'password': password },
             config
         )
@@ -94,8 +94,8 @@ export const register = (name, email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(
-            'http://localhost:8000/api/users/register/',
+        const { data } = await api.post(
+            'api/users/register/',
             { 'name': name, 'email': email, 'password': password },
             config
         )
@@ -140,8 +140,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
-            `http://localhost:8000/api/users/${id}/`,
+        const { data } = await api.get(
+            `api/users/${id}/`,
             config
         )
 
@@ -179,8 +179,8 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
-            `http://localhost:8000/api/users/profile/update/`,
+        const { data } = await api.put(
+            `api/users/profile/update/`,
             user,
             config
         )
@@ -225,8 +225,8 @@ export const listUsers = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(
-            `http://localhost:8000/api/users/`,
+        const { data } = await api.get(
+            `api/users/`,
             config
         )
 
@@ -264,8 +264,8 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(
-            `http://localhost:8000/api/users/delete/${id}/`,
+        const { data } = await api.delete(
+            `api/users/delete/${id}/`,
             config
         )
 
@@ -303,8 +303,8 @@ export const updateUser = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
-            `http://localhost:8000/api/users/update/${user._id}/`,
+        const { data } = await api.put(
+            `api/users/update/${user._id}/`,
             user,
             config
         )

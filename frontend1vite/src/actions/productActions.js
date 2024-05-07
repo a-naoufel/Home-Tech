@@ -1,4 +1,6 @@
-import axios from 'axios'
+
+import api  from "../../api"
+
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -36,7 +38,13 @@ export const listProducts = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get(`http://localhost:8000/api/products${keyword}`)
+        const { data } = await api.get(`api/products${keyword}`)
+        data.products.map ( product => (
+            product.image = "http://localhost:8000/".concat(product.image)
+        ))  
+        
+        
+        console.log(data)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -57,8 +65,11 @@ export const listTopProducts = () => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_TOP_REQUEST })
 
-        const { data } = await axios.get(`http://localhost:8000/api/products/top/`)
-
+        const { data } = await api.get(`api/products/top/`)
+        data.map ( product => (
+            product.image = "http://localhost:8000/".concat(product.image)
+        ))  
+              
         dispatch({
             type: PRODUCT_TOP_SUCCESS,
             payload: data
@@ -79,7 +90,8 @@ export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`http://localhost:8000/api/products/${id}`)
+        const { data } = await api.get(`api/products/${id}`)
+        data.image = "http://localhost:8000/".concat(data.image);
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -114,8 +126,8 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.delete(
-            `http://localhost:8000/api/products/delete/${id}/`,
+        const { data } = await api.delete(
+            `api/products/delete/${id}/`,
             config
         )
 
@@ -154,8 +166,8 @@ export const createProduct = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post(
-            `http://localhost:8000/api/products/create/`,
+        const { data } = await api.post(
+            `api/products/create/`,
             {},
             config
         )
@@ -194,11 +206,13 @@ export const updateProduct = (product) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(
-            `http://localhost:8000/api/products/update/${product._id}/`,
+        const { data } = await api.put(
+            `api/products/update/${product._id}/`,
             product,
             config
         )
+        
+        data.image = "http://localhost:8000/".concat(data.image);
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
             payload: data,
@@ -238,8 +252,8 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
             }
         }
 
-        const { data } = await axios.post(
-            `http://localhost:8000/api/products/${productId}/reviews/`,
+        const { data } = await api.post(
+            `api/products/${productId}/reviews/`,
             review,
             config
         )

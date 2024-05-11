@@ -7,11 +7,12 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 
-function LoginScreen({ location, history }) {
+function LoginScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const dispatch = useDispatch()
+ 
 
     const redirect = location.search ? location.search.split('=')[1] : '/'
 

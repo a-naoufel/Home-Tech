@@ -9,6 +9,7 @@ import ProductCarousel from '../components/ProductCarousel'
 import { listProducts } from '../actions/productActions'
 
 
+
 function HomeScreen({ history }) {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)

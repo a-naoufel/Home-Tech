@@ -1,39 +1,22 @@
 import HeroProduct from "./HeroProduct";
 import HeroSlider from "./HeroSlider";
 import { useState, useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux'
 import api from "../../api";
+import { listTopProducts } from '../../actions/productActions'
 
 // eslint-disable-next-line react/prop-types
 export default function Hero() {
-  const [products, setProducts] = useState([]);
-  const [priceSorted, setPriceSorted] = useState("");
   const [slideIndex, setslideIndex] = useState(0);
+  const dispatch = useDispatch()
+
+  const productTopRated = useSelector(state => state.productTopRated)
+  const { error, loading, products } = productTopRated
 
   useEffect(() => {
-    getProducts();
-  }, []);
-
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
-  const getProducts = () => {
-    fetch("http://localhost:8000/api/products/")
-    .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.products);
-        console.log(data.products);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  // Function to get the top three rated products
-  const getTopRatedProducts = () => {
-    // Sort products based on ratings
-    const sortedProducts = [...products].sort((a, b) => b.rating - a.rating);
-    // Slice to get only the top three rated products
-    return sortedProducts.slice(0, 4);
-  };
+      dispatch(listTopProducts())
+  }, [dispatch])
 
   return (
     <div
@@ -47,8 +30,8 @@ export default function Hero() {
         className="flex w-[400vw] text-[white] duration-500 "
         style={{ transform: `translateX(${-100 * slideIndex}vw)` }}
       >
-        {getTopRatedProducts().map((rated) => (
-          <HeroProduct rated={rated} key={rated.id} />
+        {products.map(product => (
+          <HeroProduct rated={product} key={product._id} />
         ))}
       </div>
     </div>

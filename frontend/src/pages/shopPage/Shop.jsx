@@ -17,7 +17,7 @@ export const Shop = () => {
     fetch("http://localhost:8000/api/products/")
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.products);
         console.log(data);
       })
       .catch((err) => alert(err));

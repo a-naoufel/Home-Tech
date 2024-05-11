@@ -1,38 +1,30 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import "./products.css";
 import { ProductBox } from "./ProductBox";
 import { ProductListUL } from "./ProductListUL";
 import { Paginition } from "./Paginition";
-import { Link } from "react-router-dom";
-import api from "../../api";
+import { listProducts } from '../../actions/productActions'
+import { useSearchParams } from 'react-router-dom'
 
-export const Products = () => {
+
+export const Products = ({ history }) => {
   const [toggled, setToggled] = useState("All");
   const [apiControl, setApiControl] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    getProducts();
-  }, []);
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-  const getProducts = () => {
-    fetch("http://localhost:8000/api/products/")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.products);
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  };
+  const dispatch = useDispatch()
+  const productList = useSelector(state => state.productList)
+  const { error, loading, products, page, pages } = productList
 
-  const PRODUCT_PER_PAGE = 8;
-  const PAGES = Math.ceil(products.length / PRODUCT_PER_PAGE);
-  const startIndex = (currentPage - 1) * PRODUCT_PER_PAGE;
-  const finishIndex = currentPage * PRODUCT_PER_PAGE;
-  const orderdProduct = products.slice(startIndex, finishIndex);
+
+  useEffect(() => {
+      dispatch(listProducts())
+
+  }, [dispatch])
+
 
   return (
     <>
@@ -47,12 +39,10 @@ export const Products = () => {
             setApiControl={setApiControl}
           /> */}
           <div className="flex flex-wrap justify-center gap-6">
-            <ProductBox products={orderdProduct} />
+            <ProductBox products={products} />
           </div>
           <Paginition
-            PAGES={PAGES}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+
           />
         </div>
       </div>

@@ -27,7 +27,7 @@ export const ShopProducts = ({ product }) => {
             >
               {/* Product Image */}
               <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
-          <img src={prod?.image} alt={prod?.name} className="object-cover h-full w-full" />
+          <img src={"http://localhost:8000".concat(prod?.image)} alt={prod?.name} className="object-cover h-full w-full" />
                 {/* Wishlist Icon */}
                 <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
                   <div

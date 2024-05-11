@@ -11,14 +11,13 @@ export default function Home() {
   return (
     <>
       {/* disabled */}
-        
-      <Hero />
+        <Hero></Hero>
      
       <div className="bg-bgColorWhite ">
-      <Featured />
+      
         <Products/>
       </div>
-      <NewsLetter />
+      
     </>
   );
 }

@@ -55,7 +55,7 @@ export default function HeroProduct({rated}) {
         </div>
       </div>
       {/* Image */}
-      <img src={ rated?.image} alt="#" width="400" height="400" />
+      <img src={rated?.image} alt="#" width="400" height="400" />
     </div>
   );
 }

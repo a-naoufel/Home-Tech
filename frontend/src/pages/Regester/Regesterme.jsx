@@ -52,7 +52,6 @@ const Regesterme = ({ location, history }) => {
     <div className="bg-gradient-to-r from-gray-300 to-blue-200 flex items-center justify-center flex-col h-screen font-montserrat box-border container-togge">
       {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
-            {loading && <LoadingIndicator/>}
       <div
         className="bg-[#fff] rounded-[30px] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px] "
         style={{ boxShadow: "0 5px 15px rgba(0, 0, 0, 0.35)" }}
@@ -85,14 +84,14 @@ const Regesterme = ({ location, history }) => {
               placeholder="Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
+              />
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+              />
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="password"
@@ -106,8 +105,9 @@ const Regesterme = ({ location, history }) => {
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+              />
             <button  type="submit" className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]">
+              {loading && <LoadingIndicator/>}
             Sign In
             </button>
           </form>

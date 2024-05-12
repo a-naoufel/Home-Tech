@@ -78,10 +78,10 @@ const Page = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               />
-              {loading && <LoadingIndicator />}
             <button 
             type='submit'
             className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]">
+              {loading && <LoadingIndicator />}
               Sign In
             </button>
           </form>

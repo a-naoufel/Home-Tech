@@ -27,10 +27,10 @@ export default function Hero() {
     >
       <HeroSlider slideIndex={slideIndex} setslideIndex={setslideIndex} />
       <div
-        className="flex w-[400vw] text-[white] duration-500 "
+        className="flex w-[300vw] text-[white] duration-500 "
         style={{ transform: `translateX(${-100 * slideIndex}vw)` }}
       >
-        {products.map(product => (
+        {products?.map(product => (
           <HeroProduct rated={product} key={product._id} />
         ))}
       </div>

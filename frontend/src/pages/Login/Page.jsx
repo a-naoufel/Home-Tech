@@ -24,7 +24,6 @@ const Page = () => {
   const { error, loading, userInfo } = userLogin
 
   useEffect(() => {
-    dispatch(logout())
     if (userInfo) {
       navigate("/")
     }

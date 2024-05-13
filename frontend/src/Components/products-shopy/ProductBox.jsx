@@ -19,7 +19,7 @@ export const ProductBox = ({ products }) => {
   return (
     <>
       <ToastContainer />
-      {products.map((product) => (
+      {products?.map((product) => (
         <div
           key={product?.id}
           className="  flex flex-col hover:translate-y-1 hover:scale-105 transition duration-500 ease-in-out shadow-lg hover:shadow-2xl "
@@ -28,7 +28,7 @@ export const ProductBox = ({ products }) => {
 
           <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
             <img
-              src={product.image}
+              src={product?.image}
               alt={product?.name}
               className="object-cover h-full w-full"
             />

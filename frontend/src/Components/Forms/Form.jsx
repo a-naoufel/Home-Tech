@@ -2,7 +2,6 @@ import { useState } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
-import "./Form.css"
 import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 function Form({ route, method }) {

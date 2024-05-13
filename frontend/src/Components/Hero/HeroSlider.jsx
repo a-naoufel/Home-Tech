@@ -2,7 +2,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 // Creating an empty array to store slide indexes
 const emptyArray = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 3; i++) {
   emptyArray.push(i);
 }
 
@@ -22,7 +22,7 @@ function HeroSlider({ slideIndex, setslideIndex }) {
       {/* Right navigation button */}
       <button
         className="bg-white text-black absolute right-12 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
-        disabled={slideIndex === 3}
+        disabled={slideIndex === 2}
         onClick={() => setslideIndex(slideIndex + 1)}
       >
         <FaArrowRight />

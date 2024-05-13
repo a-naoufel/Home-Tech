@@ -12,7 +12,7 @@ export default function Home() {
     <>
       {/* disabled */}
         <Hero></Hero>
-     
+     <Featured/>
       <div className="bg-bgColorWhite ">
       
         <Products/>

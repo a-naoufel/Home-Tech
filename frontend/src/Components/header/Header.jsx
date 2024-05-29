@@ -9,6 +9,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../actions/userActions'
+import Search from "../search/search";
 
 // import Menu from "./menu";
 
@@ -67,7 +68,21 @@ export default function Header() {
                     </li>
                   );
                 }
-              }else
+
+              }
+              else if (item.title ===  'Admin') {
+                if(userInfo && userInfo.isAdmin){
+                  return (
+                    <li key={index} className={item.cName}>
+                      <Link to= {item.path} >
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                }
+
+              }else{
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>
@@ -76,7 +91,7 @@ export default function Header() {
                   </Link>
                 </li>
               );
-            })}
+            }})}
           </ul>
         </nav>
       </IconContext.Provider>
@@ -98,20 +113,7 @@ export default function Header() {
 
           {/* Hamburger menu button */}
         </div>
-
-        <div className="flex items-center rounded-2xl border-2 border-solid border-[#dddddd] text-base md:text-lg">
-          <div className="flex items-center justify-center rounded-l-xl p-2">
-            <FaMagnifyingGlass />
-          </div>
-          <input
-            type="text"
-            className="w-[50px] pl-1 placeholder:text-[0px] focus:outline-none sm:w-[200px] sm:placeholder:text-sm md:w-[300px]"
-            placeholder="Search for products"
-          />
-          <button className="bg-mainColor h-full rounded-r-xl px-3 py-2 text-sm text-[white] ">
-            Search
-          </button>
-        </div>
+       <Search/>
         <div className="flex items-center justify-between gap-3 text-sm md:text-lg nav-items">
   <div className="hidden sm:flex items-center gap-3"> {/* Wrap the navigation items and apply the hidden class */}
     <Link to="/login" className="md:text-xl">

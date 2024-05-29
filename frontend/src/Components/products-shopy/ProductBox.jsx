@@ -10,7 +10,7 @@ export const ProductBox = ({ products }) => {
 
   const handleHeartClick = (productId) => {
     if (likedProducts.includes(productId)) {
-      setLikedProducts(likedProducts.filter((id) => id !== productId));
+      setLikedProducts(likedProducts.filter((_id) => _id !== productId));
     } else {
       setLikedProducts([...likedProducts, productId]);
     }
@@ -21,7 +21,7 @@ export const ProductBox = ({ products }) => {
       <ToastContainer />
       {products?.map((product) => (
         <div
-          key={product?.id}
+          key={product?._id}
           className="  flex flex-col hover:translate-y-1 hover:scale-105 transition duration-500 ease-in-out shadow-lg hover:shadow-2xl "
         >
           {/* Product Image */}

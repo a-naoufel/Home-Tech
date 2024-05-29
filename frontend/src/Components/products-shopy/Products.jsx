@@ -9,7 +9,7 @@ import { listProducts } from '../../actions/productActions'
 import { useSearchParams } from 'react-router-dom'
 
 
-export const Products = ({ history }) => {
+export const Products = () => {
   const [toggled, setToggled] = useState("All");
   const [apiControl, setApiControl] = useState("");
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,27 +1,39 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ShopProducts } from "./ShopProducts";
 import Box from "./Box";
 import api from "../../api";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../../actions/productActions";
+import { useLocation } from 'react-router-dom';
 
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 export const Shop = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch()
+  const productList = useSelector(state => state.productList)
+  const { error, loading, products, page, pages } = productList
+
+  let query = useQuery();
+  let keyword = query.get('keyword');
+
+  if(keyword){
+    keyword = "?keyword=".concat(keyword)
+  }else{
+    keyword = ''
+  } 
+  
+
+
+  useEffect(() => {
+    dispatch(listProducts(keyword))
+
+}, [dispatch, keyword])
+
   const [priceSorted, setPriceSorted] = useState("");
-  useEffect(() => {
-    getProducts();
-  }, []);
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-  const getProducts = () => {
-    api;
-    fetch("http://localhost:8000/api/products/")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.products);
-        console.log(data);
-      })
-      .catch((err) => alert(err));
-  };
+  
   const sortedPrices =
     priceSorted === "Lth"
       ? products.sort((a, b) => a.price - b.price)

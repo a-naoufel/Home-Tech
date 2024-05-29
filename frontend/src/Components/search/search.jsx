@@ -13,9 +13,9 @@ function Search() {
     const submitHandler = (e) => {
         e.preventDefault()
         if (keyword) {
-            history(`/?keyword=${keyword}&page=1`)
+            history(`/shop/?keyword=${keyword}&page=1`)
         } else {
-            history("/")
+            history()
         }
     }
     return (

@@ -12,9 +12,9 @@ from rest_framework import status
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def getProducts(request):
     query = request.query_params.get('keyword')
+    print('Query:', query)
     if query == None:
         query = ''
 

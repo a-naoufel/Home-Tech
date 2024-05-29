@@ -36,6 +36,7 @@ export const ProductBox = ({ products }) => {
               />
             {/* Wishlist Icon */}
               </Link>
+              
             <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart

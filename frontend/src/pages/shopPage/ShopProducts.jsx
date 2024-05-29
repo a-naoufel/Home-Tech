@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,18 +21,22 @@ export const ShopProducts = ({ product }) => {
         <div className="my-12 flex flex-wrap justify-center gap-8 ">
           {product.map((prod) => (
             <div
-              key={prod?.id}
+              key={prod?._id}
               className="  flex flex-col hover:translate-y-1 hover:scale-105 transition duration-500 ease-in-out shadow-lg hover:shadow-2xl "
             >
               {/* Product Image */}
               <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
-          <img src={"http://localhost:8000".concat(prod?.image)} alt={prod?.name} className="object-cover h-full w-full" />
+                <Link to={`/product/${prod?._id}`}>
+                  <img
+                    src={prod?.image}
+                    alt={prod?.name}
+                    className="object-cover h-full w-full"
+                  />
+                </Link>
+
                 {/* Wishlist Icon */}
                 <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
-                  <div
-                    className="relative text-bgColorDanger cursor-pointer z-[1]"
-                    
-                  >
+                  <div className="relative text-bgColorDanger cursor-pointer z-[1]">
                     <FaHeart
                       onClick={() => (
                         handleHeartClick(prod?.id),
@@ -52,7 +55,7 @@ export const ShopProducts = ({ product }) => {
                 </div>
                 {/* Discount Badge */}
                 <div className="absolute h-[30px] w-[30px] left-2 top-2 text-xs text-white bg-[#D72A48] flex items-center justify-center rounded-full">
-                {prod?.discount}%
+                  {prod?.discount}%
                 </div>
               </div>
               {/* Product Details */}

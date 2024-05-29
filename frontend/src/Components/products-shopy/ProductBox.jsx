@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
 
 import RatingStars from "../ratingstars/RatingStars";
+import { Link } from "react-router-dom";
 
 export const ProductBox = ({ products }) => {
   const [likedProducts, setLikedProducts] = useState([]);
@@ -27,12 +28,14 @@ export const ProductBox = ({ products }) => {
           {/* Product Image */}
 
           <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
+          <Link to={`/product/${product?._id}`}>
             <img
               src={product?.image}
               alt={product?.name}
               className="object-cover h-full w-full"
-            />
+              />
             {/* Wishlist Icon */}
+              </Link>
             <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart

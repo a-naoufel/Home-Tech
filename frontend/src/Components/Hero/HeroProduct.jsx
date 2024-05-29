@@ -55,7 +55,9 @@ export default function HeroProduct({rated}) {
         </div>
       </div>
       {/* Image */}
+      <Link to={`/product/${rated?._id}`}>
       <img src={rated?.image} alt="#" width="400" height="400" />
+      </Link>
     </div>
   );
 }

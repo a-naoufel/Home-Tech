@@ -10,6 +10,10 @@ import { Shop } from "./pages/shopPage/Shop";
 import ProtectedRoute from "./Components/protectedroot/ProtectedRoute";
 import Regesterme from "./pages/Regester/Regesterme";
 
+
+import ProductPage from "./pages/ProductPage/ProductPage";
+
+
 function Logout() {
   localStorage.clear();
   return <Navigate to="/login" />;
@@ -34,6 +38,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/loginadmin" element={<Login />} />
+
+          <Route path="/product/:id" element={<ProductPage />} />
           
           <Route
             path="/add-product"

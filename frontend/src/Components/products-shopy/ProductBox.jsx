@@ -37,7 +37,7 @@ export const ProductBox = ({ products }) => {
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart
                   onClick={() => (
-                    handleHeartClick(product?.id),
+                    handleHeartClick(product?._id),
                     toast.success(
                       "Product successfully added to your wishlist",
                       {
@@ -69,9 +69,9 @@ export const ProductBox = ({ products }) => {
               </div>
               {/* Price */}
               <div className="relative text-base font-bold text-red-600 mx-0 w-fit">
-                {product?.price}${/* Original Price */}
+                {product?.price - product?.price * product.discount/100}${/* Original Price */}
                 <del className="absolute text-xs text-[#787575] bottom-0 left-full">
-                  {product?.newprice}$
+                  {product?.price}$
                 </del>
               </div>
             </div>

@@ -23,9 +23,9 @@ export default function HeroProduct({rated}) {
         {/* Price */}
         <div className="my-2">
           <div className="relative mx-auto w-fit text-3xl text-red-600 lg:mx-0">
-           {rated?.price} $                                                          
+           {rated?.price - rated?.price*rated?.discount/100} $                                                          
             <del className="absolute bottom-0 left-full text-sm text-white">
-            { rated?.newprice}$
+            { rated?.price}$
             </del>
           </div>
           {/* Offer message */}

@@ -25,8 +25,6 @@ import products from "../../products";
 const ProductScreen = () => {
   const { id } = useParams();
   const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,6 +35,11 @@ const ProductScreen = () => {
   useEffect(() => {
     dispatch(listProductDetails(id));
   }, [dispatch]);
+
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
+
   return (
     <div>
       {loading ? (
@@ -45,7 +48,6 @@ const ProductScreen = () => {
         navigate("/*")
       ) : (
         <div>
-
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
@@ -61,9 +63,7 @@ const ProductScreen = () => {
                   {/* Add your custom styling here */}
                 </ListGroup.Item>
 
-                <ListGroup.Item>
-                  Price: ${product.price}
-                </ListGroup.Item>
+                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
 
                 <ListGroup.Item>
                   Description: {product.description}
@@ -73,7 +73,7 @@ const ProductScreen = () => {
 
             <Col md={3}>
               <Card>
-                <ListGroup variant='flush'>
+                <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
                       <Col>Price:</Col>
@@ -86,7 +86,7 @@ const ProductScreen = () => {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                        {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -95,19 +95,19 @@ const ProductScreen = () => {
                     <ListGroup.Item>
                       <Row>
                         <Col>Qty</Col>
-                        <Col xs='auto' className='my-1'>
+                        <Col xs="auto" className="my-1">
                           <Form.Control
                             as="select"
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
                           >
-                            {
-                              [...Array(product.countInStock).keys()].map((x) => (
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
                                 <option key={x + 1} value={x + 1}>
                                   {x + 1}
                                 </option>
-                              ))
-                            }
+                              )
+                            )}
                           </Form.Control>
                         </Col>
                       </Row>
@@ -115,7 +115,16 @@ const ProductScreen = () => {
                   )}
 
                   <ListGroup.Item>
-                    {/* Add your custom styling here */}
+                    <h1>
+                    <Button
+                      onClick={addToCartHandler}
+                      className="btn-block"
+                      disabled={product.countInStock == 0}
+                      type="button"
+                    >
+                      Add to Cart
+                    </Button>
+                    </h1>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>

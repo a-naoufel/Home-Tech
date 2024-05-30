@@ -1,12 +1,15 @@
 import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../actions/cartActions";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
 export default function HeroProduct({rated}) {
-  // Function to handle click event
+  // Function to hand le click event
  
-
+  const dispatch = useDispatch();
   return (
     <div
       // Container div with Tailwind CSS classes
@@ -40,8 +43,15 @@ export default function HeroProduct({rated}) {
           {/* Add to Cart Button */}
           <button
             className="flex w-[150px] items-center gap-1 rounded-xl bg-red-600 px-3 py-1 text-white"
-           
-          >
+            
+              onClick={() => {
+
+                toast.success(
+                  `Product successfully added to your shopping cart`
+                );
+                 dispatch(addToCart(rated?._id, 1))
+              }}
+            >
             <p>Add To Cart</p>
             <FaCartShopping />
           </button>

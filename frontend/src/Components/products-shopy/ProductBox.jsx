@@ -2,13 +2,15 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../actions/cartActions'
 
 import RatingStars from "../ratingstars/RatingStars";
 import { Link } from "react-router-dom";
 
 export const ProductBox = ({ products }) => {
   const [likedProducts, setLikedProducts] = useState([]);
-
+  const dispatch = useDispatch();
   const handleHeartClick = (productId) => {
     if (likedProducts.includes(productId)) {
       setLikedProducts(likedProducts.filter((_id) => _id !== productId));
@@ -88,16 +90,14 @@ export const ProductBox = ({ products }) => {
                     toast.success(
                       `Product successfully added to your shopping cart`
                     );
+                     dispatch(addToCart(product?._id, 1))
                   }}
                 >
                   Add To Cart
                 </p>
                 <FaCartShopping />
               </button>
-              {/* Read More Button */}
-              <a className="bg-mainColor text-white w-[100px] rounded-lg px-1 py-1 text-center">
-                Read More
-              </a>
+              
             </div>
           </div>
         </div>

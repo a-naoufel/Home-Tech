@@ -23,8 +23,8 @@ export const SidebarData = [
   },
 
   {
-    title: 'Card',
-    path: '/Card',
+    title: 'Cart',
+    path: '/Cart',
     icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
   },
@@ -38,20 +38,20 @@ export const SidebarData = [
  
   {
     title: 'Admin',
-    path: '/support',
+    path: '/admin',
     icon: <RiAdminFill />,
     cName: 'nav-text'
   },
   {
     title: 'profile',
-    path: '/login',
+    path: '/profile',
     icon: <FaUser />,
     cName: 'nav-text'
   },
   
   {
     title: 'Log out',
-    path: '/log-out',
+    path: '/',
     icon: <TbLogout />,
     cName: 'nav-text'
   },

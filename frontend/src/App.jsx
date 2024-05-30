@@ -9,6 +9,7 @@ import NotFound from "./pages/Not-Found/NotFound";
 import { Shop } from "./pages/shopPage/Shop";
 import ProtectedRoute from "./Components/protectedroot/ProtectedRoute";
 import Regesterme from "./pages/Regester/Regesterme";
+import CartPage from "./pages/CartPage/CartPage";
 
 
 import ProductPage from "./pages/ProductPage/ProductPage";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/loginadmin" element={<Login />} />
+          <Route path="/cart/:id?" element={<CartPage />} />
 
           <Route path="/product/:id" element={<ProductPage />} />
           

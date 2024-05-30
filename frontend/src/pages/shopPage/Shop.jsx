@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../actions/productActions";
 import { useLocation } from 'react-router-dom';
-
+import { Paginition } from "../../Components/products-shopy/Paginition";
+import { useNavigate } from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -16,10 +17,12 @@ export const Shop = () => {
   const productList = useSelector(state => state.productList)
   const { error, loading, products, page, pages } = productList
 
+  const navigate = useNavigate();
+
   let query = useQuery();
   let keyword = query.get('keyword');
   let Page = query.get('page')
-  
+
   if(Page){
     Page = "page=".concat(Page)
   }else{
@@ -60,6 +63,11 @@ export const Shop = () => {
             />
           </div>
         </div>
+        <Paginition
+            PAGES={pages}
+            currentPage={page}
+            setCurrentPage={(e) => navigate("/shop?".concat(keyword).concat("page=").concat(e))}
+          />
       </div>
     </>
   );

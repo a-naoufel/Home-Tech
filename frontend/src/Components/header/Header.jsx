@@ -28,13 +28,8 @@ export default function Header() {
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
-  let cart;
+  let cart  = "/cart";
 
-  if (userInfo) {
-    cart = "/cart";
-  } else {
-    cart = "/login";
-  }
 
   const showSidebar = () => setSidebar(!sidebar);
   return (
@@ -85,11 +80,7 @@ export default function Header() {
                       );
                     }
                   } else if (
-                    item.title === "Cart" ||
-                    item.title === "Wishlist" ||
-                    item.title === "profile" ||
-                    item.title === "profile" ||
-                    item.title === "Wishlist"
+                    item.title === "profile" 
                   ) {
                     if (userInfo) {
                       return (

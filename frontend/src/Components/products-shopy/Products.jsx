@@ -1,30 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./products.css";
 import { ProductBox } from "./ProductBox";
 import { ProductListUL } from "./ProductListUL";
 import { Paginition } from "./Paginition";
-import { listProducts } from '../../actions/productActions'
-import { useSearchParams } from 'react-router-dom'
+import { listProducts } from "../../actions/productActions";
+import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 export const Products = () => {
   const [toggled, setToggled] = useState("All");
   const [apiControl, setApiControl] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const dispatch = useDispatch()
-  const productList = useSelector(state => state.productList)
-  const { error, loading, products, page, pages } = productList
+  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { error, loading, products, page, pages } = productList;
+  let query = useQuery();
+
+  let Page = query.get("page");
+
+  if (Page) {
+    Page = "page=".concat(Page);
+  } else {
+    Page = "";
+  }
 
   useEffect(() => {
-      dispatch(listProducts())
-
-  }, [dispatch])
-
+    dispatch(listProducts(Page));
+  }, [dispatch, Page]);
 
   return (
     <>
@@ -42,7 +54,9 @@ export const Products = () => {
             <ProductBox products={products} />
           </div>
           <Paginition
-
+            PAGES={pages}
+            currentPage={page}
+            setCurrentPage={(e) => navigate("/?page=".concat(e))}
           />
         </div>
       </div>

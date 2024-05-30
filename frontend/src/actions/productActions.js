@@ -34,11 +34,11 @@ import {
 } from '../constants/productConstants'
 
 
-export const listProducts = (keyword = '') => async (dispatch) => {
+export const listProducts = (keyword = '',page ='') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await api.get(`api/products${keyword}`)
+        const { data } = await api.get(`api/products?${keyword}${page}`)
         data.products.map ( product => (
             product.image = "http://localhost:8000/".concat(product.image)
         ))  

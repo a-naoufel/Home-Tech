@@ -18,9 +18,16 @@ export const Shop = () => {
 
   let query = useQuery();
   let keyword = query.get('keyword');
+  let Page = query.get('page')
+  
+  if(Page){
+    Page = "page=".concat(Page)
+  }else{
+    Page = ""
+  } 
 
   if(keyword){
-    keyword = "?keyword=".concat(keyword)
+    keyword = "keyword=".concat(keyword).concat("&")
   }else{
     keyword = ''
   } 
@@ -28,9 +35,9 @@ export const Shop = () => {
 
 
   useEffect(() => {
-    dispatch(listProducts(keyword))
+    dispatch(listProducts(keyword,Page))
 
-}, [dispatch, keyword])
+}, [dispatch, keyword, Page])
 
   const [priceSorted, setPriceSorted] = useState("");
   

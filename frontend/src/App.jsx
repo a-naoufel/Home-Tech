@@ -11,6 +11,7 @@ import ProtectedRoute from "./Components/protectedroot/ProtectedRoute";
 import Regesterme from "./pages/Regester/Regesterme";
 import CartPage from "./pages/CartPage/CartPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import OrderPage from "./pages/OrderPage/OrderPage";
 
 
 import ProductPage from "./pages/ProductPage/ProductPage";
@@ -42,6 +43,7 @@ function App() {
           <Route path="/loginadmin" element={<Login />} />
           <Route path="/cart/:id?" element={<CartPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
 
           <Route path="/product/:id" element={<ProductPage />} />
           

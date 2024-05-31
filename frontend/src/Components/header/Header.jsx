@@ -27,10 +27,14 @@ export default function Header() {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
-
-  let cart  = "/cart";
-
-
+  let name = '';
+  let user = "/login"
+  let cart = "/cart";
+  if (userInfo) {
+    name = userInfo.name;
+    user = "/profile"
+  }
+  console.log("username : ",name)
   const showSidebar = () => setSidebar(!sidebar);
   return (
     <header
@@ -79,9 +83,7 @@ export default function Header() {
                         </li>
                       );
                     }
-                  } else if (
-                    item.title === "profile" 
-                  ) {
+                  } else if (item.title === "profile") {
                     if (userInfo) {
                       return (
                         <li key={index} className={item.cName}>
@@ -137,7 +139,10 @@ export default function Header() {
           <div className="hidden sm:flex items-center gap-3">
             {" "}
             {/* Wrap the navigation items and apply the hidden class */}
-            <Link to="/login" className="md:text-xl">
+            <Link to={user} className="md:text-xl">
+              <p>{name}</p>
+            </Link>
+            <Link to={user} className="md:text-xl">
               <FaUser />
             </Link>
             <div className="border-r-2 py-2 pr-3">

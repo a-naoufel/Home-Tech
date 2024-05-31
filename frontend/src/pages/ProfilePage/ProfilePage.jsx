@@ -32,6 +32,8 @@ function ProfilePage() {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
+  console.log("orders", orderListMy);
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
@@ -46,7 +48,6 @@ function ProfilePage() {
       }
     }
   }, [dispatch, navigate, userInfo, success]);
-  console.log(user);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -102,6 +103,47 @@ function ProfilePage() {
         ></input>
         <button type="submit">Update</button>
       </form>
+      <br></br>
+      <h1>orders list</h1>
+      {loadingOrders ? (
+                    <LoadingIndicator />
+                ) : errorOrders ? (
+                    <Message variant='danger'>{errorOrders}</Message>
+                ) : (
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>DATE</th>
+                                        <th>TOTAL</th>
+                                        <th>PAID</th>
+                                        <th>DELIVERED</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {orders.map(order => (
+                                        <tr key={order._id}>
+                                            <td>{order._id}</td>
+                                            <td>{order.createdAt.substring(0, 10)}</td>
+                                            <td>{order.totalPrice}</td>
+                                            <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            )}</td>
+                                            <td>
+                                                {order.isDelivered ? order.deliveredAt.substring(0, 10) : (
+                                                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                                )}
+                                            </td>
+                                            <td>
+                                                <button type='button' className='small' onClick={() => { navigate(`/order/${order._id}`) }}>Details</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
+
     </div>
   );
 }

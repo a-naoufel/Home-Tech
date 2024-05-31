@@ -69,7 +69,7 @@ export const listTopProducts = () => async (dispatch) => {
         data.map ( product => (
             product.image = "http://localhost:8000/".concat(product.image)
         ))  
-              
+            
         dispatch({
             type: PRODUCT_TOP_SUCCESS,
             payload: data

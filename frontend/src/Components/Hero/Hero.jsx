@@ -13,6 +13,7 @@ export default function Hero() {
 
   const productTopRated = useSelector(state => state.productTopRated)
   const { error, loading, products } = productTopRated
+  let i = 0;
 
   useEffect(() => {
       dispatch(listTopProducts())
@@ -31,6 +32,7 @@ export default function Hero() {
         style={{ transform: `translateX(${-100 * slideIndex}vw)` }}
       >
         {products?.map(product => (
+          
           <HeroProduct rated={product} key={product._id} />
         ))}
       </div>

@@ -12,6 +12,8 @@ import Regesterme from "./pages/Regester/Regesterme";
 import CartPage from "./pages/CartPage/CartPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderPage from "./pages/OrderPage/OrderPage";
+import UserListPage from "./pages/UserList/UserListPage";
+import ProductListPage from "./pages/ProductList/ProductListPage";
 
 
 import ProductPage from "./pages/ProductPage/ProductPage";
@@ -39,6 +41,8 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<RegisterAndLogout />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/userlist" element={<UserListPage />} />
+          <Route path="/productlist" element={<ProductListPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/loginadmin" element={<Login />} />
           <Route path="/cart/:id?" element={<CartPage />} />

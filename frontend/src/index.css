@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .my-container {
   min-height: calc(100vh);
   background-image: url("/jdk.jpg");
@@ -9,14 +10,6 @@
   background-size: cover;
   background-position: center bottom;
 }
-
-/* input {
-    height: 2.4rem;
-    width: 100%;
-    padding: 0.5rem;
-    background-color: transparent;
-    border-bottom: 1px solid #2edfd4;
-  } */
 
 .animation-right-arrow-father:hover > .animation-right-arrow {
   position: relative;
@@ -32,6 +25,26 @@
   to {
     left: 5px;
   }
+}
+th {
+  padding: 25px 0;
+}
+td {
+  padding: 20px 0;
+  text-align: center;
+}
+
+table tbody tr::after {
+  content: "";
+  position: absolute;
+  background-color:#00acff ;
+  height: 0.1px;
+  bottom: 0;
+  width: 95%;
+  left: 2.5%;
+}
+.wish-img img {
+  border-radius: 10px;
 }
 
 .log-in::before {
@@ -359,7 +372,7 @@ li.active {
 
 .nav-menu {
   background-color: #201f20;
-  width: 161px;
+  width: 250px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -482,4 +495,38 @@ li.active {
 
 .box-items ::-webkit-scrollbar-thumb:hover {
   background: #8e8e8e;
+}
+/* ---------------singleproduct------------------- */
+
+.single-product .img img {
+  height: 100%;
+  border-radius: 20px;
+}
+
+@media (max-width: 991px) {
+  .single-product {
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .qty {
+      width: 40%;
+  }
+}
+/* --------------------cart------------ */
+@media (max-width: 767px) {
+  .cart .cart-holder {
+      flex-direction: column;
+  }
+
+  .cart .cart-holder .cart-wrapper {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .cart .cart-holder .cart-summary {
+      width: 100%;
+  }
 }

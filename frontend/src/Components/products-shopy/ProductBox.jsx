@@ -4,18 +4,23 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../actions/cartActions'
+import { addToWish ,removeFromWish } from "../../actions/wishActions";
+import { useSelector } from "react-redux";
 
 import RatingStars from "../ratingstars/RatingStars";
 import { Link } from "react-router-dom";
 
 export const ProductBox = ({ products }) => {
-  const [likedProducts, setLikedProducts] = useState([]);
   const dispatch = useDispatch();
-  const handleHeartClick = (productId) => {
-    if (likedProducts.includes(productId)) {
-      setLikedProducts(likedProducts.filter((_id) => _id !== productId));
+
+  const wish = useSelector((state) => state.wish);
+  const { wishItems } = wish;
+
+  const handleHeartClick = (product) => {
+    if (!wishItems.includes(product)) {
+      dispatch(addToWish(product._id));
     } else {
-      setLikedProducts([...likedProducts, productId]);
+      dispatch(removeFromWish(product._id));
     }
   };
 
@@ -43,7 +48,7 @@ export const ProductBox = ({ products }) => {
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart
                   onClick={() => (
-                    handleHeartClick(product?._id),
+                    handleHeartClick(product),
                     toast.success(
                       "Product successfully added to your wishlist",
                       {
@@ -52,7 +57,7 @@ export const ProductBox = ({ products }) => {
                     )
                   )}
                   className={`icon fav ${
-                    likedProducts.includes(product?._id) ? "active" : ""
+                    wishItems ? "" : "active"
                   }`}
                 />
               </div>

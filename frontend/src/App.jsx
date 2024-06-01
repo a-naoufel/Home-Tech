@@ -17,6 +17,8 @@ import ProductListPage from "./pages/ProductList/ProductListPage";
 import ShippingPage from "./pages/PlaceOrder/ShippingPage"
 import PlaceOrderPage from "./pages/PlaceOrder/PlaceOrderPage"
 import PaymentPage from "./pages/PlaceOrder/PaymentPage"
+import Favorite from "./pages/favorite/Favorite"
+
 
 
 import ProductPage from "./pages/ProductPage/ProductPage";
@@ -49,6 +51,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/loginadmin" element={<Login />} />
           <Route path="/cart/:id?" element={<CartPage />} />
+          <Route path="/wish/:id?" element={<Favorite />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order/:id" element={<OrderPage />} />
           <Route path="/Shipping" element={<ShippingPage />} />

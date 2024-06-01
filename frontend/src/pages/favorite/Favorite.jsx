@@ -1,7 +1,12 @@
 "use client";
 import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWish, removeFromWish } from "../../actions/wishActions";
+
 import { useState } from "react";
 import { FaArrowRight, FaRegHeart, FaTrash } from "react-icons/fa6";
+import { useNavigate, useParams } from "react-router-dom";
 import cameraImage from './camera.jpg';
 import airpodsImage from './airpods.jpg';
 import alexaImage from './alexa.jpg';
@@ -14,12 +19,34 @@ const products = [
   { id: 3, name: 'Alexa', price: 99, quantity: 'in stock', image: alexaImage },
 ];
 
-export default function Page() {
-  const [state, setState] = useState(false);
+export default function Favorite() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const productId = id;
+
+  console.log("productId: ", productId);
+
+  const wish = useSelector((state) => state.wish);
+  const { wishItems } = wish;
+
+  console.log("wishItems: ", wishItems);
+  const userInfo = localStorage.getItem("userInfo");
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(addToWish(productId));
+    }
+    navigate("/wish");
+  }, [dispatch, productId]);
+  console.log("wishItems: ", wishItems);
+
+  const [state, setState] = useState(wishItems.length > 0 ? true : false);
 
   return (
     <>
-      {state ? (
+      {wishItems.length > 0 ? (
         <>
           <div>
             <p className="my-6 mt-12 text-center text-xl font-bold">
@@ -32,13 +59,12 @@ export default function Page() {
                   <th>Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
-                  <th>Subtotal</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="wish-img relative">
+                {wishItems.map((product) => (
+                  <tr key={product.product} className="wish-img relative">
                     <td>
                       <div className="mx-auto w-fit">
                         <img
@@ -53,10 +79,15 @@ export default function Page() {
                       <p>{product.name}</p>
                     </td>
                     <td>${product.price}</td>
-                    <td className=""><div>{product.quantity}</div></td>
-                    <td>${product.price * product.quantity}</td>
+                    <td className=""><div>{product.countInStock}</div></td>
+                    
                     <td>
-                      <div className="mx-auto w-fit cursor-pointer text-bgColorDanger">
+                      <div 
+                      className="mx-auto w-fit cursor-pointer text-bgColorDanger"
+                      onClick={() =>{ dispatch(removeFromWish(product.product))
+                                    navigate("/wish")}}
+                      
+                      >
                         <FaTrash />
                       </div>
                     </td>

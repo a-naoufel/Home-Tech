@@ -32,7 +32,7 @@ function CartPage() {
     }
   }, [dispatch, productId, qty]);
   console.log("cartItems: ", cartItems);
-  
+
   return (
     <div>
       {cartItems.length === 0 ? (
@@ -63,7 +63,7 @@ function CartPage() {
             <h1 className="text-4xl font-bold">Your Cart</h1>
             <div className="cart-holder pt-[20px] pb-[40px] flex justify-between">
               <div className="cart-wrapper border border-[#ddd] p-[15px] w-[70%] rounded-[8px]">
-                {cartItems.map((item) => (
+                {cartItems.map((item) => item.countInStock > 0 && (
                   <div className="mt-[8px]" key={item.product}>
                     <div className="flex justify-between">
                       <div className="flex items-center mb-[10px]">
@@ -94,24 +94,40 @@ function CartPage() {
                             className="cursor-pointer w-[40px] h-[40px] text-[20px] rounded-full p-[5px] bg-[#909090] outline-none border-none"
                             disabled={item.qty === 1}
                             onClick={() =>
-                              navigate(`/cart/${item.product}?qty=${item.qty - 1}`)
+                              navigate(
+                                `/cart/${item.product}?qty=${item.qty - 1}`
+                              )
                             }
                           >
                             -
                           </button>
                           <input
-                            className="text-center text-[17px] font-medium border-none outline-none"
+                            className="text-center text-[17px] font-medium border-[none] outline-[none]"
                             type="number"
                             min="1"
-                            max="99"
+                            max={item.countInStock}
                             value={item.qty}
-                            readOnly
+                            onChange={(e) => {
+                              if (e.target.value > item.countInStock) {
+                                navigate(
+                                  `/cart/${item.product}?qty=${item.countInStock}`
+                                );
+                              } else if (e.target.value < 1) {
+                                navigate(`/cart/${item.product}?qty=1`);
+                              } else {
+                                navigate(
+                                  `/cart/${item.product}?qty=${e.target.value}`
+                                );
+                              }
+                            }}
                           />
                           <button
                             className="cursor-pointer w-[40px] h-[40px] text-[20px] rounded-full p-[5px] bg-[#909090] outline-none border-none"
                             disabled={item.qty === item.countInStock}
                             onClick={() =>
-                              navigate(`/cart/${item.product}?qty=${item.qty + 1}`)
+                              navigate(
+                                `/cart/${item.product}?qty=${item.qty + 1}`
+                              )
                             }
                           >
                             +

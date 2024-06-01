@@ -6,6 +6,7 @@ import { addToCart } from "../../reducers/slices/cartSlice";
 import { addToWISH_List } from "../../reducers/slices/favSlice";
 import { Spinner } from "../../Components/spinner/Spinner";
 import ReactImageMagnify from "react-image-magnify";
+import Rating from "../../Components/Rating";
 
 import {
   Row,
@@ -229,7 +230,8 @@ const ProductScreen = () => {
           {product.reviews.map((review) => (
             <ListGroup.Item key={review._id}>
               <strong>{review.name}</strong>
-              <RatingStars value={review.rating} />
+              <Rating value='5' color='#f8e825' />
+              <h1> this is the rating{review.rating}</h1>
               <p>{review.createdAt.substring(0, 10)}</p>
               <p>{review.comment}</p>
             </ListGroup.Item>

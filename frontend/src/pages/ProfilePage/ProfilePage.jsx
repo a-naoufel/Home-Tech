@@ -5,8 +5,8 @@ import Message from "../../Components/Message";
 import {
   getUserDetails,
   updateUserProfile,
-} from "../../../../frontend1vite/src/actions/userActions";
-import { USER_UPDATE_PROFILE_RESET } from "../../../../frontend1vite/src/constants/userConstants";
+} from "../../actions/userActions";
+import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import { listMyOrders } from "../../actions/orderActions";
 import { useNavigate } from "react-router-dom";
 

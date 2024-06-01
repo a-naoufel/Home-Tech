@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { login, logout } from '../../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../Components/Message'
@@ -14,7 +14,11 @@ import { FaGooglePlusG, FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/
 const Page = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate();
+  let navigate = useNavigate();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  console.log("from", from)
 
   const dispatch = useDispatch()
 
@@ -25,7 +29,7 @@ const Page = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/")
+      navigate(from, {state:{from:from}})
     }
 }, [ userInfo])
 
@@ -100,7 +104,7 @@ const Page = () => {
               <p>
                 Register with your personal details to use all of site features
               </p>
-              <button onClick={(e)=>navigate("/register") } type="submit"  className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]">
+              <button onClick={(e)=>navigate("/register" , {state:{from:from}}) } type="submit"  className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]">
              
                   Sign up
                 

@@ -10,7 +10,7 @@ import {
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
     const { data } = await api.get(`api/products/${id}`)
-
+    if(data.countInStock > 0){
     dispatch({
         type: CART_ADD_ITEM,
         payload: {
@@ -23,6 +23,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
         }
     })
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
 }
 
 

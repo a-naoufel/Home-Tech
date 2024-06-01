@@ -4,21 +4,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../../Components/FormContainer'
 import CheckoutSteps from '../../Components/CheckoutSteps'
 import { saveShippingAddress } from '../../actions/cartActions'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,useLocation} from 'react-router-dom'
 
 function ShippingPage() {
 
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
-    const navigate = useNavigate()
+    let navigate = useNavigate()
+    let location = useLocation()
 
     const dispatch = useDispatch()
+    const userInfo = localStorage.getItem('userInfo');
 
     const [address, setAddress] = useState(shippingAddress.address)
     const [city, setCity] = useState(shippingAddress.city)
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
     const [country, setCountry] = useState(shippingAddress.country)
-
+    useEffect(() => {
+        if (!userInfo) {
+            navigate('/login', { state: { from: location } });
+        }
+    }, [userInfo])
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(saveShippingAddress({ address, city, postalCode, country }))

@@ -165,7 +165,7 @@ function CartPage() {
                     </span>
                   </div>
                   <button 
-                  onClick={() => navigate("/login?redirect=shipping")}
+                  onClick={() => navigate("/shipping")}
                   className="bg-[#00acff] border-none text-white p-[10px] rounded-[50px] mt-[10px] cursor-pointer w-full transition-opacity duration-300 hover:opacity-80"
                   >
                      Proceed to checkout

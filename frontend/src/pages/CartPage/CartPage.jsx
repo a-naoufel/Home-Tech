@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { BiSolidTrashAlt } from "react-icons/bi";
 
 function CartPage() {
   const navigate = useNavigate();
@@ -30,34 +31,132 @@ function CartPage() {
       dispatch(addToCart(productId, qty));
     }
   }, [dispatch, productId, qty]);
-
-  if (cartItems.length === 0) {
-    return <h1>Cart is empty</h1>;
-  }
+  console.log("cartItems: ", cartItems);
+  
   return (
     <div>
-      list of cart items
-      {cartItems.map((item) => (
-        <div key={item.product}>
-          <img src={item.image} alt={item.name} />
-          <Link to={`/product/${item.product}`}>{item.name}</Link>
-          <select
-            value={item.qty}
-            onChange={(e) =>
-              dispatch(addToCart(item.product, Number(e.target.value)))
-            }
+      {cartItems.length === 0 ? (
+        <div
+          className="container flex flex-col items-center justify-center py-14"
+          style={{ minHeight: `calc(100vh - 70.94px)` }}
+        >
+          <img
+            src="/cart-empty-photo.png"
+            alt="cart-empty"
+            width={300}
+            height={300}
+          />
+          <p className="my-6 mb-2 text-3xl font-bold">
+            Your cart is empty and sad :(
+          </p>
+          <p className="opacity-60">Add something to make it happy!</p>
+          <button
+            className="mt-6 rounded-xl bg-mainColor px-6 py-2 text-white"
+            onClick={() => navigate("/shop")}
           >
-            {[...Array(item.countInStock).keys()].map((x) => (
-              <option key={x + 1} value={x + 1}>
-                {x + 1}
-              </option>
-            ))}
-          </select>
-          <button onClick={() => dispatch(removeFromCart(item.product))}>
-            Remove
+            Continue Shopping
           </button>
         </div>
-      ))}
+      ) : (
+        <div className="cart mt-[100px]">
+          <div className="container">
+            <h1 className="text-4xl font-bold">Your Cart</h1>
+            <div className="cart-holder pt-[20px] pb-[40px] flex justify-between">
+              <div className="cart-wrapper border border-[#ddd] p-[15px] w-[70%] rounded-[8px]">
+                {cartItems.map((item) => (
+                  <div className="mt-[8px]" key={item.product}>
+                    <div className="flex justify-between">
+                      <div className="flex items-center mb-[10px]">
+                        <div className="bg-[#eee] p-[10px] mr-[15px] rounded-[6px]">
+                          <img
+                            className="w-[80px]"
+                            src={item.image}
+                            alt={item.name}
+                          />
+                        </div>
+                        <div className="flex flex-col justify-between">
+                          <h4 className="text-lg font-bold">{item.name}</h4>
+                          <p className="mb-[15px] pt-4 text-[32px] font-semibold">
+                            ${(item.price * item.qty).toFixed(2)}{" "}
+                            <del className="text-[16px] text-[#EA4B48]">
+                              ${(item.price * item.qty * 1.2).toFixed(2)}
+                            </del>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-between">
+                        <BiSolidTrashAlt
+                          className="flex relative left-[80%] text-[#EA4B48] cursor-pointer text-[22px]"
+                          onClick={() => dispatch(removeFromCart(item.product))}
+                        />
+                        <div className="mb-[20px] border border-[#909090] rounded-[50px] flex">
+                          <button
+                            className="cursor-pointer w-[40px] h-[40px] text-[20px] rounded-full p-[5px] bg-[#909090] outline-none border-none"
+                            disabled={item.qty === 1}
+                            onClick={() =>
+                              navigate(`/cart/${item.product}?qty=${item.qty - 1}`)
+                            }
+                          >
+                            -
+                          </button>
+                          <input
+                            className="text-center text-[17px] font-medium border-none outline-none"
+                            type="number"
+                            min="1"
+                            max="99"
+                            value={item.qty}
+                            readOnly
+                          />
+                          <button
+                            className="cursor-pointer w-[40px] h-[40px] text-[20px] rounded-full p-[5px] bg-[#909090] outline-none border-none"
+                            disabled={item.qty === item.countInStock}
+                            onClick={() =>
+                              navigate(`/cart/${item.product}?qty=${item.qty + 1}`)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                ))}
+              </div>
+              <div className="cart-summary rounded-[12px] h-auto p-[10px] w-[250px] border border-[#ddd]">
+                <h3 className="mb-[10px] text-lg font-bold">Order Summary</h3>
+                <div className="cart-sum-box">
+                  <div className="mb-[10px] flex justify-between">
+                    Subtotal:{" "}
+                    <span>
+                      $
+                      {cartItems
+                        .reduce((acc, cur) => acc + cur.price * cur.qty, 0)
+                        .toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="mt-[10px]">
+                    Shipping: <span>Free</span>
+                  </div>
+                  <hr />
+                  <div className="mt-[10px]">
+                    Total:{" "}
+                    <span>
+                      $
+                      {cartItems
+                        .reduce((acc, cur) => acc + cur.price * cur.qty, 0)
+                        .toFixed(2)}
+                    </span>
+                  </div>
+                  <button className="bg-[#00acff] border-none text-white p-[10px] rounded-[50px] mt-[10px] cursor-pointer w-full transition-opacity duration-300 hover:opacity-80">
+                    Proceed to checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

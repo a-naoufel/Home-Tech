@@ -16,8 +16,12 @@ export const ProductBox = ({ products }) => {
   const wish = useSelector((state) => state.wish);
   const { wishItems } = wish;
 
+const isProductInWishList = (productId) => {
+  return wishItems.some((product) => product.product === productId);
+};
+
   const handleHeartClick = (product) => {
-    if (!wishItems.includes(product)) {
+    if (isProductInWishList(product._id) === false) {
       dispatch(addToWish(product._id));
     } else {
       dispatch(removeFromWish(product._id));
@@ -57,7 +61,7 @@ export const ProductBox = ({ products }) => {
                     )
                   )}
                   className={`icon fav ${
-                    wishItems ? "" : "active"
+                    !isProductInWishList(product._id) ? "" : "active"
                   }`}
                 />
               </div>

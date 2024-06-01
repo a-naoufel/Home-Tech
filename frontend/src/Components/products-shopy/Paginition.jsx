@@ -11,7 +11,7 @@ export const Paginition = ({ PAGES, currentPage, setCurrentPage }) => {
       <button
         className="page arrow"
         disabled={currentPage === 1}
-        onClick={() => setCurrentPage((prv) => prv - 1)}
+        onClick={() => setCurrentPage(currentPage - 1)}
       >
         Back
       </button>
@@ -28,7 +28,7 @@ export const Paginition = ({ PAGES, currentPage, setCurrentPage }) => {
       <button
         className="page arrow"
         disabled={currentPage === PAGES}
-        onClick={() => setCurrentPage((prv) => prv + 1)}
+        onClick={() => setCurrentPage(currentPage + 1)}
       >
         Next
       </button>

@@ -9,6 +9,13 @@ import NotFound from "./pages/Not-Found/NotFound";
 import { Shop } from "./pages/shopPage/Shop";
 import ProtectedRoute from "./Components/protectedroot/ProtectedRoute";
 import Regesterme from "./pages/Regester/Regesterme";
+import CartPage from "./pages/CartPage/CartPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import OrderPage from "./pages/OrderPage/OrderPage";
+
+
+import ProductPage from "./pages/ProductPage/ProductPage";
+
 
 function Logout() {
   localStorage.clear();
@@ -34,6 +41,11 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/loginadmin" element={<Login />} />
+          <Route path="/cart/:id?" element={<CartPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
+
+          <Route path="/product/:id" element={<ProductPage />} />
           
           <Route
             path="/add-product"

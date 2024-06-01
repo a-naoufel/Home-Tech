@@ -16,12 +16,12 @@ export default function Footer() {
           </p>
           <p>(+213) 0655881621</p>
           <p className="opacity-30 duration-1000 hover:opacity-100 ">
-         hgzqgzqgzoqbhzhb
+         home
           </p>
           <p className="opacity-30 duration-1000 hover:opacity-100 ">
-           hgqoihgzqou
+           home
           </p>
-          <p>aymenchaabna.com</p>
+          <p>hometech.com</p>
         </div>
         <div className="flex w-[30%] flex-col gap-2 text-white">
            <p className="cursor-pointer opacity-30 duration-1000 hover:opacity-100">Quick Links</p>

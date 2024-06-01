@@ -1,40 +1,98 @@
-
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Product, Cart , Wishlist , Rating
+from django.contrib.auth.models import User
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import Product, Order, OrderItem, ShippingAddress, Review
+
 
 class UserSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField(read_only=True)
+    _id = serializers.SerializerMethodField(read_only=True)
+    isAdmin = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = User
-        fields = ["id", "username", "password","email"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin']
 
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
-    
+    def get__id(self, obj):
+        return obj.id
+
+    def get_isAdmin(self, obj):
+        return obj.is_staff
+
+    def get_name(self, obj):
+        name = obj.first_name
+        if name == '':
+            name = obj.email
+
+        return name
+
+
+class UserSerializerWithToken(UserSerializer):
+    token = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin', 'token']
+
+    def get_token(self, obj):
+        token = RefreshToken.for_user(obj)
+        return str(token.access_token)
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    reviews = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Product
         fields = '__all__'
-        extra_kwargs = {"author": {"read_only": True}}
 
-    
-
-class CartSerializer(serializers.ModelSerializer):
-    class Meta:     
-        model = Cart
-        fields = ["id", "user", "product", "quantity", "purchased", "created_at"]
-        extra_kwargs = {"user": {"read_only": True}}
+    def get_reviews(self, obj):
+        reviews = obj.review_set.all()
+        serializer = ReviewSerializer(reviews, many=True)
+        return serializer.data
 
 
-class WishlistSerializer(serializers.ModelSerializer):
+class ShippingAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShippingAddress
+        fields = '__all__'
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    orderItems = serializers.SerializerMethodField(read_only=True)
+    shippingAddress = serializers.SerializerMethodField(read_only=True)
+    user = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = Wishlist
-        fields = ['id', "user" , 'products' , 'created_at']
+        model = Order
+        fields = '__all__'
 
-class RatingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Rating
-        fields = ['id', 'product' , 'user' , 'rating']
+    def get_orderItems(self, obj):
+        items = obj.orderitem_set.all()
+        serializer = OrderItemSerializer(items, many=True)
+        return serializer.data
+
+    def get_shippingAddress(self, obj):
+        try:
+            address = ShippingAddressSerializer(
+                obj.shippingaddress, many=False).data
+        except:
+            address = False
+        return address
+
+    def get_user(self, obj):
+        user = obj.user
+        serializer = UserSerializer(user, many=False)
+        return serializer.data

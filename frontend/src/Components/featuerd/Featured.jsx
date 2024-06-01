@@ -1,4 +1,3 @@
-import "./featured.css";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsHeadset, BsShieldCheck, BsBoxSeam } from "react-icons/bs";
 

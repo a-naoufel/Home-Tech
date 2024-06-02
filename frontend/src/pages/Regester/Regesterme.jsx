@@ -60,20 +60,7 @@ const Regesterme = () => {
             className="bg-white h-[100%] flex items-center justify-center flex-col px-10"
           >
             <h1 className="text-3xl font-bold mb-6">Sign In</h1>
-            <div className="my-5 mx-0 social-icons">
-              <a href="#" className="icon">
-                <FaGooglePlusG />
-              </a>
-              <a href="#" className="icon">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="icon">
-                <FaGithub />
-              </a>
-              <a href="#" className="icon">
-                <FaLinkedinIn />
-              </a>
-            </div>
+            
             <span className="text-sm pb-1">or use your email password</span>
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"

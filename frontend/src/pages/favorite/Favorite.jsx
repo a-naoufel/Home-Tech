@@ -55,11 +55,11 @@ export default function Favorite() {
             <table className="mb-24 mt-12 w-screen">
               <thead className="bg-mainColor py-2 text-white">
                 <tr>
-                  <th>Product img</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Action</th>
+                  <th><center>Product img</center></th>
+                  <th><center>Name</center></th>
+                  <th><center>Price</center></th>
+                  <th><center>Quantity</center></th>
+                  <th><center>Action</center></th>
                 </tr>
               </thead>
               <tbody>

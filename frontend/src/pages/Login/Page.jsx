@@ -51,20 +51,7 @@ const Page = () => {
         <div className="absolute top-0 h-full transition-all duration-600 ease-in-out  left-0 w-1/2 z-10">
           <form onSubmit={submitHandler} className="bg-white h-[100%] flex items-center justify-center flex-col px-10">
           <h1 className="text-3xl font-bold mb-6">Creat Acount</h1>
-      <div className="my-5 mx-0 social-icons">
-        <a href="#" className="icon">
-          <FaGooglePlusG />
-        </a>
-        <a href="#" className="icon">
-          <FaFacebookF />
-        </a>
-        <a href="#" className="icon">
-          <FaGithub />
-        </a>
-        <a href="#" className="icon">
-          <FaLinkedinIn />
-        </a>
-      </div>
+   
             <span className="">or use your email for registration</span>
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"

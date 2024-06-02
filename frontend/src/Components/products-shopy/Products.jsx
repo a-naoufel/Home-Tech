@@ -35,7 +35,7 @@ export const Products = () => {
   }, [dispatch, Page]);
 
   const topRatedProducts = products
-    ? [...products].sort((a, b) => b.rating - a.rating).slice(0, 2)
+    ? [...products].sort((a, b) => b.rating - a.rating)
     : [];
 
   return (

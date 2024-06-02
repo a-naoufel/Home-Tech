@@ -59,7 +59,7 @@ export default function HeroProduct({rated}) {
             className="flex w-[150px] items-center gap-1 rounded-xl bg-mainColor px-3 py-1 text-white"
            
           >
-            <p>Showmore</p>
+            <p>More</p>
             <BsArrowRight className="text-3xl pl-1" />
           </Link>
         </div>

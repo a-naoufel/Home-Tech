@@ -36,6 +36,11 @@ export default function Header() {
   }
   console.log("username : ",name)
   const showSidebar = () => setSidebar(!sidebar);
+  let to = "/login";
+  if (userInfo) {
+    to = "/profile";
+  }
+
   return (
     <header
       className={`bg-white sticky z-[200] left-0 top-0`}
@@ -84,16 +89,15 @@ export default function Header() {
                       );
                     }
                   } else if (item.title === "profile") {
-                    if (userInfo) {
+
                       return (
                         <li key={index} className={item.cName}>
-                          <Link to={item.path}>
+                          <Link to={to}>
                             {item.icon}
                             <span>{item.title}</span>
                           </Link>
                         </li>
                       );
-                    }
                   } else if (item.title === "Admin") {
                     if (userInfo && userInfo.isAdmin) {
                       return (

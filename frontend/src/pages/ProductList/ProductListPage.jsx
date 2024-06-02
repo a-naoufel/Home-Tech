@@ -4,27 +4,76 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
+import Paginate from "../../Components/Paginate";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../../constants/productConstants";
+import { useNavigate, useLocation } from "react-router";
 
 function ProductListPage() {
-  const [products, setProducts] = useState([
-    {
-      _id: "1",
-      name: "Product 1",
-      price: 29.99,
-      category: "Category 1",
-      brand: "Brand 1",
-    },
-    {
-      _id: "2",
-      name: "Product 2",
-      price: 49.99,
-      category: "Category 2",
-      brand: "Brand 2",
-    },
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const dispatch = useDispatch();
+  let from = location.state ? location.state.from : "/";
+
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products, pages, page } = productList;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  let keyword = location.search;
+  useEffect(() => {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+
+    if (!userInfo) {
+      navigate("/login", { state: { from: "/admin/productlist" } });
+    } else if (!userInfo.isAdmin) {
+      navigate(from);
+    }
+
+    if (successCreate) {
+      navigate(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts(keyword));
+    }
+  }, [
+    dispatch,
+    navigate,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct,
+    keyword,
   ]);
 
   const deleteHandler = (id) => {
-    console.log(`Product with id ${id} deleted.`);
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      dispatch(deleteProduct(id));
+    }
+  };
+
+  const createProductHandler = () => {
+    dispatch(createProduct());
   };
 
   return (
@@ -36,7 +85,8 @@ function ProductListPage() {
 
         <Col className="text-right">
           <Button className="my-3">
-            <i className="bi bi-bag-plus-fill" style={{color : 'black'}}></i> Create Product
+            <i className="bi bi-bag-plus-fill" style={{ color: "black" }}></i>{" "}
+            Create Product
           </Button>
         </Col>
       </Row>
@@ -86,7 +136,7 @@ function ProductListPage() {
                     className="btn-sm"
                     onClick={() => deleteHandler(product._id)}
                   >
-                    <i className="bi bi-trash" style={{ color: 'black' }}></i>
+                    <i className="bi bi-trash" style={{ color: "black" }}></i>
                   </Button>
                 </td>
               </tr>

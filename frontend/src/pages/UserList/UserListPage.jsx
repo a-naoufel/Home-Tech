@@ -29,7 +29,7 @@ function UserListPage() {
     }
      else {
 
-        navigate('/login', { state: { from: '/admin/users' } })
+        navigate('/login', { state: { from: '/admin/userlist' } })
     }
 
 }, [dispatch, navigate, successDelete, userInfo])

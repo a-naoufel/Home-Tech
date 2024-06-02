@@ -219,13 +219,15 @@ const deliverHandler = () => {
                                 {loadingDeliver && <LoadingIndicator />}
                                 {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                     <ListGroup.Item>
+                                        <center>
                                         <Button
                                             type='button'
-                                            className='btn btn-block'
+                                            className=' bg-mainColor hover:bg-[#0062ff] mt-3 mb-4 p-[12px] w-[200px] rounded-[30px]'
                                             onClick={deliverHandler}
                                         >
                                             Mark As Delivered
                                         </Button>
+                                        </center>
                                     </ListGroup.Item>
                                 )}
                             </Card>

@@ -95,16 +95,16 @@ const deliverHandler = () => {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <div>
-      <h1>Order: {order._id}</h1>
+    <div className="mt-5">
+      <h1 className="text-3xl font-bold ">Order: {order._id}</h1>
                       <Row>
                         <Col md={8}>
                             <ListGroup variant='flush'>
-                                <ListGroup.Item>
-                                    <h2>Shipping</h2>
+                                <ListGroup.Item className="py-3">
+                                    <h2 className="text-2xl font-bold py-2">Shipping</h2>
                                     <p><strong>Name: </strong> {order.user.name}</p>
                                     <p><strong>Email: </strong><a href={`mailto:${order.user.email}`}>{order.user.email}</a></p>
-                                    <p>
+                                    <p className="mb-2">
                                         <strong>Shipping: </strong>
                                         {order.shippingAddress.address},  {order.shippingAddress.city}
                                         {'  '}
@@ -116,13 +116,13 @@ const deliverHandler = () => {
                                     {order.isDelivered ? (
                                         <Message variant='success'>Delivered on {order.deliveredAt}</Message>
                                     ) : (
-                                            <Message variant='warning'>Not Delivered</Message>
+                                            <Message variant='warning' >Not Delivered</Message>
                                         )}
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
-                                    <h2>Payment Method</h2>
-                                    <p>
+                                    <h2 className="text-2xl font-bold py-2">Payment Method</h2>
+                                    <p className="mb-2">
                                         <strong>Method: </strong>
                                         {order.paymentMethod}
                                     </p>
@@ -135,7 +135,7 @@ const deliverHandler = () => {
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
-                                    <h2>Order Items</h2>
+                                    <h2 className="text-2xl font-bold py-2">Order Items</h2>
                                     {order.orderItems.length === 0 ? <Message variant='info'>
                                         Order is empty
                             </Message> : (
@@ -169,32 +169,32 @@ const deliverHandler = () => {
                             <Card>
                                 <ListGroup variant='flush'>
                                     <ListGroup.Item>
-                                        <h2>Order Summary</h2>
+                                        <h2 className="text-2xl font-bold py-2">Order Summary</h2>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
-                                        <Row>
-                                            <Col>Items:</Col>
+                                        <Row className="p-2">
+                                            <Col >Items:</Col>
                                             <Col>${order.itemsPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
-                                        <Row>
+                                        <Row className="p-2">
                                             <Col>Shipping:</Col>
                                             <Col>${order.shippingPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
-                                        <Row>
+                                        <Row className="p-2">
                                             <Col>Tax:</Col>
                                             <Col>${order.taxPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
                                     <ListGroup.Item>
-                                        <Row>
+                                        <Row className="p-2">
                                             <Col>Total:</Col>
                                             <Col>${order.totalPrice}</Col>
                                         </Row>

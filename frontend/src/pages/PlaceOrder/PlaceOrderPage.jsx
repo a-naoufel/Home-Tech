@@ -64,10 +64,10 @@ function PlaceOrderPage() {
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>Shipping</h2>
+            <ListGroup.Item >
+              <h2  className="text-2xl font-bold">Shipping</h2 >
 
-              <p>
+              <p className="py-[10px]">
                 <strong>Shipping: </strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.city}
                 {"  "}
@@ -76,20 +76,20 @@ function PlaceOrderPage() {
               </p>
             </ListGroup.Item>
 
-            <ListGroup.Item>
-              <h2>Payment Method</h2>
-              <p>
+            <ListGroup.Item  >
+              <h2 className="text-2xl font-bold" >Payment Method</h2 >
+              <p  className="py-[10px]">
                 <strong>Method: </strong>
                 {cart.paymentMethod}
               </p>
             </ListGroup.Item>
 
-            <ListGroup.Item>
-              <h2>Order Items</h2>
+            <ListGroup.Item >
+              <h2 className="text-2xl font-bold">Order Items</h2 >
               {cart.cartItems.length === 0 ? (
-                <Message variant="info">Your cart is empty</Message>
+                <Message  variant="info">Your cart is empty</Message>
               ) : (
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" className="py-[10px]">
                   {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
@@ -102,13 +102,13 @@ function PlaceOrderPage() {
                           />
                         </Col>
 
-                        <Col>
-                          <Link to={`/product/${item.product}`}>
+                        <Col className="pt-3">
+                          <Link className="text-xl" to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>
 
-                        <Col md={4}>
+                        <Col md={4} className="py-2 font-semibold">
                           {item.qty} X ${item.price} = $
                           {(item.qty * item.price).toFixed(2)}
                         </Col>
@@ -122,48 +122,48 @@ function PlaceOrderPage() {
         </Col>
 
         <Col md={4}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-                <h2>Order Summary</h2>
+          <Card className=" border-mainColor ">
+            <ListGroup variant="flush" >
+              <ListGroup.Item >
+                <h2 className="text-2xl font-bold">Order Summary</h2 >
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Row>
-                  <Col>Items:</Col>
+              <ListGroup.Item >
+                <Row className="p-[4px]">
+                  <Col className="text-lg">Items:</Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Row>
-                  <Col>Shipping:</Col>
+              <ListGroup.Item >
+                <Row  className="p-[4px]">
+                  <Col className="text-lg">Shipping:</Col>
                   <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Row>
-                  <Col>Tax:</Col>
+              <ListGroup.Item >
+                <Row  className="p-[4px]">
+                  <Col className="text-lg">Tax:</Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Row>
-                  <Col>Total:</Col>
+              <ListGroup.Item >
+                <Row  className="p-[4px]">
+                  <Col className="text-lg">Total:</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
+              <ListGroup.Item >
                 {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
 
-              <ListGroup.Item>
+              <ListGroup.Item >
                 <Button
                   type="button"
-                  className="btn-block"
+                  className=' bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px]'
                   disabled={cart.cartItems === 0}
                   onClick={placeOrder}
                 >

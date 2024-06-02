@@ -71,9 +71,9 @@ function ProfilePage() {
   };
 
   return (
-    <Row>
-    <Col md={3}>
-        <h2>User Profile</h2>
+    <Row className="m-5">
+    <Col md={3} className="">
+        <h2 className="text-2xl font-bold ">User Profile</h2>
 
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
@@ -82,7 +82,8 @@ function ProfilePage() {
 
             <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
-                <Form.Control
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4 '
                     required
                     type='name'
                     placeholder='Enter name'
@@ -94,7 +95,8 @@ function ProfilePage() {
 
             <Form.Group controlId='email'>
                 <Form.Label>Email Address</Form.Label>
-                <Form.Control
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
                     required
                     type='email'
                     placeholder='Enter Email'
@@ -106,7 +108,8 @@ function ProfilePage() {
 
             <Form.Group controlId='password'>
                 <Form.Label>Password</Form.Label>
-                <Form.Control
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
 
                     type='password'
                     placeholder='Enter Password'
@@ -118,7 +121,8 @@ function ProfilePage() {
 
             <Form.Group controlId='passwordConfirm'>
                 <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
 
                     type='password'
                     placeholder='Confirm Password'
@@ -128,7 +132,7 @@ function ProfilePage() {
                 </Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='primary'>
+            <Button type='submit' variant='primary'className='  bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px] '>
                 Update
         </Button>
 
@@ -136,7 +140,7 @@ function ProfilePage() {
     </Col>
 
     <Col md={9}>
-        <h2>My Orders</h2>
+        <h2 className="text-2xl font-bold py-2">My Orders</h2>
         {loadingOrders ? (
             <Loader />
         ) : errorOrders ? (
@@ -165,7 +169,7 @@ function ProfilePage() {
                                     )}</td>
                                     <td>
                                         <LinkContainer to={`/order/${order._id}`}>
-                                            <Button className='btn-sm'>Details</Button>
+                                            <Button  className=' bg-mainColor hover:bg-[#008cff] mt-1 mb-1 p-[8px] w-[80px] rounded-[50px]'>Details</Button>
                                         </LinkContainer>
                                     </td>
                                 </tr>

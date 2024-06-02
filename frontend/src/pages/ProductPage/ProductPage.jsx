@@ -221,23 +221,34 @@ const ProductScreen = () => {
                 ))
             )}
         </div> */}
-          </div>
+              </div>
+              <div className="m-4 flex flex-col ">
 
-          <h1>Reviews</h1>
-          {product.reviews.length === 0 && (
+                <h1 className="text-2xl font-bold mb-4">Reviews</h1>
+                <div className="flex ">
+                  
+                  {product.reviews.length === 0 && (
             <Message variant="info">No Reviews</Message>
-          )}
-          {product.reviews.map((review) => (
+                  )}
+                 
+                  {product.reviews.map((review) => (
+             <div key={review._id} className="flex justify-between mx-3 p-3 border border-mainColor rounded-[20px] ">
             <ListGroup.Item key={review._id}>
               <strong>{review.name}</strong>
               <Rating value='5' color='#f8e825' />
-              <h1> this is the rating{review.rating}</h1>
+              <h1 className="font-minbold">  rating : {review.rating} stars</h1>
               <p>{review.createdAt.substring(0, 10)}</p>
               <p>{review.comment}</p>
-            </ListGroup.Item>
+                      </ListGroup.Item>
+                      
+            </div>
           ))}
+                  
+               
+                </div>
+          
 
-          <h4>Write a review</h4>
+          <h4 className="tex-lg font-bold my-3" >Write a review</h4>
           {loadingProductReview && <LoadingIndicator />}
           {successProductReview && (
             <Message variant="success">Review Submitted</Message>
@@ -249,8 +260,9 @@ const ProductScreen = () => {
           {userInfo ? (
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="rating">
-                <Form.Label>Rating</Form.Label>
-                <Form.Control
+                <Form.Label className="tex-lg font-bold mb-2" >Rating</Form.Label>
+                    <Form.Control
+                  className="w-[20%]"
                   as="select"
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
@@ -264,8 +276,8 @@ const ProductScreen = () => {
                 </Form.Control>
               </Form.Group>
 
-              <Form.Group controlId="comment">
-                <Form.Label>Review</Form.Label>
+              <Form.Group controlId="comment" className="w-[50%]">
+                <Form.Label className="tex-lg font-bold my-2">Review</Form.Label>
                 <Form.Control
                   as="textarea"
                   row="5"
@@ -274,7 +286,8 @@ const ProductScreen = () => {
                 ></Form.Control>
               </Form.Group>
 
-              <Button
+                    <Button
+                      className=' bg-mainColor hover:bg-[#0062ff] mt-3 mb-4 p-[12px] w-[100px] rounded-[50px]'
                 disabled={loadingProductReview}
                 type="submit"
                 variant="primary"
@@ -286,7 +299,8 @@ const ProductScreen = () => {
             <Message variant="info">
               Please <Link to="/login">login</Link> to write a review
             </Message>
-          )}
+                )}
+                </div>
         </div>
       )}
     </div>

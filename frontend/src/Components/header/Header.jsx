@@ -38,7 +38,7 @@ export default function Header() {
   const showSidebar = () => setSidebar(!sidebar);
   return (
     <header
-      className={`bg-white sticky z-[12] left-0 top-0`}
+      className={`bg-white sticky z-[200] left-0 top-0`}
       style={{ boxShadow: "rgba(0, 0, 0, 0.56) 4px -4px 30px 4px" }}
     >
       <div

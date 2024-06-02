@@ -38,14 +38,15 @@ function PaymentPage() {
     }
 
     return (
-        <FormContainer>
+        <FormContainer >
             <CheckoutSteps step1 step2 step3 />
 
-            <Form onSubmit={submitHandler}>
-                <Form.Group>
-                    <Form.Label as='legend'>Select Method</Form.Label>
+            <Form onSubmit={submitHandler} className='py-3'>
+                <Form.Group className=''>
+                    <Form.Label as='legend' className='font-semibold'>Select Method</Form.Label>
                     <Col>
                         <Form.Check
+                            className='py-3'
                             type='radio'
                             label='PayPal or Credit Card'
                             id='paypal'
@@ -58,7 +59,7 @@ function PaymentPage() {
                     </Col>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button type='submit' variant='primary' className=' bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px]'>
                     Continue
                 </Button>
             </Form>

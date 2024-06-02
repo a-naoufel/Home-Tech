@@ -26,6 +26,7 @@ function ProductListPage() {
   const deleteHandler = (id) => {
     console.log(`Product with id ${id} deleted.`);
   };
+
   return (
     <div>
       <Row className="align-items-center">
@@ -35,7 +36,7 @@ function ProductListPage() {
 
         <Col className="text-right">
           <Button className="my-3">
-            <i className="fas fa-plus"></i> Create Product
+            <i className="bi bi-bag-plus-fill" style={{color : 'black'}}></i> Create Product
           </Button>
         </Col>
       </Row>
@@ -76,7 +77,7 @@ function ProductListPage() {
                 <td>
                   <LinkContainer to={`/admin/product/${product._id}/edit`}>
                     <Button variant="light" className="btn-sm">
-                      <i className="fas fa-edit"></i>
+                      <i className="bi bi-pencil-square"></i>
                     </Button>
                   </LinkContainer>
 
@@ -85,7 +86,7 @@ function ProductListPage() {
                     className="btn-sm"
                     onClick={() => deleteHandler(product._id)}
                   >
-                    <i className="fas fa-trash"></i>
+                    <i className="bi bi-trash" style={{ color: 'black' }}></i>
                   </Button>
                 </td>
               </tr>

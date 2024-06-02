@@ -13,13 +13,15 @@ import CartPage from "./pages/CartPage/CartPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import UserListPage from "./pages/UserList/UserListPage";
+import OrderListPage from "./pages/OrderList/OrderListPage";
+
+import EditProduct from "./pages/EditProduct/EditProductPage";
+import UserEditPage from "./pages/UserEditPage/UserEditPage";
 import ProductListPage from "./pages/ProductList/ProductListPage";
-import ShippingPage from "./pages/PlaceOrder/ShippingPage"
-import PlaceOrderPage from "./pages/PlaceOrder/PlaceOrderPage"
-import PaymentPage from "./pages/PlaceOrder/PaymentPage"
-import Favorite from "./pages/favorite/Favorite"
-
-
+import ShippingPage from "./pages/PlaceOrder/ShippingPage";
+import PlaceOrderPage from "./pages/PlaceOrder/PlaceOrderPage";
+import PaymentPage from "./pages/PlaceOrder/PaymentPage";
+import Favorite from "./pages/favorite/Favorite";
 
 import ProductPage from "./pages/ProductPage/ProductPage";
 
@@ -58,15 +60,48 @@ function App() {
           <Route path="/PlaceOrder" element={<PlaceOrderPage />} />
           <Route path="/payment" element={<PaymentPage />} />
 
-
           <Route path="/product/:id" element={<ProductPage />} />
-          
+
           <Route
-            path="/add-product"
+            path="/admin/userlist"
             element={
-              <ProtectedRoute>
-                <AddProduct />
-              </ProtectedRoute>
+              
+                <UserListPage />
+              
+            }
+          />
+          <Route
+            path="/admin/user/:id/edit"
+            element={
+              
+                < UserEditPage/>
+             
+            }
+          />
+
+          <Route
+            path="/admin/productlist"
+            element={
+             
+                <ProductListPage />
+              
+            }
+          />
+          <Route
+            path="/admin/product/:id/edit"
+            element={
+              
+                <EditProduct />
+              
+            }
+          />
+
+          <Route
+            path="/admin/orderlist"
+            element={
+              
+                <OrderListPage />
+        
             }
           />
 

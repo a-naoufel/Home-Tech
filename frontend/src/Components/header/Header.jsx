@@ -146,7 +146,7 @@ export default function Header() {
               <FaUser />
             </Link>
             <div className="border-r-2 py-2 pr-3">
-              <Link to={cart} className="md:text-xl">
+              <Link to="/wish" className="md:text-xl">
                 <FaHeart />
               </Link>
             </div>

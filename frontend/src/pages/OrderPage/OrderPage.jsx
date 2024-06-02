@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 import Message from "../../Components/Message";
-
+//AUVHCuDoki3NdO69VUedY_NoMU26ggvOhukJ-0ChS6wtF-bR2hwvqQQeJ9HdsvlGmE4oNASSPvSbcWh6
 function OrderPage() {
   const { id } = useParams();
   const orderId = id;
@@ -50,7 +50,7 @@ console.log("order", order);
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=AeDXja18CkwFUkL-HQPySbzZsiTrN52cG13mf9Yz7KiV2vNnGfTDP0wDEN9sGlhZHrbb_USawcJzVDgn";
+      "https://www.paypal.com/sdk/js?client-id=AUVHCuDoki3NdO69VUedY_NoMU26ggvOhukJ-0ChS6wtF-bR2hwvqQQeJ9HdsvlGmE4oNASSPvSbcWh6";
     script.async = true;
     script.onload = () => {
       setSdkReady(true);

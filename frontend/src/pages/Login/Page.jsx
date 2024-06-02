@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../Components/Message'
 import Loader from '../../Components/Loader'
 import LoadingIndicator from '../../Components/LoadingIndicator/LoadingIndicator'
-
 import "./style.css";
 import { FaGooglePlusG, FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
@@ -48,11 +47,14 @@ const Page = () => {
         className="bg-[#fff] rounded-[30px] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px]" style={{ boxShadow: '0 5px 15px rgba(0, 0, 0, 0.35)' }}
         id="container"
         >
-        <div className="absolute top-0 h-full transition-all duration-600 ease-in-out  left-0 w-1/2 z-10">
+        <div className="absolute top-0 h-full transition-all duration-600 ease-in-out  left-0  z-10 w-[100%] sm:w-[50%]">
           <form onSubmit={submitHandler} className="bg-white h-[100%] flex items-center justify-center flex-col px-10">
-          <h1 className="text-3xl font-bold mb-6">Creat Acount</h1>
+            <h1 className="text-3xl font-bold mb-6">Sign In</h1>
+            <span className="text-sm pb-1"> use your email password</span>
+          
    
-            <span className="">or use your email for registration</span>
+            
+            
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="email"
@@ -74,9 +76,10 @@ const Page = () => {
               {loading && <LoadingIndicator />}
               Sign In
             </button>
+            <Link to="/register" className='block sm:hidden'>or sing up?</Link>
           </form>
         </div>
-        <div className="absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-all duration-600 ease-in-out rounded-bl-[100px]   rounded-tl-[150px] z-10">
+        <div className="absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-all duration-600 ease-in-out rounded-bl-[100px]   rounded-tl-[150px] z-10 hidden sm:block">
           <div
             className=" text-white relative left-[-100%] h-full w-[200%] transform transition-all duration-600 ease-in-out"
             style={{

@@ -54,14 +54,14 @@ const Regesterme = () => {
         style={{ boxShadow: "0 5px 15px rgba(0, 0, 0, 0.35)" }}
         id="container"
       >
-        <div className="absolute top-0 h-full transition-all duration-600 ease-in-out  right-0 w-1/2 z-10">
+        <div className="absolute top-0 h-full transition-all duration-600 ease-in-out  right-0  z-10 w-[100%] sm:w-[50%]">
           <form
             onSubmit={submitHandler}
             className="bg-white h-[100%] flex items-center justify-center flex-col px-10"
           >
-            <h1 className="text-3xl font-bold mb-6">Sign In</h1>
+            <h1 className="text-3xl font-bold mb-6">Creat Acount</h1>
             
-            <span className="text-sm pb-1">or use your email password</span>
+            <span className="text-sm pb-1"> use your email password</span>
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="text"
@@ -95,11 +95,12 @@ const Regesterme = () => {
               className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]"
             >
               {loading && <LoadingIndicator />}
-              Sign In
+              Sign Up
             </button>
+            <Link  to="/login" className="block sm:hidden">or sing in?</Link>
           </form>
         </div>
-        <div className="absolute top-0 right-1/2 w-1/2 h-full overflow-hidden transition-all duration-600 ease-in-out rounded-br-[150px]   rounded-tr-[100px] z-10">
+        <div className="absolute top-0 right-1/2 w-1/2 h-full overflow-hidden transition-all duration-600 ease-in-out rounded-br-[150px]   rounded-tr-[100px] z-10 hidden sm:block">
           <div
             className=" text-white relative left-[-100%] h-full w-[200%] transform transition-all duration-600 ease-in-out"
             style={{
@@ -115,7 +116,7 @@ const Regesterme = () => {
                 onClick={(e) => navigate("/login",{state:{from:from}})}
                 className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]"
               >
-                <Link to="/login">Sign Up</Link>
+                <Link to="/login">Sign In</Link>
               </button>
             </div>
           </div>

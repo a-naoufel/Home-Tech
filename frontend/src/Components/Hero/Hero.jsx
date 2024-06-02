@@ -23,12 +23,12 @@ export default function Hero() {
     <div
       className=" relative bg-bgColorBlack overflow-hidden"
       style={{
-        minHeight: "calc(100vh -30px)",
+        minHeight: "calc(100vh -82px)",
       }}
     >
       <HeroSlider slideIndex={slideIndex} setslideIndex={setslideIndex} />
       <div
-        className="flex w-[300vw] text-[white] duration-500 "
+        className="flex w-[300vw] text-[white] duration-[1500ms]"
         style={{ transform: `translateX(${-100 * slideIndex}vw)` }}
       >
         {products?.map(product => (

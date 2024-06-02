@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import "./products.css";
 import { ProductBox } from "./ProductBox";
-import { ProductListUL } from "./ProductListUL";
 import { Paginition } from "./Paginition";
 import { listProducts } from "../../actions/productActions";
-import { useSearchParams } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -20,12 +17,11 @@ export const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
   const productList = useSelector((state) => state.productList);
   const { error, loading, products, page, pages } = productList;
   let query = useQuery();
-
   let Page = query.get("page");
 
   if (Page) {
@@ -37,6 +33,10 @@ export const Products = () => {
   useEffect(() => {
     dispatch(listProducts(Page));
   }, [dispatch, Page]);
+
+  const topRatedProducts = products
+    ? [...products].sort((a, b) => b.rating - a.rating).slice(0, 2)
+    : [];
 
   return (
     <>
@@ -51,7 +51,7 @@ export const Products = () => {
             setApiControl={setApiControl}
           /> */}
           <div className="flex flex-wrap justify-center gap-6">
-            <ProductBox products={products} />
+            <ProductBox products={topRatedProducts} />
           </div>
           <Paginition
             PAGES={pages}

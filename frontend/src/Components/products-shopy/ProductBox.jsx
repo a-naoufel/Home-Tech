@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '../../actions/cartActions'
 import { addToWish ,removeFromWish } from "../../actions/wishActions";
 import { useSelector } from "react-redux";
-
 import RatingStars from "../ratingstars/RatingStars";
 import { Link } from "react-router-dom";
 

@@ -26,15 +26,15 @@
     left: 5px;
   }
 }
-th {
+.wish th {
   padding: 25px 0;
 }
-td {
+.wish td {
   padding: 20px 0;
   text-align: center;
 }
 
-table tbody tr::after {
+.wish table tbody tr::after {
   content: "";
   position: absolute;
   background-color:#00acff ;

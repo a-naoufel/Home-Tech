@@ -48,7 +48,7 @@ export default function Favorite() {
     <>
       {wishItems.length > 0 ? (
         <>
-          <div>
+          <div className="wish">
             <p className="my-6 mt-12 text-center text-xl font-bold">
               My Wish list
             </p>

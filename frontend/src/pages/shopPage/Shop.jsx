@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ShopProducts } from "./ShopProducts";
+
 import Box from "./Box";
 import api from "../../api";
 import { useParams } from "react-router-dom";
@@ -8,7 +8,7 @@ import { listProducts } from "../../actions/productActions";
 import { useLocation } from 'react-router-dom';
 import { Paginition } from "../../Components/products-shopy/Paginition";
 import { useNavigate } from "react-router-dom";
-
+import { ProductBox } from "../../Components/products-shopy/ProductBox";
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -57,10 +57,15 @@ export const Shop = () => {
           <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Shop</h1>
           <div className="shop-wrapper">
             <Box setPriceSorted={setPriceSorted} />
-            <ShopProducts
-              product={sortedPrices}
+            <div className="container py-6 bg-bgColorWhite"> 
+              <div className="my-12 flex flex-wrap justify-center gap-8 ">
+              <ProductBox
+              products={sortedPrices}
               // filterdProducts={sortedPrices}
-            />
+              />
+        </div>
+            
+              </div>
           </div>
         </div>
         <Paginition

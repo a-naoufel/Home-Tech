@@ -48,7 +48,10 @@ function ProductListPage() {
     if (!userInfo) {
       navigate("/login", { state: { from: "/admin/productlist" } });
     } else if (!userInfo.isAdmin) {
-      navigate(from);
+      if (from === "/admin/productlist") {
+        navigate("/");
+      }
+      else{navigate(from);}
     }
 
     if (successCreate) {
@@ -78,20 +81,28 @@ function ProductListPage() {
 
   return (
     <div>
+      <LinkContainer to="/admin/orderlist">
+        <Button className="btn btn-light my-3">Orders</Button>
+      </LinkContainer>
+      <LinkContainer to="/admin/userlist">
+        <Button className="btn btn-light my-3">Users</Button>
+      </LinkContainer>
+          <h1 className="mt-5 mb-10  text-center text-4xl font-bold"><center>Products</center></h1>
       <Row className="align-items-center">
         <Col>
-          <h1>Products</h1>
         </Col>
 
         <Col className="text-right">
-          <Button className="my-3">
-            <i className="bi bi-bag-plus-fill" style={{ color: "black" }}></i>{" "}
-            Create Product
+          <Button 
+          onClick={createProductHandler}
+          className="my-3">
+            <i className="" style={{ color: "black" }}>Create Product</i>{" "}
+            +
           </Button>
         </Col>
       </Row>
 
-      {/* {loadingDelete && <Loader />}
+      {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
 
       {loadingCreate && <Loader />}
@@ -101,7 +112,7 @@ function ProductListPage() {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : ( */}
+      ) : ( 
       <div>
         <Table striped bordered hover responsive className="table-sm">
           <thead>
@@ -111,7 +122,7 @@ function ProductListPage() {
               <th>PRICE</th>
               <th>CATEGORY</th>
               <th>BRAND</th>
-              <th></th>
+              <th>ACTION</th>
             </tr>
           </thead>
 
@@ -126,14 +137,14 @@ function ProductListPage() {
 
                 <td>
                   <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant="light" className="btn-sm">
+                    <Button variant="light" className="btn-sm px-4 py-3">
                       <i className="bi bi-pencil-square"></i>
                     </Button>
                   </LinkContainer>
 
                   <Button
                     variant="danger"
-                    className="btn-sm"
+                    className="btn-sm px-4 py-3"
                     onClick={() => deleteHandler(product._id)}
                   >
                     <i className="bi bi-trash" style={{ color: "black" }}></i>
@@ -143,9 +154,9 @@ function ProductListPage() {
             ))}
           </tbody>
         </Table>
-        {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
+         <Paginate pages={pages} page={page} isAdmin={true} /> 
       </div>
-      {/* )} */}
+      )} 
     </div>
   );
 }

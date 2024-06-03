@@ -4,41 +4,44 @@ import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
-
+import { listOrders } from "../../actions/orderActions";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function OrderListPage() {
-  
-    const [orders, setOrders] = useState([
-        { 
-          _id: '1', 
-          user: { name: 'mghni' }, 
-          createdAt: '2023-06-01T12:34:56Z', 
-          totalPrice: 99.99, 
-          isPaid: true, 
-          paidAt: '2023-06-02T12:34:56Z', 
-          isDelivered: false, 
-          deliveredAt: null 
-        },
-        { 
-          _id: '2', 
-          user: { name: 'lhasli' }, 
-          createdAt: '2023-06-05T14:20:00Z', 
-          totalPrice: 49.49, 
-          isPaid: false, 
-          paidAt: null, 
-          isDelivered: true, 
-          deliveredAt: '2023-06-06T16:00:00Z' 
-        },
-      ]);
-      
+  const dispatch = useDispatch();
+
+  const orderList = useSelector((state) => state.orderList);
+  const { loading, error, orders } = orderList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders());
+    } else if (userInfo) {
+      navigate("/");
+    } else {
+      navigate("/login", { state: { from: "/admin/orderlist" } });
+    }
+  }, [dispatch, navigate, userInfo]);
+
   return (
     <div>
-      <h1>Orders</h1>
-      {/* {loading ? (
+      <LinkContainer to="/admin/productlist">
+        <Button className="btn btn-light my-3">Products</Button>
+      </LinkContainer>
+      <LinkContainer to="/admin/userlist">
+        <Button className="btn btn-light my-3">Users</Button>
+      </LinkContainer>
+      <h1 className="mt-5 mb-10  text-center text-4xl font-bold">Orders</h1>
+      {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : ( */}
+      ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
@@ -64,7 +67,7 @@ function OrderListPage() {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-check" style={{ color: "red" }}></i>
+                    <i className="bi bi-check" style={{ color: "red" }}></i>
                   )}
                 </td>
 
@@ -72,13 +75,13 @@ function OrderListPage() {
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-check" style={{ color: "red" }}></i>
+                    <i className="bi bi-check" style={{ color: "red" }}></i>
                   )}
                 </td>
 
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="light" className="btn-sm">
+                    <Button variant="light" className="btn-sm px-4 py-3">
                       Details
                     </Button>
                   </LinkContainer>
@@ -87,7 +90,7 @@ function OrderListPage() {
             ))}
           </tbody>
         </Table>
-      {/* )} */}
+      )}
     </div>
   );
 }

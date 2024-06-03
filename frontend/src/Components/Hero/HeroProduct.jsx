@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../actions/cartActions";
 import { toast } from "react-toastify";
 
+
 // eslint-disable-next-line react/prop-types
 export default function HeroProduct({rated}) {
   // Function to hand le click event

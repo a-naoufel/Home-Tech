@@ -2,24 +2,30 @@ import HeroProduct from "./HeroProduct";
 import HeroSlider from "./HeroSlider";
 import { useState, useEffect } from "react";
 
-import { useDispatch, useSelector } from 'react-redux'
-import api from "../../api";
-import { listTopProducts } from '../../actions/productActions'
+import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import Loader from "../Loader";
+import Message from "../Message";
+import { listTopProducts } from "../../actions/productActions";
 
 // eslint-disable-next-line react/prop-types
 export default function Hero() {
   const [slideIndex, setslideIndex] = useState(0);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const productTopRated = useSelector(state => state.productTopRated)
-  const { error, loading, products } = productTopRated
+  const productTopRated = useSelector((state) => state.productTopRated);
+  const { error, loading, products } = productTopRated;
   let i = 0;
 
   useEffect(() => {
-      dispatch(listTopProducts())
-  }, [dispatch])
+    dispatch(listTopProducts());
+  }, [dispatch]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
+  ) : (
     <div
       className=" relative bg-bgColorBlack overflow-hidden"
       style={{
@@ -27,11 +33,8 @@ export default function Hero() {
       }}
     >
       <HeroSlider slideIndex={slideIndex} setslideIndex={setslideIndex} />
-      <div
-        className="flex w-[300vw] text-[white] duration-[1500ms] animated-div"
-      >
-        {products?.map(product => (
-          
+      <div className="flex w-[300vw] text-[white] duration-[1500ms] animated-div">
+        {products?.map((product) => (
           <HeroProduct rated={product} key={product._id} />
         ))}
       </div>

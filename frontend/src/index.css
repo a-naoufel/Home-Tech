@@ -365,23 +365,24 @@ li.active {
 }
 /*------------------------animation----------------- */
 @keyframes slide {
-  0%, 20% {
+  0%, 35% {
     transform: translateX(0);
   }
-  40%, 60% {
+  40%, 75% {
     transform: translateX(-100vw);
   }
-  80%, 100% {
+  80%, 95% {
     transform: translateX(-200vw);
   }
 }
+
 
 
 .animated-div:hover {
   animation-play-state: paused;
 }
 .animated-div {
-  animation: slide 4s  linear infinite;
+  animation: slide 10s  ease-in-out infinite;
 }
 /* ---------------------------------navbar------------------------ */
 

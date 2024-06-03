@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       {/* disabled */}
-        <Hero></Hero>
+        <Hero pause='hover'></Hero>
      <Featured/>
       <div className="bg-bgColorWhite ">
       

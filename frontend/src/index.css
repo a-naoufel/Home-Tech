@@ -363,6 +363,26 @@ li.active {
     transform: rotate(360deg);
   }
 }
+/*------------------------animation----------------- */
+@keyframes slide {
+  0%, 20% {
+    transform: translateX(0);
+  }
+  40%, 60% {
+    transform: translateX(-100vw);
+  }
+  80%, 100% {
+    transform: translateX(-200vw);
+  }
+}
+
+
+.animated-div:hover {
+  animation-play-state: paused;
+}
+.animated-div {
+  animation: slide 4s  linear infinite;
+}
 /* ---------------------------------navbar------------------------ */
 
 .menu-bars {

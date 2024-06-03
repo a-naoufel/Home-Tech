@@ -33,7 +33,9 @@ export default function Hero() {
       }}
     >
       <HeroSlider slideIndex={slideIndex} setslideIndex={setslideIndex} />
-      <div className="flex w-[300vw] text-[white] duration-[1500ms] animated-div">
+      <div className="flex w-[300vw] text-[white] duration-[1500ms] animated-div"
+      style={{transform: `translateX(-${slideIndex * 100}vw)`}}
+      >
         {products?.map((product) => (
           <HeroProduct rated={product} key={product._id} />
         ))}

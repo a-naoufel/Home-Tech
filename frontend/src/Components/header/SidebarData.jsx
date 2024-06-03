@@ -31,7 +31,7 @@ export const SidebarData = [
   
   {
     title: 'Wishlist',
-    path: '/wishlist',
+    path: '/wish',
     icon:<FaHeartCirclePlus />,
     cName: 'nav-text'
   },

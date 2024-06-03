@@ -50,6 +50,33 @@ export const Shop = () => {
       : priceSorted === "Htl"
       ? products.sort((a, b) => b.price - a.price)
       : products;
+
+  if (products.length === 0) {
+    return (
+      <div
+      className="container flex flex-col items-center justify-center py-14"
+      style={{ minHeight: `calc(100vh - 70.94px)` }}
+    >
+      <img 
+        className="rounded-[20px]"
+        src="/Not-Found.png"
+        alt="cart-empty"
+        width={300}
+        height={300}
+      />
+      <p className="my-6 mb-2 text-3xl font-bold">
+        No Resolts :(
+      </p>
+      <p className="opacity-60">See our products!</p>
+      <button
+        className="mt-6 rounded-xl bg-mainColor px-6 py-2 text-white"
+        onClick={() => navigate("/shop")}
+      >
+        Continue Shopping
+      </button>
+    </div>
+    );
+  }
   return (
     <>
       <div className="py-[40px] px-0 bg-bgColorWhite">

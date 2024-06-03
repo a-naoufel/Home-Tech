@@ -8,7 +8,7 @@ import { Spinner } from "../../Components/spinner/Spinner";
 import ReactImageMagnify from "react-image-magnify";
 import Rating from "../../Components/Rating";
 import { addToWish, removeFromWish } from "../../actions/wishActions";
-
+import BoxSingle from "./BoxSingle";
 import {
   Row,
   Col,
@@ -89,6 +89,7 @@ const ProductScreen = () => {
     );
   };
   console.log("product", product);
+
   return (
     <div>
       {loading ? (
@@ -99,7 +100,7 @@ const ProductScreen = () => {
         <div>
           <div className="container my-[30px] ">
             <div className="single-product  grid grid-cols-2 py-[40px] ">
-              <div className=" img w-[80%] h-[100%] ">
+              <div className="  img w-[80%] h-[100%] ">
                 <ReactImageMagnify
                   {...{
                     smallImage: {
@@ -109,8 +110,8 @@ const ProductScreen = () => {
                     },
                     largeImage: {
                       src: product?.image,
-                      width: 1800,
-                      height: 1200,
+                      width: 1280,
+                      height: 1020,
                     },
                     isHintEnabled: true,
                   }}
@@ -120,8 +121,7 @@ const ProductScreen = () => {
                 <h3 className="text-[32px]">{product?.name}</h3>
                 <div className="rating flex items-center text-[20px] my-[8px]">
                   <p className="flex items-center mr-[10px]">
-                    
-                  <RatingStars rating={product?.rating} />
+                    <RatingStars rating={product?.rating} />
                   </p>
                   <p className="text-[#909090] text-[16px]">
                     {product?.numReviews} review
@@ -257,13 +257,49 @@ const ProductScreen = () => {
                   key={review._id}
                   className="flex justify-between mx-3 p-3 border border-mainColor rounded-[20px] "
                 >
-                  <ListGroup.Item key={review._id}>
-                    <span style={{ display: 'flex', alignItems: 'center' }}>
-                      <strong>{review.name}</strong>
-                      <RatingStars rating={review.rating} />
-                    </span>
-                    <p className="text-[#909090] text-[10px]">{review.createdAt.substring(0, 10)}</p>
-                    <p>{review.comment}</p>
+                  <ListGroup.Item key={review._id} style={{ padding: "10px" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "5px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                          gap: "5px",
+                        }}
+                      >
+                        <img
+                          style={{
+                            width: "50px",
+                            height: "auto",
+                            flexShrink: 0,
+                          }}
+                          src="/anonymos.png"
+                          alt=""
+                        />
+                        <strong style={{ marginRight: "auto" }}>
+                          {review.name}
+                        </strong>
+                        <div style={{ flexShrink: 0 }}>
+                          <RatingStars rating={review.rating} />
+                        </div>
+                      </div>
+                      <p
+                        style={{
+                          color: "#909090",
+                          fontSize: "10px",
+                          margin: 0,
+                        }}
+                      >
+                        {review.createdAt.substring(0, 10)}
+                      </p>
+                      <p style={{ margin: 0 }}>{review.comment}</p>
+                    </div>
                   </ListGroup.Item>
                 </div>
               ))}

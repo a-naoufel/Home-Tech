@@ -40,8 +40,9 @@ function CartPage() {
           className="container flex flex-col items-center justify-center py-14"
           style={{ minHeight: `calc(100vh - 70.94px)` }}
         >
-          <img
-            src="/cart-empty-photo.png"
+          <img 
+            className="rounded-[20px]"
+            src="/empty.png"
             alt="cart-empty"
             width={300}
             height={300}

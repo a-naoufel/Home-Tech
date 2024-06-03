@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 .my-container {
   min-height: calc(100vh);
   background-image: url("/jdk.jpg");
@@ -499,7 +500,7 @@ li.active {
 /* ---------------singleproduct------------------- */
 
 .single-product .img img {
-  height: 100%;
+  max-width: unset !important;
   border-radius: 20px;
 }
 

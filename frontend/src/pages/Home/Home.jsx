@@ -1,23 +1,16 @@
 import Hero from "../../Components/Hero/Hero";
-
-import { useState } from "react";
+import React from "react";
 import { Featured } from "../../Components/featuerd/Featured";
-import { NewsLetter } from "../../Components/news-letter/NewsLetter";
 import { Products } from "../../Components/products-shopy/Products";
 
 export default function Home() {
-  const [notification, setnotification] = useState(0);
-
   return (
     <>
-      {/* disabled */}
-        <Hero></Hero>
-     <Featured/>
+      <Hero />
+      <Featured />
       <div className="bg-bgColorWhite ">
-      
-        <Products/>
+        <Products />
       </div>
-      
     </>
   );
 }

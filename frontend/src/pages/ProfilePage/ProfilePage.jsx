@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 import Message from "../../Components/Message";
 import {
   getUserDetails,
@@ -9,6 +8,9 @@ import {
 import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import { listMyOrders } from "../../actions/orderActions";
 import { useNavigate } from "react-router-dom";
+import { Row, Col, Form, Button, Table } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import Loader from "../../Components/Loader";
 
 function ProfilePage() {
   const [name, setName] = useState("");
@@ -68,83 +70,114 @@ function ProfilePage() {
   };
 
   return (
-    <div>
-      <h1>Profile Page</h1>
-      <h1>{user.username}</h1>
-      {message && <Message variant="danger">{message}</Message>}
-      {error && <Message variant="danger">{error}</Message>}
-      {loading && <LoadingIndicator />}
-      <form onSubmit={submitHandler}>
-        <label>Name</label>
-        <input
-          type="text"
-          value={name}
-          placeholder={user.name}
-          onChange={(e) => setName(e.target.value)}
-        ></input>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          placeholder={user.username}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        ></input>
-        <button type="submit">Update</button>
-      </form>
-      <br></br>
-      <h1>orders list</h1>
-      {loadingOrders ? (
-                    <LoadingIndicator />
-                ) : errorOrders ? (
-                    <Message variant='danger'>{errorOrders}</Message>
-                ) : (
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>DATE</th>
-                                        <th>TOTAL</th>
-                                        <th>PAID</th>
-                                        <th>DELIVERED</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {orders.map(order => (
-                                        <tr key={order._id}>
-                                            <td>{order._id}</td>
-                                            <td>{order.createdAt.substring(0, 10)}</td>
-                                            <td>{order.totalPrice}</td>
-                                            <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
-                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                            )}</td>
-                                            <td>
-                                                {order.isDelivered ? order.deliveredAt.substring(0, 10) : (
-                                                    <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                                )}
-                                            </td>
-                                            <td>
-                                                <button type='button' className='small' onClick={() => { navigate(`/order/${order._id}`) }}>Details</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        )}
+    <Row className="m-5">
+    <Col md={3} className="">
+        <h2 className="text-2xl font-bold ">User Profile</h2>
 
-    </div>
+        {message && <Message variant='danger'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        {loading && <Loader />}
+        <Form onSubmit={submitHandler}>
+
+            <Form.Group controlId='name'>
+                <Form.Label>Name</Form.Label>
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4 '
+                    required
+                    type='name'
+                    placeholder='Enter name'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                >
+                </Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='email'>
+                <Form.Label>Email Address</Form.Label>
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
+                    required
+                    type='email'
+                    placeholder='Enter Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                >
+                </Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='password'>
+                <Form.Label>Password</Form.Label>
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
+
+                    type='password'
+                    placeholder='Enter Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                >
+                </Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='passwordConfirm'>
+                <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
+
+                    type='password'
+                    placeholder='Confirm Password'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                >
+                </Form.Control>
+            </Form.Group>
+
+            <Button type='submit' variant='primary'className='  bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px] '>
+                Update
+        </Button>
+
+        </Form>
+    </Col>
+
+    <Col md={9}>
+        <h2 className="text-2xl font-bold py-2">My Orders</h2>
+        {loadingOrders ? (
+            <Loader />
+        ) : errorOrders ? (
+            <Message variant='danger'>{errorOrders}</Message>
+        ) : (
+                    <Table striped responsive className='table-sm'>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Paid</th>
+                                <th>Delivered</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {orders.map(order => (
+                                <tr key={order._id}>
+                                    <td>{order._id}</td>
+                                    <td>{order.createdAt.substring(0, 10)}</td>
+                                    <td>${order.totalPrice}</td>
+                                    <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                        <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                    )}</td>
+                                    <td>
+                                        <LinkContainer to={`/order/${order._id}`}>
+                                            <Button  className=' bg-mainColor hover:bg-[#008cff] mt-1 mb-1 p-[8px] w-[80px] rounded-[50px]'>Details</Button>
+                                        </LinkContainer>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
+    </Col>
+</Row>
   );
 }
 

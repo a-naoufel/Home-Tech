@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .my-container {
   min-height: calc(100vh);
   background-image: url("/jdk.jpg");
@@ -9,14 +11,6 @@
   background-size: cover;
   background-position: center bottom;
 }
-
-/* input {
-    height: 2.4rem;
-    width: 100%;
-    padding: 0.5rem;
-    background-color: transparent;
-    border-bottom: 1px solid #2edfd4;
-  } */
 
 .animation-right-arrow-father:hover > .animation-right-arrow {
   position: relative;
@@ -32,6 +26,26 @@
   to {
     left: 5px;
   }
+}
+.wish th {
+  padding: 25px 0;
+}
+.wish td {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.wish table tbody tr::after {
+  content: "";
+  position: absolute;
+  background-color:#00acff ;
+  height: 0.1px;
+  bottom: 0;
+  width: 95%;
+  left: 2.5%;
+}
+.wish-img img {
+  border-radius: 10px;
 }
 
 .log-in::before {
@@ -349,6 +363,27 @@ li.active {
     transform: rotate(360deg);
   }
 }
+/*------------------------animation----------------- */
+@keyframes slide {
+  0%, 30% {
+    transform: translateX(0);
+  }
+  40%, 70% {
+    transform: translateX(-100vw);
+  }
+  80%, 90% {
+    transform: translateX(-200vw);
+  }
+}
+
+
+
+.animated-div:hover {
+  animation-play-state: paused;
+}
+.animated-div {
+  animation: slide 5s  ease-in-out infinite;
+}
 /* ---------------------------------navbar------------------------ */
 
 .menu-bars {
@@ -482,4 +517,38 @@ li.active {
 
 .box-items ::-webkit-scrollbar-thumb:hover {
   background: #8e8e8e;
+}
+/* ---------------singleproduct------------------- */
+
+.single-product .img img {
+  max-width: unset !important;
+  border-radius: 20px;
+}
+
+@media (max-width: 991px) {
+  .single-product {
+      display: flex;
+      flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .qty {
+      width: 40%;
+  }
+}
+/* --------------------cart------------ */
+@media (max-width: 767px) {
+  .cart .cart-holder {
+      flex-direction: column;
+  }
+
+  .cart .cart-holder .cart-wrapper {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .cart .cart-holder .cart-summary {
+      width: 100%;
+  }
 }

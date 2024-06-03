@@ -36,9 +36,14 @@ export default function Header() {
   }
   console.log("username : ",name)
   const showSidebar = () => setSidebar(!sidebar);
+  let to = "/login";
+  if (userInfo) {
+    to = "/profile";
+  }
+
   return (
     <header
-      className={`bg-white sticky z-[99999] left-0 top-0`}
+      className={`bg-white sticky z-[200] left-0 top-0`}
       style={{ boxShadow: "rgba(0, 0, 0, 0.56) 4px -4px 30px 4px" }}
     >
       <div
@@ -84,16 +89,15 @@ export default function Header() {
                       );
                     }
                   } else if (item.title === "profile") {
-                    if (userInfo) {
+
                       return (
                         <li key={index} className={item.cName}>
-                          <Link to={item.path}>
+                          <Link to={to}>
                             {item.icon}
                             <span>{item.title}</span>
                           </Link>
                         </li>
                       );
-                    }
                   } else if (item.title === "Admin") {
                     if (userInfo && userInfo.isAdmin) {
                       return (
@@ -146,7 +150,7 @@ export default function Header() {
               <FaUser />
             </Link>
             <div className="border-r-2 py-2 pr-3">
-              <Link to={cart} className="md:text-xl">
+              <Link to="/wish" className="md:text-xl">
                 <FaHeart />
               </Link>
             </div>

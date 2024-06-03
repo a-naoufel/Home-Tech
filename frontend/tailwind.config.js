@@ -4,8 +4,12 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
   theme: {
     extend: {
+      boxShadow: {
+        'blue-xl': '0 5px 10px -3px rgba(0, 172, 255, 0.7), 0 4px 3px -2px rgba(0, 172, 255, 0.5)'
+      },
       container: { center: true, padding: "2rem" },
       fontFamily: {
         sans : ['Roboto','sans-serif'],

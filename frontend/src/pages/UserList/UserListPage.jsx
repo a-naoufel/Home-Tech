@@ -38,7 +38,7 @@ function UserListPage() {
   };
   console.log("users", users);
   console.log("userInfo", userInfo);
-  if (users && users.length === 0) {
+  if (users && users.length <= 0) {
     return loading ? (
       <Loader />
     ) : error ? (

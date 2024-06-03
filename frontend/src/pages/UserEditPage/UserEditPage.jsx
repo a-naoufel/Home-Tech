@@ -9,6 +9,7 @@ import { getUserDetails, updateUser } from "../../actions/userActions";
 import { USER_UPDATE_RESET } from "../../constants/userConstants";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams } from "react-router";
+import { LinkContainer } from "react-router-bootstrap";
 
 function UserEditScreen() {
   const { id } = useParams();
@@ -62,7 +63,9 @@ function UserEditScreen() {
 
   return (
     <div className="mt-5">
-      <Link to="/admin/userlist">Go Back</Link>
+      <LinkContainer to="/admin/userlist">
+        <Button className="btn btn-light my-3">Go Back</Button>
+      </LinkContainer>
 
       <FormContainer>
         <h1 className="text-2xl font-bold mb-3 ">Edit User</h1>

@@ -4,6 +4,8 @@ import FormContainer from "../../Components/FormContainer";
 import api from "../../api";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+
 import {
   listProductDetails,
   updateProduct,
@@ -41,7 +43,7 @@ function EditProductPage() {
   } = productUpdate;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login", { state: { from: "/admin/productlist" } });
@@ -68,7 +70,15 @@ function EditProductPage() {
     if (!userInfo.isAdmin) {
       navigate("/");
     }
-  }, [dispatch, product, productId,userInfo.isAdmin, userInfo, navigate, successUpdate]);
+  }, [
+    dispatch,
+    product,
+    productId,
+    userInfo.isAdmin,
+    userInfo,
+    navigate,
+    successUpdate,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -85,11 +95,11 @@ function EditProductPage() {
       })
     );
   };
-  
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    
+
     formData.append("image", file);
     formData.append("product_id", productId);
 
@@ -103,24 +113,25 @@ function EditProductPage() {
       };
 
       const { data } = await api.post("api/products/upload/", formData, config);
-      
+
       setImage(data);
       setUploading(false);
     } catch (error) {
       setUploading(false);
     }
   };
-  let imageName = ""; 
-  if(!loading && product && product.image){
+  let imageName = "";
+  if (!loading && product && product.image) {
     imageName = product.image.split("/").pop();
     console.log(imageName);
     console.log(product.image);
   }
-     
 
   return (
     <div className="mt-5">
-      <Link to="/admin/productlist">Go Back</Link>
+      <LinkContainer to="/admin/productlist">
+        <Button className="btn btn-light my-3">Go Back</Button>
+      </LinkContainer>
       <FormContainer>
         <h1 className="text-2xl font-bold mb-3 ">Edit Product</h1>
         {loadingUpdate && <Loader />}
@@ -167,16 +178,20 @@ function EditProductPage() {
                 type="text"
                 placeholder="Enter image"
                 value={imageName}
-                onChange={(e) => setImage( "http://localhost:8000//media/".concat(e.target.value))}
+                onChange={(e) =>
+                  setImage(
+                    "http://localhost:8000//media/".concat(e.target.value)
+                  )
+                }
               ></Form.Control>
-               <input
-                                    id='image-file'
-                                    label='Choose File'
-                                    type='file'
-                                    custom
-                                    className="my-3"
-                                    onChange={uploadFileHandler}
-                                />
+              <input
+                id="image-file"
+                label="Choose File"
+                type="file"
+                custom
+                className="my-3"
+                onChange={uploadFileHandler}
+              />
 
               {uploading && <Loader />}
             </Form.Group>
@@ -241,7 +256,7 @@ function EditProductPage() {
               Update
             </Button>
           </Form>
-        )}  
+        )}
       </FormContainer>
     </div>
   );

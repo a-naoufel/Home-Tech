@@ -7,6 +7,7 @@ import {
   FaGithub,
   FaLinkedinIn,
 } from "react-icons/fa";
+
 import api from "../../api";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
@@ -31,15 +32,54 @@ const Regesterme = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(from,{state:{from:from}});
+      navigate(from, { state: { from: from } });
     }
   }, [userInfo]);
+
+  const [lowerValidated, setLowerValidated] = useState(false);
+  const [upperValidated, setUpperValidated] = useState(false);
+  const [numberValidated, setNumberValidated] = useState(false);
+  const [specialValidated, setSpecialValidated] = useState(false);
+  const [lengthValidated, setLengthValidated] = useState(false);
+
+  const handleChange = (value) => {
+    const lower = new RegExp("(?=.*[a-z])");
+    const upper = new RegExp("(?=.*[A-Z])");
+    const number = new RegExp("(?=.*[0-9])");
+    const special = new RegExp("(?=.*[!@#$%^&*])");
+    const length = new RegExp("(?=.{8,})");
+    if (lower.test(value)) {
+      setLowerValidated(true);
+    } else {
+      setLowerValidated(false);
+    }
+    if (upper.test(value)) {
+      setUpperValidated(true);
+    } else {
+      setUpperValidated(false);
+    }
+    if (number.test(value)) {
+      setNumberValidated(true);
+    } else {
+      setNumberValidated(false);
+    }
+    if (special.test(value)) {
+      setSpecialValidated(true);
+    } else {
+      setSpecialValidated(false);
+    }
+    if (length.test(value)) {
+      setLengthValidated(true);
+    } else {
+      setLengthValidated(false);
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) {
-      setMessage("Passwords do not match");
+    if (password != confirmPassword  || !lowerValidated || !upperValidated || !numberValidated || !specialValidated || !lengthValidated) {
+      setMessage("Password is not valid");
     } else {
       dispatch(register(username, email, password));
     }
@@ -60,7 +100,7 @@ const Regesterme = () => {
             className="bg-white h-[100%] flex items-center justify-center flex-col px-10"
           >
             <h1 className="text-3xl font-bold mb-6">Creat Acount</h1>
-            
+
             <span className="text-sm pb-1"> use your email password</span>
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
@@ -81,8 +121,42 @@ const Regesterme = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                handleChange(e.target.value);
+              }}
             />
+
+            {!lowerValidated && (
+              <div className="text-sm text-red-600 text-left">
+                must contain lowercase
+              </div>
+            )}
+            {!upperValidated && (
+              <div className="text-sm text-red-600 text-left ">
+                must contain uppercase
+              </div>
+            )}
+            {!specialValidated && (
+              <div className="text-sm text-red-600 text-left ">
+                must contain special characters
+              </div>
+            )}
+            {!numberValidated && (
+              <div className="text-sm text-red-600 text-left ">
+                must contain numbers
+              </div>
+            )}
+            {!lengthValidated && (
+              <div className="text-sm text-red-600 text-left ">
+                must be at least 8 characters
+              </div>
+            )}
+            {password!==confirmPassword && (
+              <div className="text-sm text-red-600 text-left ">
+                password and confirmation aren't matching
+              </div>
+            )}
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="password"
@@ -90,6 +164,7 @@ const Regesterme = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+
             <button
               type="submit"
               className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]"
@@ -97,7 +172,9 @@ const Regesterme = () => {
               {loading && <LoadingIndicator />}
               Sign Up
             </button>
-            <Link  to="/login" className="block sm:hidden">or sing in?</Link>
+            <Link to="/login" className="block sm:hidden">
+              or sing in?
+            </Link>
           </form>
         </div>
         <div className="absolute top-0 right-1/2 w-1/2 h-full overflow-hidden transition-all duration-600 ease-in-out rounded-br-[150px]   rounded-tr-[100px] z-10 hidden sm:block">
@@ -113,7 +190,7 @@ const Regesterme = () => {
               <h1 className="text-3xl font-bold mb-6">Welcome Back!</h1>
               <p>Enter your personal details to use all of site features</p>
               <button
-                onClick={(e) => navigate("/login",{state:{from:from}})}
+                onClick={(e) => navigate("/login", { state: { from: from } })}
                 className="bg-mainColor  text-white text-xs font-semibold uppercase py-[15px] px-[45px] rounded-[12px] font-montserrat tracking-wide hover:bg-blue-500 focus:outline-none focus:border-blue-900 focus:ring  disabled:opacity-50 cursor-pointer mt-[10px]"
               >
                 <Link to="/login">Sign In</Link>

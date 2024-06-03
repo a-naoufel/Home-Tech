@@ -38,7 +38,7 @@ export const SidebarData = [
  
   {
     title: 'Admin',
-    path: '/admin/productlist',
+    path: '/admin',
     icon: <RiAdminFill />,
     cName: 'nav-text'
   },

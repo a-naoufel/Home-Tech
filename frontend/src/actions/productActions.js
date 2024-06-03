@@ -31,6 +31,10 @@ import {
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
 
+    PRODUCT_POP_REQUEST,
+    PRODUCT_POP_SUCCESS,
+    PRODUCT_POP_FAIL,
+
 } from '../constants/productConstants'
 
 
@@ -84,6 +88,31 @@ export const listTopProducts = () => async (dispatch) => {
         })
     }
 }
+
+export const listPopProducts = () => async (dispatch) => {
+    try {
+        dispatch({ type: PRODUCT_POP_REQUEST })
+
+        const { data } = await api.get(`api/products/pop/`)
+        data.map ( product => (
+            product.image = "http://localhost:8000/".concat(product.image)
+        ))  
+            
+        dispatch({
+            type: PRODUCT_POP_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_POP_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
 
 
 export const listProductDetails = (id) => async (dispatch) => {

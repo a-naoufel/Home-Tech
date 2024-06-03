@@ -23,6 +23,8 @@ import Favorite from "./pages/favorite/Favorite";
 
 import ProductPage from "./pages/ProductPage/ProductPage";
 
+import Dashboard from "./pages/Dashboard/Dashboard";
+
 function Logout() {
   localStorage.clear();
   return <Navigate to="/login" />;
@@ -65,6 +67,7 @@ function App() {
           <Route path="/admin/product/:id/edit" element={<EditProduct />} />
 
           <Route path="/admin/orderlist" element={<OrderListPage />} />
+          <Route path="/admin" element={<Dashboard />} />
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

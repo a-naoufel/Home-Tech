@@ -29,6 +29,10 @@ import {
     PRODUCT_TOP_REQUEST,
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
+
+    PRODUCT_POP_REQUEST,
+    PRODUCT_POP_SUCCESS,
+    PRODUCT_POP_FAIL,
 } from '../constants/productConstants'
 
 
@@ -167,3 +171,18 @@ export const productTopRatedReducer = (state = { products: [] }, action) => {
     }
 }
 
+export const productPopRatedReducer = (state = { products: [] }, action) => {
+    switch (action.type) {
+        case PRODUCT_POP_REQUEST:
+            return { loading: true, products: [] }
+
+        case PRODUCT_POP_SUCCESS:
+            return { loading: false, products: action.payload, }
+
+        case PRODUCT_POP_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}

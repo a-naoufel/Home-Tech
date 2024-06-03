@@ -48,6 +48,12 @@ def getTopProducts(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def getPopProducts(request):
+    products = Product.objects.order_by('numReviews')[0:20]
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

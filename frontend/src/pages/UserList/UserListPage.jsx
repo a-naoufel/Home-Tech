@@ -39,11 +39,8 @@ function UserListPage() {
 
   return (
     <div>
-      <LinkContainer to="/admin/productlist">
-        <Button className="btn btn-light my-3">Products</Button>
-      </LinkContainer>
-      <LinkContainer to="/admin/orderlist">
-        <Button className="btn btn-light my-3">Orders</Button>
+      <LinkContainer to="/admin">
+        <Button className="btn btn-light my-3">Go Back</Button>
       </LinkContainer>
       <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Users</h1>
       {loading ? (

@@ -114,12 +114,10 @@ function ProductListPage() {
 
   return (
     <div>
-      <LinkContainer to="/admin/orderlist">
-        <Button className="btn btn-light my-3">Orders</Button>
+      <LinkContainer to="/admin">
+        <Button className="btn btn-light my-3">Go Back</Button>
       </LinkContainer>
-      <LinkContainer to="/admin/userlist">
-        <Button className="btn btn-light my-3">Users</Button>
-      </LinkContainer>
+
       <h1 className="mt-5 mb-10  text-center text-4xl font-bold">
         <center>Products</center>
       </h1>

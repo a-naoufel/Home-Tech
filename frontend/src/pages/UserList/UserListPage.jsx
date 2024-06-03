@@ -36,7 +36,22 @@ function UserListPage() {
       dispatch(deleteUser(id));
     }
   };
-
+  console.log("users", users);
+  console.log("userInfo", userInfo);
+  if (users && users.length === 0) {
+    return loading ? (
+      <Loader />
+    ) : error ? (
+      <Message variant="danger">{error}</Message>
+    ) : (
+      <div
+        className="container flex flex-col items-center justify-center py-14"
+        style={{ minHeight: `calc(100vh - 70.94px)` }}
+      >
+        <h1 className="text-4xl font-bold mb-5">No Users Found</h1>
+      </div>
+    );
+  }
   return (
     <div>
       <LinkContainer to="/admin">
@@ -60,36 +75,47 @@ function UserListPage() {
           </thead>
 
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className="bi bi-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="bi bi-check" style={{ color: "red" }}></i>
-                  )}
-                </td>
+            {users.map((user) => {
+              if (user._id != userInfo._id) {
+                return(
+                <>
+                  <tr key={user._id}>
+                    <td>{user._id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      {user.isAdmin ? (
+                        <i
+                          className="bi bi-check"
+                          style={{ color: "green" }}
+                        ></i>
+                      ) : (
+                        <i className="bi bi-check" style={{ color: "red" }}></i>
+                      )}
+                    </td>
 
-                <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant="light" className="btn-sm px-4 py-3">
-                      <i className="bi bi-pencil-square"></i>
-                    </Button>
-                  </LinkContainer>
+                    <td>
+                      <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                        <Button variant="light" className="btn-sm px-4 py-3">
+                          <i className="bi bi-pencil-square"></i>
+                        </Button>
+                      </LinkContainer>
 
-                  <Button
-                    variant="danger"
-                    className="btn-sm py-3 px-4"
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <i className="bi bi-trash" style={{ color: "black" }}></i>
-                  </Button>
-                </td>
-              </tr>
-            ))}
+                      <Button
+                        variant="danger"
+                        className="btn-sm py-3 px-4"
+                        onClick={() => deleteHandler(user._id)}
+                      >
+                        <i
+                          className="bi bi-trash"
+                          style={{ color: "black" }}
+                        ></i>
+                      </Button>
+                    </td>
+                  </tr>
+                </>);
+              }
+            })}
           </tbody>
         </Table>
       )}

@@ -4,68 +4,7 @@ import { useEffect } from "react";
 import { listOrders } from "../../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 
-const data = [
-	{
-		name: 'Jan',
-		// Expense: 4000,
-		Income: 2400
-	},
-	{
-		name: 'Feb',
-		// Expense: 3000,
-		Income: 1398
-	},
-	{
-		name: 'Mar',
-		// Expense: 2000,
-		Income: 9800
-	},
-	{
-		name: 'Apr',
-		// Expense: 2780,
-		Income: 3908
-	},
-	{
-		name: 'May',
-		// Expense: 1890,
-		Income: 4800
-	},
-	{
-		name: 'Jun',
-		// Expense: 2390,
-		Income: 3800
-	},
-	{
-		name: 'July',
-		// Expense: 3490,
-		Income: 4300
-	},
-	{
-		name: 'Aug',
-		// Expense: 2000,
-		Income: 9800
-	},
-	{
-		name: 'Sep',
-		// Expense: 2780,
-		Income: 3908
-	},
-	{
-		name: 'Oct',
-		// Expense: 1890,
-		Income: 4800
-	},
-	{
-		name: 'Nov',
-		// Expense: 2390,
-		Income: 3800
-	},
-	{
-		name: 'Dec',
-		// Expense: 3490,
-		Income: 4300
-	}
-]
+
 
 export default function TransactionChart() {
 	const dispatch = useDispatch();
@@ -83,7 +22,7 @@ export default function TransactionChart() {
 	let incomeOct = 0;
 	let incomeNov = 0;
 	let incomeDec = 0;
-	let incomedata = data;
+	let incomedata = [];
 	if (orders) {
 		orders.forEach((order) => {
 			const date = new Date(order.paidAt);
@@ -179,6 +118,9 @@ export default function TransactionChart() {
 		]
 
 	}
+	useEffect(() => {
+		dispatch(listOrders());
+	}, [dispatch]);
 	return (
 		<div className="h-[30rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
 			<strong className="font-medium text-gray-700">Transactions</strong>

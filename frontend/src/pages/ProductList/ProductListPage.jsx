@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import Paginate from "../../Components/Paginate";
+import { FaArrowLeft } from "react-icons/fa";
+
 import {
   listProducts,
   deleteProduct,
@@ -80,7 +82,7 @@ function ProductListPage() {
     if (successCreate) {
       navigate(`/admin/product/${createdProduct._id}/edit`);
     } else {
-      dispatch(listProducts(keyword,Page));
+      dispatch(listProducts(keyword, Page));
     }
   }, [
     dispatch,
@@ -105,17 +107,26 @@ function ProductListPage() {
   console.log("Keyword", keyword);
 
   if (products.length === 0) {
-    return loading ? ( <Loader /> ) : error ? ( <Message variant="danger">{error}</Message> ) : (
-      <div  className="container flex flex-col items-center justify-center py-14" style={{ minHeight: `calc(100vh - 70.94px)` }}>
+    return loading ? (
+      <Loader />
+    ) : error ? (
+      <Message variant="danger">{error}</Message>
+    ) : (
+      <div
+        className="container flex flex-col items-center justify-center py-14"
+        style={{ minHeight: `calc(100vh - 70.94px)` }}
+      >
         <h1 className="text-4xl font-bold">No Products Found</h1>
       </div>
     );
   }
 
   return (
-    <div>
+    <div  className="m-5">
       <LinkContainer to="/admin">
-        <Button className="btn btn-light my-3">Go Back</Button>
+        <button className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+          <FaArrowLeft />
+        </button>
       </LinkContainer>
 
       <h1 className="mt-5 mb-10  text-center text-4xl font-bold">
@@ -125,11 +136,11 @@ function ProductListPage() {
         <Col></Col>
 
         <Col className="text-right">
-          <Button onClick={createProductHandler} className="my-3">
-            <i className="" style={{ color: "black" }}>
-              Create Product
-            </i>{" "}
-            +
+          <Button
+            onClick={createProductHandler}
+            className=" bg-mainColor hover:bg-[#0062ff] mt-3 mb-4 p-[12px] w-[150px] rounded-[25px]"
+          >
+            <i className="text-lg">Create Product</i>{" "}
           </Button>
         </Col>
       </Row>
@@ -189,11 +200,15 @@ function ProductListPage() {
           <Paginition
             PAGES={pages}
             currentPage={page}
-            setCurrentPage={(e) =>{
-              console.log("e", e)
-              console.log("keyword", keyword)
-              console.log("/admin/productlist/?".concat(keyword).concat("page=").concat(e))
-              navigate("/admin/productlist?".concat(keyword).concat("page=").concat(e))
+            setCurrentPage={(e) => {
+              console.log("e", e);
+              console.log("keyword", keyword);
+              console.log(
+                "/admin/productlist/?".concat(keyword).concat("page=").concat(e)
+              );
+              navigate(
+                "/admin/productlist?".concat(keyword).concat("page=").concat(e)
+              );
             }}
           />
         </div>

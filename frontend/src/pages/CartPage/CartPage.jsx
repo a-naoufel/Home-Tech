@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidTrashAlt } from "react-icons/bi";
-
+import { LinkContainer } from "react-router-bootstrap";
+import { FaArrowLeft } from "react-icons/fa";
 
 function CartPage() {
   const navigate = useNavigate();
@@ -69,8 +70,20 @@ function CartPage() {
           </button>
         </div>
       ) : (
-        <div className="cart mt-[100px]">
-          <div className="container">
+          
+          
+          <div className="cart mt-[100px]">
+              <LinkContainer to="/shop">
+        <button
+        className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
+       
+      >
+        <FaArrowLeft />
+      </button>
+      </LinkContainer>
+       
+            <div className="container">
+          
             <h1 className="text-4xl font-bold">Your Cart</h1>
             <div className="cart-holder pt-[20px] pb-[40px] flex justify-between">
               <div className="cart-wrapper border border-[#ddd] p-[15px] w-[70%] rounded-[8px]">

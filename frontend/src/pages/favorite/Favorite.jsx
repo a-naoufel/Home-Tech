@@ -7,16 +7,42 @@ import { addToWish, removeFromWish } from "../../actions/wishActions";
 import { useState } from "react";
 import { FaArrowRight, FaRegHeart, FaTrash } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
-import cameraImage from './camera.jpg';
-import airpodsImage from './airpods.jpg';
-import alexaImage from './alexa.jpg';
+import cameraImage from "./camera.jpg";
+import airpodsImage from "./airpods.jpg";
+import alexaImage from "./alexa.jpg";
+import { FaArrowLeft } from "react-icons/fa";
+import { LinkContainer } from "react-router-bootstrap";
 
 const products = [
-  { id: 1, name: 'Camera', price: 180, quantity:'in stock', image: cameraImage },
-  { id: 2, name: 'AirPods', price: 250, quantity: 'out of stock', image: airpodsImage },
-  { id: 3, name: 'Alexa', price: 99, quantity: 'bieng restord', image: alexaImage },
-  { id: 2, name: 'AirPods', price: 250, quantity: 'in stock', image: airpodsImage },
-  { id: 3, name: 'Alexa', price: 99, quantity: 'in stock', image: alexaImage },
+  {
+    id: 1,
+    name: "Camera",
+    price: 180,
+    quantity: "in stock",
+    image: cameraImage,
+  },
+  {
+    id: 2,
+    name: "AirPods",
+    price: 250,
+    quantity: "out of stock",
+    image: airpodsImage,
+  },
+  {
+    id: 3,
+    name: "Alexa",
+    price: 99,
+    quantity: "bieng restord",
+    image: alexaImage,
+  },
+  {
+    id: 2,
+    name: "AirPods",
+    price: 250,
+    quantity: "in stock",
+    image: airpodsImage,
+  },
+  { id: 3, name: "Alexa", price: 99, quantity: "in stock", image: alexaImage },
 ];
 
 export default function Favorite() {
@@ -49,17 +75,32 @@ export default function Favorite() {
       {wishItems.length > 0 ? (
         <>
           <div className="wish">
+            <LinkContainer to="/shop">
+              <button className="bg-mainColor text-white absolute left-12 mt-2 flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+                <FaArrowLeft />
+              </button>
+            </LinkContainer>
             <p className="my-6 mt-12 text-center text-xl font-bold">
               My Wish list
             </p>
             <table className="mb-24 mt-12 w-screen">
               <thead className="bg-mainColor py-2 text-white">
                 <tr>
-                  <th><center>Product img</center></th>
-                  <th><center>Name</center></th>
-                  <th><center>Price</center></th>
-                  <th><center>Quantity</center></th>
-                  <th><center>Action</center></th>
+                  <th>
+                    <center>Product img</center>
+                  </th>
+                  <th>
+                    <center>Name</center>
+                  </th>
+                  <th>
+                    <center>Price</center>
+                  </th>
+                  <th>
+                    <center>Quantity</center>
+                  </th>
+                  <th>
+                    <center>Action</center>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -79,14 +120,17 @@ export default function Favorite() {
                       <p>{product.name}</p>
                     </td>
                     <td>${product.price}</td>
-                    <td className=""><div>{product.countInStock}</div></td>
-                    
+                    <td className="">
+                      <div>{product.countInStock}</div>
+                    </td>
+
                     <td>
-                      <div 
-                      className="mx-auto w-fit cursor-pointer text-bgColorDanger"
-                      onClick={() =>{ dispatch(removeFromWish(product.product))
-                                    navigate("/wish")}}
-                      
+                      <div
+                        className="mx-auto w-fit cursor-pointer text-bgColorDanger"
+                        onClick={() => {
+                          dispatch(removeFromWish(product.product));
+                          navigate("/wish");
+                        }}
                       >
                         <FaTrash />
                       </div>
@@ -145,7 +189,9 @@ export default function Favorite() {
             <div className="flex h-[130px] w-[130px] items-center justify-center rounded-full bg-[#F0F9F4]">
               <FaRegHeart className="h-1/2 w-1/2" />
             </div>
-            <p className="my-6 mb-2 text-3xl font-bold">Your wishlist is empty</p>
+            <p className="my-6 mb-2 text-3xl font-bold">
+              Your wishlist is empty
+            </p>
             <p className="opacity-60">
               You don’t have any products in the wishlist yet. You will find a
               lot of interesting products on our Shop page.

@@ -36,52 +36,100 @@ const Regesterme = () => {
     }
   }, [userInfo]);
 
+  const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+  const [passwordValidationMessage, setPasswordValidationMessage] =
+    useState("");
+  const [confirmationValidationMessage, setConfirmationValidationMessage] =
+    useState("");
   const [lowerValidated, setLowerValidated] = useState(false);
   const [upperValidated, setUpperValidated] = useState(false);
   const [numberValidated, setNumberValidated] = useState(false);
   const [specialValidated, setSpecialValidated] = useState(false);
   const [lengthValidated, setLengthValidated] = useState(false);
+  const [hasStartedTypingPassword, setHasStartedTypingPassword] =
+    useState(false);
+  const [hasStartedTypingConfirmation, setHasStartedTypingConfirmation] =
+    useState(false);
 
-  const handleChange = (value) => {
+  let debounceTimeoutPassword;
+  let debounceTimeoutConfirmation;
+
+  const handleChangePassword = (value) => {
+    if (!hasStartedTypingPassword) setHasStartedTypingPassword(true);
+
+    setPasswordInput(value);
+
+    clearTimeout(debounceTimeoutPassword);
+    debounceTimeoutPassword = setTimeout(() => validatePassword(value), 500); // 500ms debounce time
+  };
+
+  const handleChangeConfirmation = (value) => {
+    if (!hasStartedTypingConfirmation) setHasStartedTypingConfirmation(true);
+
+    setConfirmPasswordInput(value);
+
+    clearTimeout(debounceTimeoutConfirmation);
+    debounceTimeoutConfirmation = setTimeout(
+      () => validateConfirmation(value),
+      500
+    ); // 500ms debounce time
+  };
+
+  const validatePassword = (value) => {
     const lower = new RegExp("(?=.*[a-z])");
     const upper = new RegExp("(?=.*[A-Z])");
     const number = new RegExp("(?=.*[0-9])");
     const special = new RegExp("(?=.*[!@#$%^&*])");
     const length = new RegExp("(?=.{8,})");
-    if (lower.test(value)) {
-      setLowerValidated(true);
+
+    setLowerValidated(lower.test(value));
+    setUpperValidated(upper.test(value));
+    setNumberValidated(number.test(value));
+    setSpecialValidated(special.test(value));
+    setLengthValidated(length.test(value));
+  };
+
+  const validateConfirmation = (value) => {
+    if (value !== passwordInput) {
+      setConfirmationValidationMessage(
+        "password and confirmation aren't matching !"
+      );
     } else {
-      setLowerValidated(false);
+      setConfirmationValidationMessage("");
     }
-    if (upper.test(value)) {
-      setUpperValidated(true);
-    } else {
-      setUpperValidated(false);
-    }
-    if (number.test(value)) {
-      setNumberValidated(true);
-    } else {
-      setNumberValidated(false);
-    }
-    if (special.test(value)) {
-      setSpecialValidated(true);
-    } else {
-      setSpecialValidated(false);
-    }
-    if (length.test(value)) {
-      setLengthValidated(true);
-    } else {
-      setLengthValidated(false);
-    }
+  };
+
+  const getValidationMessagePassword = () => {
+    if (!hasStartedTypingPassword || passwordInput === "") return "";
+    // No validation message if the user hasn't started typing yet
+    if (!lowerValidated) return "must contain lowercase!";
+    if (!upperValidated) return "must contain uppercase!";
+    if (!numberValidated) return "must contain numbers !";
+    if (!specialValidated) return "must contain special characters !";
+    if (!lengthValidated) return "must be at least 8 characters !";
+    return "";
+  };
+
+  const getValidationMessageConfirmation = () => {
+    if (!hasStartedTypingConfirmation || confirmPasswordInput === "") return ""; // No validation message if the user hasn't started typing yet
+    return confirmationValidationMessage;
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword  || !lowerValidated || !upperValidated || !numberValidated || !specialValidated || !lengthValidated) {
-      setMessage("Password is not valid");
+    if (
+      passwordInput !== confirmPasswordInput ||
+      !lowerValidated ||
+      !upperValidated ||
+      !numberValidated ||
+      !specialValidated ||
+      !lengthValidated
+    ) {
+      setPasswordValidationMessage("Password is not valid");
     } else {
-      dispatch(register(username, email, password));
+      dispatch(register(username, email, passwordInput));
     }
   };
 
@@ -116,54 +164,31 @@ const Regesterme = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                handleChange(e.target.value);
-              }}
+              value={passwordInput}
+              onChange={(e) => handleChangePassword(e.target.value)}
             />
-
-            {!lowerValidated && (
-              <div className="text-sm text-red-600 text-left">
-                must contain lowercase
-              </div>
-            )}
-            {!upperValidated && (
-              <div className="text-sm text-red-600 text-left ">
-                must contain uppercase
-              </div>
-            )}
-            {!specialValidated && (
-              <div className="text-sm text-red-600 text-left ">
-                must contain special characters
-              </div>
-            )}
-            {!numberValidated && (
-              <div className="text-sm text-red-600 text-left ">
-                must contain numbers
-              </div>
-            )}
-            {!lengthValidated && (
-              <div className="text-sm text-red-600 text-left ">
-                must be at least 8 characters
-              </div>
-            )}
-            {password!==confirmPassword && (
-              <div className="text-sm text-red-600 text-left ">
-                password and confirmation aren't matching
+            {hasStartedTypingPassword && (
+              <div className="text-[12px] text-red-600 text-left">
+                {getValidationMessagePassword()}
               </div>
             )}
             <input
               className="bg-gray-200 border-none my-2 py-[10px] px-[15px] text-sm rounded-lg w-full outline-none"
               type="password"
               placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmPasswordInput}
+              onChange={(e) => handleChangeConfirmation(e.target.value)}
             />
+            {hasStartedTypingConfirmation && (
+              <div className="text-[12px] text-red-600 text-left">
+                {getValidationMessageConfirmation()}
+              </div>
+            )}
 
             <button
               type="submit"

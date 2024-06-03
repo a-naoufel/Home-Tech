@@ -6,6 +6,7 @@ import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import { listOrders } from "../../actions/orderActions";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 function OrderListPage() {
   const dispatch = useDispatch();
@@ -29,9 +30,11 @@ function OrderListPage() {
   }, [dispatch, navigate, userInfo]);
 
   return (
-    <div>
+    <div  className="m-5">
       <LinkContainer to="/admin">
-        <Button className="btn btn-light my-3">Go Back</Button>
+        <button className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+          <FaArrowLeft />
+        </button>
       </LinkContainer>
       <h1 className="mt-5 mb-10  text-center text-4xl font-bold">Orders</h1>
       {loading ? (

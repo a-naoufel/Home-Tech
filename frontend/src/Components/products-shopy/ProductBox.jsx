@@ -2,9 +2,9 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCartShopping, FaHeart, FaRegHeart } from "react-icons/fa6";
-import { useDispatch } from 'react-redux'
-import { addToCart } from '../../actions/cartActions'
-import { addToWish ,removeFromWish } from "../../actions/wishActions";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../actions/cartActions";
+import { addToWish, removeFromWish } from "../../actions/wishActions";
 import { useSelector } from "react-redux";
 import RatingStars from "../ratingstars/RatingStars";
 import { Link } from "react-router-dom";
@@ -15,15 +15,21 @@ export const ProductBox = ({ products }) => {
   const wish = useSelector((state) => state.wish);
   const { wishItems } = wish;
 
-const isProductInWishList = (productId) => {
-  return wishItems.some((product) => product.product === productId);
-};
+  const isProductInWishList = (productId) => {
+    return wishItems.some((product) => product.product === productId);
+  };
 
   const handleHeartClick = (product) => {
-    if (isProductInWishList(product._id) === false) {
+    if (!isProductInWishList(product._id)) {
       dispatch(addToWish(product._id));
+      toast.success("Product successfully added to your wishlist", {
+        type: "dark",
+      });
     } else {
       dispatch(removeFromWish(product._id));
+      toast.warning("Product removed from your wishlist", {
+        type: "dark",
+      });
     }
   };
 
@@ -38,26 +44,21 @@ const isProductInWishList = (productId) => {
           {/* Product Image */}
 
           <div className="relative flex h-[150px] w-[230px] items-center justify-center rounded-t-xl bg-white overflow-hidden">
-          <Link to={`/product/${product?._id}`}>
-            <img
-              src={product?.image}
-              alt={product?.name}
-              className="object-cover h-full w-full"
+            <Link to={`/product/${product?._id}`}>
+              <img
+                src={product?.image}
+                alt={product?.name}
+                className="object-cover h-full w-full"
               />
-            {/* Wishlist Icon */}
-              </Link>
-              
+              {/* Wishlist Icon */}
+            </Link>
+
             <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart
                   onClick={() => (
-                    handleHeartClick(product),
-                    toast.success(
-                      "Product successfully added to your wishlist",
-                      {
-                        type: "dark",
-                      }
-                    )
+                    handleHeartClick(product)
+                    
                   )}
                   className={`icon fav ${
                     !isProductInWishList(product._id) ? "" : "active"
@@ -83,7 +84,8 @@ const isProductInWishList = (productId) => {
               </div>
               {/* Price */}
               <div className="relative text-base font-bold text-red-600 mx-0 w-fit">
-                {product?.price - product?.price * product.discount/100}${/* Original Price */}
+                {product?.price - (product?.price * product.discount) / 100}$
+                {/* Original Price */}
                 <del className="absolute text-xs text-[#787575] bottom-0 left-full">
                   {product?.price}$
                 </del>
@@ -92,20 +94,22 @@ const isProductInWishList = (productId) => {
             {/* Buttons */}
             <div className="flex flex-col items-center justify-center gap-3 text-xs rounded-lg font-bold lg:justify-normal">
               {/* Add to Cart Button */}
-              <button className="flex items-center justify-center w-[100px] gap-1 px-1 py-1 rounded-lg bg-bgColorDanger text-white">
-                <p
-                  onClick={() => {
+              <button
+                className="flex items-center justify-center w-[100px] gap-1 px-1 py-1 rounded-lg bg-bgColorDanger text-white"
+                onClick={() => {
+                  if (product.countInStock > 0) {
                     toast.success(
                       `Product successfully added to your shopping cart`
                     );
-                     dispatch(addToCart(product?._id, 1))
-                  }}
-                >
-                  Add To Cart
-                </p>
+                    dispatch(addToCart(product?._id, 1));
+                  } else {
+                    toast.error(`Product is out of stock`);
+                  }
+                }}
+              >
+                <p>Add To Cart</p>
                 <FaCartShopping />
               </button>
-              
             </div>
           </div>
         </div>

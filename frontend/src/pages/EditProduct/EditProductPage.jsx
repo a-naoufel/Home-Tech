@@ -5,7 +5,7 @@ import api from "../../api";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-
+import { FaArrowLeft } from "react-icons/fa";
 import {
   listProductDetails,
   updateProduct,
@@ -128,10 +128,15 @@ function EditProductPage() {
   }
 
   return (
-    <div className="mt-5">
-      <LinkContainer to="/admin/productlist">
-        <Button className="btn btn-light my-3">Go Back</Button>
-      </LinkContainer>
+    <div className="m-5">
+     <LinkContainer to="/admin/productlist">
+    <button
+    className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
+
+  >
+    <FaArrowLeft />
+  </button>
+  </LinkContainer>
       <FormContainer>
         <h1 className="text-2xl font-bold mb-3 ">Edit Product</h1>
         {loadingUpdate && <Loader />}

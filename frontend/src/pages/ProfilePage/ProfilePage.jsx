@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Form, Button, Table } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../../Components/Loader";
+import { FaArrowLeft } from "react-icons/fa";
 
 function ProfilePage() {
   const [name, setName] = useState("");
@@ -70,8 +71,17 @@ function ProfilePage() {
   };
 
   return (
-    <Row className="m-5">
+    <Row className="m-20">
+
     <Col md={3} className="">
+    <LinkContainer to="/">
+  <button
+  className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
+
+>
+  <FaArrowLeft />
+</button>
+</LinkContainer>
         <h2 className="text-2xl font-bold ">User Profile</h2>
 
         {message && <Message variant='danger'>{message}</Message>}

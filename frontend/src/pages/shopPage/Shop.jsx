@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { ProductBox } from "../../Components/products-shopy/ProductBox";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
+import { FaArrowLeft } from "react-icons/fa";
+
+import { LinkContainer } from "react-router-bootstrap";
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -82,6 +85,11 @@ export const Shop = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <div className="py-[40px] px-0 bg-bgColorWhite">
+      <LinkContainer to="/">
+        <button className="bg-mainColor text-white absolute left-12 mt-2 flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+          <FaArrowLeft />
+        </button>
+      </LinkContainer>
       <div className="container">
         <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Shop</h1>
         <div className="shop-wrapper">

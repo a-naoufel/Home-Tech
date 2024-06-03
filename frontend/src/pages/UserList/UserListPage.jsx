@@ -6,6 +6,7 @@ import Loader from "../../Components/Loader.jsx";
 import Message from "../../Components/Message.jsx";
 import { listUsers, deleteUser } from "../../actions/userActions.js";
 import { useNavigate, useLocation } from "react-router";
+import { FaArrowLeft } from "react-icons/fa";
 
 function UserListPage() {
   const navigate = useNavigate();
@@ -55,7 +56,9 @@ function UserListPage() {
   return (
     <div>
       <LinkContainer to="/admin">
-        <Button className="btn btn-light my-3">Go Back</Button>
+        <button className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+          <FaArrowLeft />
+        </button>
       </LinkContainer>
       <h1 className="mt-5 mb-10 text-center text-4xl font-bold">Users</h1>
       {loading ? (

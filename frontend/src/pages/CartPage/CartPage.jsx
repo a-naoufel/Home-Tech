@@ -1,8 +1,18 @@
+/**
+ * Renders the CartPage component.
+ * This component displays the user's cart items and allows them to modify the quantity or remove items.
+ * If the cart is empty, it displays a message and a button to continue shopping.
+ *
+ * @component
+ * @example
+ * return <CartPage />;
+ */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidTrashAlt } from "react-icons/bi";
+
 
 function CartPage() {
   const navigate = useNavigate();

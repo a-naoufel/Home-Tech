@@ -4,18 +4,15 @@ import "./products.css";
 import { ProductBox } from "./ProductBox";
 import { Paginition } from "./Paginition";
 import { listProducts } from "../../actions/productActions";
-import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../Loader";
+import Message from "../Message";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 export const Products = () => {
-  const [toggled, setToggled] = useState("All");
-  const [apiControl, setApiControl] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,28 +35,25 @@ export const Products = () => {
     ? [...products].sort((a, b) => b.rating - a.rating)
     : [];
 
-  return (
-    <>
-      <div className="bg-[#f1f1f1f1] pt-5 pb-[100px]">
-        <div className="container">
-          <h1 className="mt-5 mb-10 text-center text-4xl font-bold">
-            Super Deals
-          </h1>
-          {/* <ProductListUL
-            toggled={toggled}
-            setToggled={setToggled}
-            setApiControl={setApiControl}
-          /> */}
-          <div className="flex flex-wrap justify-center gap-6">
-            <ProductBox products={topRatedProducts} />
-          </div>
-          <Paginition
-            PAGES={pages}
-            currentPage={page}
-            setCurrentPage={(e) => navigate("/?page=".concat(e))}
-          />
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
+  ) : (
+    <div className="bg-[#f1f1f1f1] pt-5 pb-[100px]">
+      <div className="container">
+        <h1 className="mt-5 mb-10 text-center text-4xl font-bold">
+          Super Deals
+        </h1>
+        <div className="flex flex-wrap justify-center gap-6">
+          <ProductBox products={topRatedProducts} />
         </div>
+        <Paginition
+          PAGES={pages}
+          currentPage={page}
+          setCurrentPage={(e) => navigate("/?page=".concat(e))}
+        />
       </div>
-    </>
+    </div>
   );
 };

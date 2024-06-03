@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 import Message from "../../Components/Message";
 import {
   getUserDetails,
   updateUserProfile,
 } from "../../actions/userActions";
-import { USER_UPDATE_PROFILE_RESET } from "../../../../frontend1vite/src/constants/userConstants";
+import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import { listMyOrders } from "../../actions/orderActions";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Form, Button, Table } from "react-bootstrap";

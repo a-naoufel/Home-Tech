@@ -37,8 +37,10 @@ export default function Header() {
   console.log("username : ", name);
   const showSidebar = () => setSidebar(!sidebar);
   let to = "/login";
+  let profilename = "Login";
   if (userInfo) {
     to = "/profile";
+    profilename = "Profile";
   }
 
   return (
@@ -124,7 +126,17 @@ export default function Header() {
                         </li>
                       );
                     }
-                  } else {
+                  }else if(item.title === "Profile"){
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span>{profilename}</span>
+                        </Link>
+                      </li>
+                    );
+                  }
+                   else {
                     return (
                       <li key={index} className={item.cName}>
                         <Link to={item.path}>

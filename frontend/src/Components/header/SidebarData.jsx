@@ -43,7 +43,7 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'profile',
+    title: 'Profile',
     path: '/profile',
     icon: <FaUser />,
     cName: 'nav-text'

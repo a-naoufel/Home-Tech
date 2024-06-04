@@ -37,6 +37,7 @@ const ProductScreen = () => {
 
   const wish = useSelector((state) => state.wish);
   const { wishItems } = wish;
+  
 
   const isProductInWishList = (productId) => {
     return wishItems.some((product) => product.product === productId);
@@ -136,7 +137,7 @@ const ProductScreen = () => {
                 <p className="desc leading-[1.5] text-[#909090] my-[10px]">
                   {product?.description}
                 </p>
-                {product?.countInStock > 0 && (
+                {(!userInfo || (product?.countInStock > 0 && userInfo && !userInfo.isAdmin)) && (
                   <div className="btns flex items-center justify-between border-t-[1px] border-t-[#eee] border-b-[1px] border-b-[#eee]">
                     <div className="qty mt-[15px] mb-[15px] border-[1px] border-[#909090] rounded-[50px] flex ">
                       <button

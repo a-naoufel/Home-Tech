@@ -8,12 +8,18 @@ import { addToWish, removeFromWish } from "../../actions/wishActions";
 import { useSelector } from "react-redux";
 import RatingStars from "../ratingstars/RatingStars";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export const ProductBox = ({ products }) => {
   const dispatch = useDispatch();
 
   const wish = useSelector((state) => state.wish);
   const { wishItems } = wish;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+
 
   const isProductInWishList = (productId) => {
     return wishItems.some((product) => product.product === productId);
@@ -97,7 +103,10 @@ export const ProductBox = ({ products }) => {
               <button
                 className="flex items-center justify-center w-[100px] gap-1 px-1 py-1 rounded-lg bg-bgColorDanger text-white"
                 onClick={() => {
-                  if (product.countInStock > 0) {
+                  if(userInfo && userInfo.isAdmin){
+                    toast.error(`Your an Admin, you can't add products to cart`);
+                    return;
+                  }else if (product.countInStock > 0) {
                     toast.success(
                       `Product successfully added to your shopping cart`
                     );

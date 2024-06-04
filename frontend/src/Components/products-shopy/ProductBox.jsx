@@ -56,10 +56,10 @@ export const ProductBox = ({ products }) => {
                 alt={product?.name}
                 className="object-cover h-full w-full"
               />
-              {/* Wishlist Icon */}
             </Link>
+              {/* Wishlist Icon */}
 
-            <div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
+            {!(userInfo && userInfo.isAdmin )&& (<div className="absolute text-white bg-bgColorWhite right-2 top-2 p-2 rounded-full">
               <div className="relative  cursor-pointer z-[1]">
                 <FaHeart
                   onClick={() => (
@@ -71,7 +71,7 @@ export const ProductBox = ({ products }) => {
                   }`}
                 />
               </div>
-            </div>
+            </div>)}
             {/* Discount Badge */}
             <div className="absolute h-[30px] w-[30px] left-2 top-2 text-xs text-white bg-[#D72A48] flex items-center justify-center rounded-full">
               {product?.discount}%

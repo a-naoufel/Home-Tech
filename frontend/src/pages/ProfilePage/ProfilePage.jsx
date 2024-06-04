@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Components/Message";
-import {
-  getUserDetails,
-  updateUserProfile,
-} from "../../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../../actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import { listMyOrders } from "../../actions/orderActions";
 import { useNavigate } from "react-router-dom";
@@ -72,122 +69,124 @@ function ProfilePage() {
 
   return (
     <Row className="m-20">
-
-    <Col md={3} className="">
-    <LinkContainer to="/">
-  <button
-  className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
-
->
-  <FaArrowLeft />
-</button>
-</LinkContainer>
+      <Col md={3} className="">
+        <LinkContainer to="/">
+          <button className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed">
+            <FaArrowLeft />
+          </button>
+        </LinkContainer>
         <h2 className="text-2xl font-bold ">User Profile</h2>
 
-        {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
+        {message && <Message variant="danger">{message}</Message>}
+        {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
-
-            <Form.Group controlId='name'>
-                <Form.Label>Name</Form.Label>
+          <Form.Group controlId="name">
+            <Form.Label>Name</Form.Label>
             <Form.Control
-               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4 '
-                    required
-                    type='name'
-                    placeholder='Enter name'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
+              className="p-[10px] border-mainColor focus:border-blue-300  rounded-4 "
+              required
+              type="name"
+              placeholder="Enter name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-            <Form.Group controlId='email'>
-                <Form.Label>Email Address</Form.Label>
+          <Form.Group controlId="email">
+            <Form.Label>Email Address</Form.Label>
             <Form.Control
-               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
-                    required
-                    type='email'
-                    placeholder='Enter Email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
+              className="p-[10px] border-mainColor focus:border-blue-300  rounded-4  "
+              required
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-            <Form.Group controlId='password'>
-                <Form.Label>Password</Form.Label>
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
             <Form.Control
-               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
+              className="p-[10px] border-mainColor focus:border-blue-300  rounded-4  "
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-                    type='password'
-                    placeholder='Enter Password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId='passwordConfirm'>
-                <Form.Label>Confirm Password</Form.Label>
+          <Form.Group controlId="passwordConfirm">
+            <Form.Label>Confirm Password</Form.Label>
             <Form.Control
-               className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
+              className="p-[10px] border-mainColor focus:border-blue-300  rounded-4  "
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-                    type='password'
-                    placeholder='Confirm Password'
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
-
-            <Button type='submit' variant='primary'className='  bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px] '>
-                Update
-        </Button>
-
+          <Button
+            type="submit"
+            variant="primary"
+            className="  bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px] "
+          >
+            Update
+          </Button>
         </Form>
-    </Col>
-
-    <Col md={9}>
-        <h2 className="text-2xl font-bold py-2">My Orders</h2>
-        {loadingOrders ? (
+      </Col>
+      {userInfo && !userInfo.isAdmin && (
+        <Col md={9}>
+          <h2 className="text-2xl font-bold py-2">My Orders</h2>
+          {loadingOrders ? (
             <Loader />
-        ) : errorOrders ? (
-            <Message variant='danger'>{errorOrders}</Message>
-        ) : (
-                    <Table striped responsive className='table-sm'>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Total</th>
-                                <th>Paid</th>
-                                <th>Delivered</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+          ) : errorOrders ? (
+            <Message variant="danger">{errorOrders}</Message>
+          ) : (
+            <Table striped responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Paid</th>
+                  <th>Delivered</th>
+                  <th></th>
+                </tr>
+              </thead>
 
-                        <tbody>
-                            {orders.map(order => (
-                                <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    <td>{order.createdAt.substring(0, 10)}</td>
-                                    <td>${order.totalPrice}</td>
-                                    <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
-                                        <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                    )}</td>
-                                    <td>
-                                        <LinkContainer to={`/order/${order._id}`}>
-                                            <Button  className=' bg-mainColor hover:bg-[#008cff] mt-1 mb-1 p-[8px] w-[80px] rounded-[50px]'>Details</Button>
-                                        </LinkContainer>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                )}
-    </Col>
-</Row>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>${order.totalPrice}</td>
+                    <td>
+                      {order.isPaid ? (
+                        order.paidAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      <LinkContainer to={`/order/${order._id}`}>
+                        <Button className=" bg-mainColor hover:bg-[#008cff] mt-1 mb-1 p-[8px] w-[80px] rounded-[50px]">
+                          Details
+                        </Button>
+                      </LinkContainer>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      )}
+    </Row>
   );
 }
 

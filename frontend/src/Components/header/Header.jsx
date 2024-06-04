@@ -1,6 +1,6 @@
 import { IoStorefront } from "react-icons/io5";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { FaCartShopping, FaHeart, FaUser } from "react-icons/fa6";
+import { FaCartShopping, FaHeart, FaUser, FaChalkboard } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { SidebarData } from "./SidebarData";
@@ -27,14 +27,14 @@ export default function Header() {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
-  let name = '';
-  let user = "/login"
+  let name = "";
+  let user = "/login";
   let cart = "/cart";
   if (userInfo) {
     name = userInfo.name;
-    user = "/profile"
+    user = "/profile";
   }
-  console.log("username : ",name)
+  console.log("username : ", name);
   const showSidebar = () => setSidebar(!sidebar);
   let to = "/login";
   if (userInfo) {
@@ -89,17 +89,32 @@ export default function Header() {
                       );
                     }
                   } else if (item.title === "profile") {
-
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={to}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  } else if (item.title === "Admin") {
+                    if (userInfo && userInfo.isAdmin) {
                       return (
                         <li key={index} className={item.cName}>
-                          <Link to={to}>
+                          <Link to={item.path}>
                             {item.icon}
                             <span>{item.title}</span>
                           </Link>
                         </li>
                       );
-                  } else if (item.title === "Admin") {
-                    if (userInfo && userInfo.isAdmin) {
+                    }
+                  } else if (
+                    item.title === "Wishlist" ||
+                    item.title === "Cart" ||
+                    item.title === "Shop" ||
+                    item.title === "Support"
+                  ) {
+                    if (!userInfo||(userInfo && !userInfo.isAdmin)) {
                       return (
                         <li key={index} className={item.cName}>
                           <Link to={item.path}>
@@ -149,16 +164,31 @@ export default function Header() {
             <Link to={user} className="md:text-xl">
               <FaUser />
             </Link>
-            <div className="border-r-2 py-2 pr-3">
-              <Link to="/wish" className="md:text-xl">
-                <FaHeart />
-              </Link>
-            </div>
-            <div className="relative">
-              <Link to={cart} className="md:text-xl">
-                <FaCartShopping />
-              </Link>
-            </div>
+            {(!userInfo || (userInfo && !userInfo.isAdmin ))&& (
+              <>
+                <div className="border-r-2 py-2 pr-3">
+                  <Link to="/wish" className="md:text-xl">
+                    <FaHeart />
+                  </Link>
+                </div>
+                <div className="relative">
+                  <Link to={cart} className="md:text-xl">
+                    <FaCartShopping />
+                  </Link>
+                </div>
+              </>
+            )}
+            {userInfo && userInfo.isAdmin && (<>
+              <div className="relative">
+                <Link to="/admin" className="md:text-xl">
+                  <FaChalkboard />
+                </Link>
+              </div>
+                <Link to='/admin' className="md:text-xl">
+                  <p>Dashbord</p>
+                </Link>
+                </>
+            )}
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 import Message from "../../Components/Message";
+import Loader from "../../Components/Loader";
 //AUVHCuDoki3NdO69VUedY_NoMU26ggvOhukJ-0ChS6wtF-bR2hwvqQQeJ9HdsvlGmE4oNASSPvSbcWh6
 function OrderPage() {
   const { id } = useParams();
@@ -91,7 +92,7 @@ const deliverHandler = () => {
 }
 
   return loading ? (
-    <LoadingIndicator />
+    <Loader />
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
@@ -201,12 +202,12 @@ const deliverHandler = () => {
                                     </ListGroup.Item>
 
 
-                                    {!order.isPaid && (
+                                    {!order.isPaid && userInfo && !userInfo.isAdmin && (
                                         <ListGroup.Item>
-                                            {loadingPay && <LoadingIndicator />}
+                                            {loadingPay && <Loader />}
 
                                             {!sdkReady ? (
-                                                <LoadingIndicator />
+                                                <Loader />
                                             ) : (
                                                     <PayPalButton
                                                         amount={order.totalPrice}
@@ -216,7 +217,7 @@ const deliverHandler = () => {
                                         </ListGroup.Item>
                                     )}
                                 </ListGroup>
-                                {loadingDeliver && <LoadingIndicator />}
+                                {loadingDeliver && <Loader />}
                                 {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                     <ListGroup.Item>
                                         <center>

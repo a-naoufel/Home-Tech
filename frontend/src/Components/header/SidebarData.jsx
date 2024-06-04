@@ -57,7 +57,7 @@ export const SidebarData = [
   },
   {
     title: 'Support',
-    path: '/support',
+    path: '#',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
   }

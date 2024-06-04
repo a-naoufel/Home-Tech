@@ -161,6 +161,7 @@ function PlaceOrderPage() {
               </ListGroup.Item>
 
               <ListGroup.Item >
+                <center>
                 <Button
                   type="button"
                   className=' bg-mainColor hover:bg-[#008cff] mt-3 mb-4 p-[12px] w-[150px] rounded-[50px]'
@@ -169,6 +170,7 @@ function PlaceOrderPage() {
                 >
                   Place Order
                 </Button>
+                </center>
               </ListGroup.Item>
             </ListGroup>
           </Card>

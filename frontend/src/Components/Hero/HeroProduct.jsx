@@ -46,11 +46,16 @@ export default function HeroProduct({rated}) {
             className="flex w-[150px] items-center gap-1 rounded-xl bg-red-600 px-3 py-1 text-white"
             
               onClick={() => {
-
+                if (rated.countInStock > 0) {
                 toast.success(
                   `Product successfully added to your shopping cart`
                 );
                  dispatch(addToCart(rated?._id, 1))
+                }else{
+                  toast.error(
+                    `Product is out of stock`
+                  );
+                }
               }}
             >
             <p>Add To Cart</p>

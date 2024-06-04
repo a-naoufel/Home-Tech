@@ -68,7 +68,7 @@ function ShippingPage() {
                     <Form.Control
                         className='p-[10px] border-mainColor focus:border-blue-300  rounded-4  '
                         required
-                        type='text'
+                        type='Number'
                         placeholder='Enter postal code'
                         value={postalCode ? postalCode : ''}
                         onChange={(e) => setPostalCode(e.target.value)}

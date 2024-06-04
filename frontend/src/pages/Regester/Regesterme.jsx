@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  FaGooglePlusG,
-  FaFacebookF,
-  FaGithub,
-  FaLinkedinIn,
-} from "react-icons/fa";
 
-import api from "../../api";
+
+
 import { useNavigate, useLocation } from "react-router-dom";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import { register } from "../../actions/userActions";
 import Message from "../../Components/Message";
 import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
@@ -115,6 +109,12 @@ const Regesterme = () => {
     if (!hasStartedTypingConfirmation || confirmPasswordInput === "") return ""; // No validation message if the user hasn't started typing yet
     return confirmationValidationMessage;
   };
+  const isValidEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+  
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -125,10 +125,15 @@ const Regesterme = () => {
       !upperValidated ||
       !numberValidated ||
       !specialValidated ||
-      !lengthValidated
+      !lengthValidated 
     ) {
       setPasswordValidationMessage("Password is not valid");
-    } else {
+    }else if (username === "" || email === "" || passwordInput === "") {
+      setMessage("Please fill in all fields");
+    } else if(!isValidEmail(email)){
+      setMessage("Please enter a valid email");
+    }
+     else {
       dispatch(register(username, email, passwordInput));
     }
   };

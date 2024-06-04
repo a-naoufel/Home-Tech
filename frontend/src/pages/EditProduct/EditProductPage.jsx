@@ -27,6 +27,7 @@ function EditProductPage() {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [discount, setDiscount] = useState(0);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ function EditProductPage() {
         setCategory(product.category);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setDiscount(product.discount);
       }
     }
     if (!userInfo.isAdmin) {
@@ -92,6 +94,7 @@ function EditProductPage() {
         category,
         countInStock,
         description,
+        discount,
       })
     );
   };
@@ -124,7 +127,7 @@ function EditProductPage() {
   if (!loading && product && product.image) {
     imageName = product.image.split("/").pop();
     console.log(imageName);
-    console.log(product.image);
+    console.log(product);
   }
 
   return (
@@ -211,6 +214,18 @@ function EditProductPage() {
                 placeholder="Enter brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
+              ></Form.Control>
+
+            </Form.Group> <Form.Group controlId="discount" className="mt-2">
+              <Form.Label className="text-[16px] font-semibold">
+                Discount
+              </Form.Label>
+              <Form.Control
+                className="p-[10px] border-mainColor focus:border-blue-300  rounded-4  "
+                type="number"
+                
+                value={discount}
+                onChange={(e) => setDiscount(e.target.value)}
               ></Form.Control>
             </Form.Group>
 

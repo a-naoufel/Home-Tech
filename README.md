@@ -1,7 +1,7 @@
 # Home-Tech
 Projet 2CP
 
-#**Installation guide**
+**Installation guide**
 
 Install requirement:
     cd to backend and run "pip install -r requirements.txt"

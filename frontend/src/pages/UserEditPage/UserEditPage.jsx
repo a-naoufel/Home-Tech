@@ -10,6 +10,7 @@ import { USER_UPDATE_RESET } from "../../constants/userConstants";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams } from "react-router";
 import { LinkContainer } from "react-router-bootstrap";
+import { FaArrowLeft } from "react-icons/fa";
 
 function UserEditScreen() {
   const { id } = useParams();
@@ -63,9 +64,14 @@ function UserEditScreen() {
 
   return (
     <div className="mt-5">
-      <LinkContainer to="/admin/userlist">
-        <Button className="btn btn-light my-3">Go Back</Button>
-      </LinkContainer>
+      <button
+        className="bg-mainColor text-white absolute left-12 top-[150px]   flex -translate-y-1/2 items-center justify-center rounded-full p-2 disabled:opacity-30 z-10 disabled:cursor-not-allowed"
+        onClick={() => {
+          navigate("/admin");
+        }}
+      >
+        <FaArrowLeft />
+      </button>
 
       <FormContainer>
         <h1 className="text-2xl font-bold mb-3 ">Edit User</h1>

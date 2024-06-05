@@ -37,7 +37,17 @@ export default function RecentOrders() {
 
   recentOrderData = [];
   if (orders) {
-    orders.forEach((order) => {
+    const today = new Date();
+    const filteredOrders = orders.filter((order) => {
+      const orderDate = new Date(order.createdAt);
+      return (
+        orderDate.getDate() === today.getDate() &&
+        orderDate.getMonth() === today.getMonth() &&
+        orderDate.getFullYear() === today.getFullYear()
+      );
+    });
+
+    filteredOrders.forEach((order) => {
       recentOrderData.push({
         id: order._id,
         product_id: order.orderItems[0].product,
@@ -58,6 +68,9 @@ export default function RecentOrders() {
       });
     });
   }
+  console.log("recentOrders",recentOrderData);
+  
+ 
 
 
   return (
@@ -88,7 +101,7 @@ export default function RecentOrders() {
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/customer/${order.customer_id}`}>
+                  <Link to={`/admin/user/${order.customer_id._id}/edit`}>
                     {order.customer_name}
                   </Link>
                 </td>
